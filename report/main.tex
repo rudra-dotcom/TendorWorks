@@ -1,0 +1,57 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{chngcntr}
+\usepackage{setspace}
+\usepackage{datetime}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{amsmath}
+
+\usetikzlibrary{arrows.meta,positioning}
+\geometry{a4paper,inner=1in,outer=1in,bindingoffset=.5cm,top=.75in,bottom=.75in}
+\setstretch{1.35}
+\counterwithin{table}{section}
+\counterwithin{figure}{section}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\newdateformat{monthyeardate}{\monthname[\THEMONTH], \THEYEAR}
+\newcommand{\HRule}{\rule{.9\linewidth}{.6pt}}
+\newcommand{\myemptypage}{\null\thispagestyle{empty}\newpage}
+
+\newcommand{\ttitle}{TenderWorks: An Evidence-Backed Concept Estimation Workspace for Government Works}
+\newcommand{\authorname}{[Student Name]}
+\newcommand{\rn}{[Roll Number]}
+\newcommand{\supname}{[Supervisor Name]}
+\newcommand{\degree}{B.Tech. Project}
+\newcommand{\univname}{Indian Institute of Technology Jodhpur}
+\newcommand{\deptname}{[Department Name]}
+
+\begin{document}
+\include{titlePage}
+\pagenumbering{roman}
+\setcounter{page}{1}
+\include{declaration}
+\include{certificate}
+\include{acknowledgments}
+\include{abstract}
+\tableofcontents
+\clearpage
+\listoffigures
+\listoftables
+\clearpage
+\pagenumbering{arabic}
+\include{mainReport}
+\bibliographystyle{IEEEtran}
+\addcontentsline{toc}{section}{References}
+\bibliography{refs}
+\end{document}
