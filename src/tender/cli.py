@@ -48,14 +48,20 @@ def main():
         print(f"Synthetic example written to {args.path}")
     else:
         if args.command == "db":
-            from alembic import command
             from alembic.config import Config
+
+            from alembic import command
             from tender.config import Settings
+
             cfg = Config("alembic.ini")
+            cfg.set_main_option("script_location", str(Path("alembic").resolve()))
             cfg.set_main_option("sqlalchemy.url", Settings().database_url)
-            if args.action == "upgrade": command.upgrade(cfg, "head")
-            elif args.action == "current": command.current(cfg)
-            else: command.revision(cfg, message=args.message, autogenerate=True)
+            if args.action == "upgrade":
+                command.upgrade(cfg, "head")
+            elif args.action == "current":
+                command.current(cfg)
+            else:
+                command.revision(cfg, message=args.message, autogenerate=True)
             return
         from tender.config import Settings
         from tender.db import Repository

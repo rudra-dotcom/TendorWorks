@@ -113,6 +113,15 @@ class KnowledgeGateway:
         self.repo, self.objects, self.settings = repo, objects, settings
         self.embedder = Embedder(settings)
 
+    @property
+    def embedding_model_id(self) -> str:
+        """Keep lightweight evaluation fakes compatible with the production embedder."""
+        return getattr(self.embedder, "model_id", getattr(self.embedder, "name", ""))
+
+    @property
+    def embeddings_enabled(self) -> bool:
+        return getattr(self.embedder, "enabled", bool(getattr(self.embedder, "name", "")))
+
     def index_document(self, document: SourceDocument, tenant: str, namespace: str = "inbox") -> str:
         if not document.content_hash:
             document.content_hash = hashlib.sha256(document.text.encode()).hexdigest()
@@ -121,14 +130,14 @@ class KnowledgeGateway:
             existing = session.get(DocumentRow, doc_id)
             if existing:
                 existing.active = True
-                if not self.embedder.enabled:
+                if not self.embeddings_enabled:
                     return doc_id
                 stale = session.scalars(select(ChunkRow).where(ChunkRow.document_id == doc_id)).all()
                 if self.embedder._dimension is None and stale:
                     model, separator, dimension = stale[0].embedding_model.rpartition(":")
                     if separator and model == self.embedder.name and dimension.isdigit():
                         self.embedder._dimension = int(dimension)
-                if stale and all(chunk.embedding_model == self.embedder.model_id for chunk in stale):
+                if stale and all(chunk.embedding_model == self.embedding_model_id for chunk in stale):
                     return doc_id
         content = document.text
         chunk_data = chunk_document(content)
@@ -161,14 +170,14 @@ class KnowledgeGateway:
                         position=i,
                         content=chunk,
                         embedding=vector,
-                        embedding_model=self.embedder.model_id if vector is not None else "",
+                        embedding_model=self.embedding_model_id if vector is not None else "",
                     )
                 )
         return doc_id
 
     def backfill_embeddings(self, tenant: str) -> int:
         """Refresh vectors for the configured model without making a failed embedding block text search."""
-        if not self.embedder.enabled:
+        if not self.embeddings_enabled:
             return 0
         with self.repo.session() as session:
             rows = session.scalars(select(DocumentRow).where(DocumentRow.tenant == tenant)).all()
@@ -181,7 +190,7 @@ class KnowledgeGateway:
                     model, separator, dimension = chunks[0].embedding_model.rpartition(":")
                     if separator and model == self.embedder.name and dimension.isdigit():
                         self.embedder._dimension = int(dimension)
-                if chunks and all(chunk.embedding_model == self.embedder.model_id for chunk in chunks):
+                if chunks and all(chunk.embedding_model == self.embedding_model_id for chunk in chunks):
                     continue
             data = chunk_document(document.text)
             try:
@@ -195,7 +204,7 @@ class KnowledgeGateway:
                 for position, ((text, _), vector) in enumerate(zip(data, vectors, strict=True)):
                     session.add(ChunkRow(id=f"{doc_id}-{position}", document_id=doc_id, position=position,
                                          content=text, embedding=vector,
-                                         embedding_model=self.embedder.model_id if vector is not None else ""))
+                                         embedding_model=self.embedding_model_id if vector is not None else ""))
             refreshed += 1
         return refreshed
 
@@ -365,12 +374,12 @@ class KnowledgeGateway:
         lexical.sort(key=lambda x: x[1], reverse=True)
         ranked = {i: 1 / (60 + rank) for rank, (i, _) in enumerate(lexical, 1)}
         mode, warning = "keyword", None
-        if self.embedder.enabled:
+        if self.embeddings_enabled:
             try:
                 vector = np.array(self.embedder.embed([query], query=True)[0])
                 semantic = []
                 for i, (chunk, _) in enumerate(rows):
-                    if chunk.embedding is None or chunk.embedding_model != self.embedder.model_id:
+                    if chunk.embedding is None or chunk.embedding_model != self.embedding_model_id:
                         continue
                     other = np.array(chunk.embedding)
                     if other.shape != vector.shape:

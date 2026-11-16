@@ -159,11 +159,18 @@ class Repository:
 
     def _migrate(self):
         """Upgrade app tables only; LangGraph owns its checkpoint tables."""
-        from alembic import command
+        from pathlib import Path
+
         from alembic.config import Config
         from sqlalchemy import inspect
-        from pathlib import Path
-        cfg = Config(str(Path(__file__).resolve().parents[2] / "alembic.ini"))
+
+        from alembic import command
+
+        root = Path(__file__).resolve().parents[2]
+        cfg = Config(str(root / "alembic.ini"))
+        # Alembic resolves a relative script_location from the process CWD,
+        # which is often eval/ for the diagnostic probes.
+        cfg.set_main_option("script_location", str(root / "alembic"))
         cfg.set_main_option("sqlalchemy.url", self.settings.database_url)
         tables = set(inspect(self.engine).get_table_names())
         app_tables = set(Base.metadata.tables)
