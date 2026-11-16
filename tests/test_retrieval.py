@@ -50,3 +50,33 @@ def test_shared_inbox_content_stays_active_when_one_copy_changes(client, setting
     client.post("/api/knowledge/scan")
     result = client.post("/api/knowledge/search", json={"query": "Original foundation shared"}).json()
     assert any("Original foundation" in r["content"] for r in result["results"])
+
+
+def test_nvidia_embeddings_use_passages_for_indexing_and_queries_for_search(client):
+    class FakeNVIDIAEmbeddings:
+        def __init__(self):
+            self.documents = []
+            self.queries = []
+
+        def embed_documents(self, texts):
+            self.documents.extend(texts)
+            return [[float(len(text)), 1.0] for text in texts]
+
+        def embed_query(self, text):
+            self.queries.append(text)
+            return [float(len(text)), 1.0]
+
+    gateway = client.app.state.gateway
+    gateway.settings.nvidia_embedding_model = "fake-embed"
+    gateway.settings.nvidia_api_key = "test-key"
+    gateway.embedder.name = "fake-embed"
+    fake = FakeNVIDIAEmbeddings()
+    gateway.embedder.__dict__["nvidia"] = fake
+    gateway.index_document(
+        document("paged", "Kerala", "[Page 1]\nBRICKWORK\n\nClause one.\n\n[Page 2]\nClause two."), "a"
+    )
+    found = gateway.search("Clause", "a", state="Kerala")
+    assert fake.documents
+    assert fake.queries == ["Clause"]
+    assert gateway.embedder.model_id == "fake-embed:2"
+    assert all("Page " in item["locator"] for item in found["results"])

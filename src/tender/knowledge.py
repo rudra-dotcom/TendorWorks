@@ -5,6 +5,7 @@ import math
 import re
 from collections import Counter
 from datetime import date
+from functools import cached_property
 
 import httpx
 import numpy as np
@@ -31,19 +32,40 @@ def in_period(start: date, end: date | None, when: date) -> bool:
 class Embedder:
     def __init__(self, settings: Settings):
         self.settings = settings
-        self.name = settings.embedding_url
+        self.name = settings.nvidia_embedding_model or settings.embedding_url
+        self._dimension: int | None = None
 
-    def embed(self, texts: list[str]) -> list[list[float] | None]:
-        if not self.name:
+    @property
+    def enabled(self) -> bool:
+        return bool(self.name)
+
+    @cached_property
+    def nvidia(self):
+        from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings
+
+        options = {"model": self.settings.nvidia_embedding_model, "api_key": self.settings.nvidia_api_key}
+        if self.settings.nvidia_base_url:
+            options["base_url"] = self.settings.nvidia_base_url
+        return NVIDIAEmbeddings(**options)
+
+    @property
+    def model_id(self) -> str:
+        return f"{self.name}:{self._dimension}" if self._dimension else self.name
+
+    def embed(self, texts: list[str], *, query: bool = False) -> list[list[float] | None]:
+        if not self.enabled:
             return [None] * len(texts)
-        response = httpx.post(
-            self.name,
-            json={"texts": texts},
-            timeout=60,
-            headers={"Authorization": f"Bearer {self.settings.embedding_key}"},
-        )
-        response.raise_for_status()
-        vectors = response.json()["vectors"]
+        if self.settings.nvidia_embedding_model:
+            vectors = [self.nvidia.embed_query(texts[0])] if query else self.nvidia.embed_documents(texts)
+        else:
+            response = httpx.post(
+                self.name,
+                json={"texts": texts},
+                timeout=60,
+                headers={"Authorization": f"Bearer {self.settings.embedding_key}"},
+            )
+            response.raise_for_status()
+            vectors = response.json()["vectors"]
         if len(vectors) != len(texts):
             raise ValueError("Embedding provider returned the wrong number of vectors")
         sizes = {len(v) for v in vectors}
@@ -53,13 +75,52 @@ class Embedder:
             or not all(math.isfinite(float(n)) for v in vectors for n in v)
         ):
             raise ValueError("Embedding provider returned invalid vectors")
+        self._dimension = next(iter(sizes))
         return vectors
+
+
+def chunk_document(content: str) -> list[tuple[str, str]]:
+    """Keep PDF page locators and prefer paragraph/heading boundaries under a conservative token cap."""
+    pages = re.split(r"(?=\[Page \d+\])", content)
+    chunks: list[tuple[str, str]] = []
+    for page in pages:
+        number = re.search(r"\[Page (\d+)\]", page)
+        locator = f"Page {number.group(1)}" if number else ""
+        pieces = re.split(r"\n\s*\n|(?=^\s*(?:\d+(?:\.\d+)*[.)]|[A-Z][A-Z /-]{4,})\s*$)", page, flags=re.M)
+        current = ""
+        for piece in pieces:
+            piece = piece.strip()
+            if not piece:
+                continue
+            candidate = f"{current}\n\n{piece}".strip()
+            if len(candidate) <= 1800:
+                current = candidate
+                continue
+            if current:
+                chunks.append((current, locator))
+            while len(piece) > 1800:
+                split_at = max(piece.rfind(" ", 0, 1800), piece.rfind("\n", 0, 1800), 1)
+                chunks.append((piece[:split_at].strip(), locator))
+                piece = piece[split_at:].strip()
+            current = piece
+        if current:
+            chunks.append((current, locator))
+    return chunks or [(content[:1800], "")]
 
 
 class KnowledgeGateway:
     def __init__(self, repo: Repository, objects: ObjectStore, settings: Settings):
         self.repo, self.objects, self.settings = repo, objects, settings
         self.embedder = Embedder(settings)
+
+    @property
+    def embedding_model_id(self) -> str:
+        """Keep lightweight evaluation fakes compatible with the production embedder."""
+        return getattr(self.embedder, "model_id", getattr(self.embedder, "name", ""))
+
+    @property
+    def embeddings_enabled(self) -> bool:
+        return getattr(self.embedder, "enabled", bool(getattr(self.embedder, "name", "")))
 
     def index_document(self, document: SourceDocument, tenant: str, namespace: str = "inbox") -> str:
         if not document.content_hash:
@@ -69,29 +130,39 @@ class KnowledgeGateway:
             existing = session.get(DocumentRow, doc_id)
             if existing:
                 existing.active = True
-                return doc_id
-        # Overlapping paragraph windows preserve nearby table headers and qualification text.
+                if not self.embeddings_enabled:
+                    return doc_id
+                stale = session.scalars(select(ChunkRow).where(ChunkRow.document_id == doc_id)).all()
+                if self.embedder._dimension is None and stale:
+                    model, separator, dimension = stale[0].embedding_model.rpartition(":")
+                    if separator and model == self.embedder.name and dimension.isdigit():
+                        self.embedder._dimension = int(dimension)
+                if stale and all(chunk.embedding_model == self.embedding_model_id for chunk in stale):
+                    return doc_id
         content = document.text
-        chunks = [content[i : i + 2400] for i in range(0, len(content), 2100)]
-        vectors = []
-        for offset in range(0, len(chunks), 32):
-            vectors.extend(self.embedder.embed(chunks[offset : offset + 32]))
+        chunk_data = chunk_document(content)
+        chunks = [chunk for chunk, _ in chunk_data]
+        try:
+            vectors = []
+            for offset in range(0, len(chunks), 32):
+                vectors.extend(self.embedder.embed(chunks[offset : offset + 32]))
+        except Exception:
+            # Text remains searchable even when an optional embedding endpoint is unavailable.
+            vectors = [None] * len(chunks)
         if not document.snapshot_ref:
             document.snapshot_ref = self.objects.put(content.encode())
         if not document.content_hash:
             document.content_hash = hashlib.sha256(content.encode()).hexdigest()
         with self.repo.session.begin() as session:
-            session.add(
-                DocumentRow(
-                    id=doc_id,
-                    tenant=tenant,
-                    authority=document.authority,
-                    trust=document.trust,
-                    payload=document.model_dump(mode="json"),
-                )
-            )
+            row = session.get(DocumentRow, doc_id)
+            if row is None:
+                row = DocumentRow(id=doc_id, tenant=tenant, authority=document.authority, trust=document.trust,
+                                  payload=document.model_dump(mode="json"))
+                session.add(row)
+            else:
+                session.query(ChunkRow).filter(ChunkRow.document_id == doc_id).delete()
             session.flush()
-            for i, (chunk, vector) in enumerate(zip(chunks, vectors, strict=True)):
+            for i, ((chunk, locator), vector) in enumerate(zip(chunk_data, vectors, strict=True)):
                 session.add(
                     ChunkRow(
                         id=f"{doc_id}-{i}",
@@ -99,10 +170,43 @@ class KnowledgeGateway:
                         position=i,
                         content=chunk,
                         embedding=vector,
-                        embedding_model=self.embedder.name,
+                        embedding_model=self.embedding_model_id if vector is not None else "",
                     )
                 )
         return doc_id
+
+    def backfill_embeddings(self, tenant: str) -> int:
+        """Refresh vectors for the configured model without making a failed embedding block text search."""
+        if not self.embeddings_enabled:
+            return 0
+        with self.repo.session() as session:
+            rows = session.scalars(select(DocumentRow).where(DocumentRow.tenant == tenant)).all()
+            documents = [(row.id, SourceDocument.model_validate(row.payload)) for row in rows]
+        refreshed = 0
+        for doc_id, document in documents:
+            with self.repo.session() as session:
+                chunks = session.scalars(select(ChunkRow).where(ChunkRow.document_id == doc_id)).all()
+                if self.embedder._dimension is None and chunks:
+                    model, separator, dimension = chunks[0].embedding_model.rpartition(":")
+                    if separator and model == self.embedder.name and dimension.isdigit():
+                        self.embedder._dimension = int(dimension)
+                if chunks and all(chunk.embedding_model == self.embedding_model_id for chunk in chunks):
+                    continue
+            data = chunk_document(document.text)
+            try:
+                vectors = []
+                for offset in range(0, len(data), 32):
+                    vectors.extend(self.embedder.embed([text for text, _ in data[offset : offset + 32]]))
+            except Exception:
+                vectors = [None] * len(data)
+            with self.repo.session.begin() as session:
+                session.query(ChunkRow).filter(ChunkRow.document_id == doc_id).delete()
+                for position, ((text, _), vector) in enumerate(zip(data, vectors, strict=True)):
+                    session.add(ChunkRow(id=f"{doc_id}-{position}", document_id=doc_id, position=position,
+                                         content=text, embedding=vector,
+                                         embedding_model=self.embedding_model_id if vector is not None else ""))
+            refreshed += 1
+        return refreshed
 
     def import_pack(self, pack: DomainPack, identity: Identity, *, internal_demo: bool = False) -> str:
         pack = pack.model_copy(deep=True)
@@ -270,12 +374,12 @@ class KnowledgeGateway:
         lexical.sort(key=lambda x: x[1], reverse=True)
         ranked = {i: 1 / (60 + rank) for rank, (i, _) in enumerate(lexical, 1)}
         mode, warning = "keyword", None
-        if self.embedder.name:
+        if self.embeddings_enabled:
             try:
-                vector = np.array(self.embedder.embed([query])[0])
+                vector = np.array(self.embedder.embed([query], query=True)[0])
                 semantic = []
                 for i, (chunk, _) in enumerate(rows):
-                    if chunk.embedding is None or chunk.embedding_model != self.embedder.name:
+                    if chunk.embedding is None or chunk.embedding_model != self.embedding_model_id:
                         continue
                     other = np.array(chunk.embedding)
                     if other.shape != vector.shape:
@@ -289,20 +393,45 @@ class KnowledgeGateway:
                 mode = "hybrid" if semantic else "keyword"
             except (httpx.HTTPError, ValueError, KeyError):
                 warning = "Semantic retrieval unavailable; keyword results are shown."
+            except Exception:
+                warning = "Semantic retrieval unavailable; keyword results are shown."
+        candidate_limit = max(limit, min(40, limit * 4))
+        candidate_ids = [i for i, _ in sorted(ranked.items(), key=lambda x: -x[1])[:candidate_limit]]
+        if self.settings.rag_enabled and self.settings.nvidia_rerank_model and candidate_ids:
+            try:
+                from langchain_core.documents import Document
+                from langchain_nvidia_ai_endpoints import NVIDIARerank
+
+                options = {"model": self.settings.nvidia_rerank_model, "api_key": self.settings.nvidia_api_key}
+                if self.settings.nvidia_base_url:
+                    options["base_url"] = self.settings.nvidia_base_url
+                candidates = [Document(page_content=rows[i][0].content, metadata={"index": i}) for i in candidate_ids]
+                reranked = NVIDIARerank(**options).compress_documents(candidates, query)
+                candidate_ids = [item.metadata["index"] for item in reranked if "index" in item.metadata]
+                mode = "hybrid_reranked" if mode == "hybrid" else "keyword_reranked"
+            except Exception:
+                warning = "Reranking unavailable; hybrid candidates are shown."
         results = []
-        for i, score in sorted(ranked.items(), key=lambda x: -x[1])[:limit]:
+        for i in candidate_ids[:limit]:
             chunk, doc = rows[i]
             results.append(
                 {
                     "document_id": doc.id,
+                    "source_id": doc.payload["id"],
                     "title": doc.payload["title"],
                     "version": doc.payload["version"],
                     "trust": doc.trust,
                     "authority": doc.authority,
                     "content": chunk.content,
-                    "locator": f"{doc.payload.get('locator', '')}; chunk {chunk.position + 1}",
+                    "locator": "; ".join(
+                        value for value in (doc.payload.get("locator", ""),
+                                              re.search(r"\[Page (\d+)\]", chunk.content).group(0).strip("[]")
+                                              if re.search(r"\[Page (\d+)\]", chunk.content) else "",
+                                              f"chunk {chunk.position + 1}") if value
+                    ),
                     "snapshot_ref": doc.payload["snapshot_ref"],
-                    "score": score,
+                    "content_hash": doc.payload["content_hash"],
+                    "score": ranked.get(i, 0),
                 }
             )
         return {"mode": mode, "warning": warning, "results": results}

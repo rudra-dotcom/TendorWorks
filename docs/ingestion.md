@@ -8,6 +8,19 @@ The document bytes are stored under a content-addressed object key. Extracted te
 
 Source files are not deleted or rewritten by the application. PDFs without usable text need OCR before ingestion. XLSX cells are read as stored values; spreadsheet formulas are never executed.
 
+## Review-only PDF draft packs
+
+When a new or changed PDF has `kind` `schedule`, `specification`, `rule`, or `norms`, TenderWorks can create a candidate package only when `TENDER_NVIDIA_API_KEY` and `TENDER_NVIDIA_CHAT_MODEL` are configured. It uses page-aware table extraction and ChatNVIDIA to propose rows, then rejects rows whose item code, value, or quoted source text is absent from the cited page. Generated `*.pack.json` and `*.review.xlsx` files go to `drafts/`, never `database/`, and remain `candidate` status.
+
+The spreadsheet lists rejected, conflicting, unmapped, and OCR-failed pages. Check the **approved** column, then rebuild a package containing only approved rows:
+
+```sh
+uv run tender draft-packs
+uv run tender draft-packs --rebuild drafts/example.review.xlsx --pack drafts/example.pack.json
+```
+
+Measurement formulas are copied from the template and explicitly marked as needing review. A generated package must still be imported and approved through the existing admin flow; draft generation never approves or imports it.
+
 ## Optional metadata
 
 For `cpwd-rates.pdf`, create `cpwd-rates.pdf.meta.json`:

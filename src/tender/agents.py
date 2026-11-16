@@ -1,5 +1,6 @@
 """Specialist responsibilities. All accepted numeric values come from evidence or deterministic tools."""
 
+import hashlib
 import re
 from decimal import Decimal
 
@@ -9,6 +10,7 @@ from tender.providers import INTAKE_SCHEMA, ModelAdapter
 from tender.research import ResearchWorker
 from tender.schemas import (
     AdjustmentResult,
+    Assumption,
     BOQItem,
     CalculationRecord,
     DomainPack,
@@ -124,22 +126,57 @@ class Specialists:
 
     def model_review(self, role: str, result: EstimateResult, tenant: str, context: dict | None = None):
         try:
+            retrieved = [
+                {"evidence_id": e.id, "locator": e.locator, "text": e.value}
+                for e in result.evidence
+                if e.kind == "retrieved"
+            ]
+            review_context = context or {
+                "authority": result.brief.authority,
+                "brief": result.brief.model_dump(mode="json"),
+                "rules": [r.model_dump(mode="json") for r in result.rules],
+                "assumptions": [a.model_dump(mode="json") for a in result.assumptions],
+                "boq": [b.model_dump(mode="json") for b in result.boq],
+                "findings": [f.model_dump(mode="json") for f in result.findings],
+            }
+            if retrieved:
+                review_context = {**review_context, "retrieved_context": retrieved}
             output, usage = self.models.run(
                 role,
-                context
-                or {
-                    "authority": result.brief.authority,
-                    "brief": result.brief.model_dump(mode="json"),
-                    "rules": [r.model_dump(mode="json") for r in result.rules],
-                    "assumptions": [a.model_dump(mode="json") for a in result.assumptions],
-                    "boq": [b.model_dump(mode="json") for b in result.boq],
-                    "findings": [f.model_dump(mode="json") for f in result.findings],
-                },
+                review_context,
                 tenant,
             )
+            evidence = {e.id: e for e in result.evidence if e.kind == "retrieved"}
+
+            def cited(item: dict) -> tuple[str, str] | None:
+                evidence_id, quote = item.get("evidence_id", ""), item.get("quote", "")
+                if not isinstance(quote, str) or not quote or evidence_id not in evidence or quote not in evidence[evidence_id].value:
+                    result.metrics["retrieval_citation_drops"] = result.metrics.get("retrieval_citation_drops", 0) + 1
+                    return None
+                return evidence_id, quote
+
             for concern in output.get("concerns", [])[:15]:
                 if isinstance(concern, str):
                     finding(result, f"{role}_concern", max(1, result.checkpoint), concern[:1200], "warning")
+                elif isinstance(concern, dict) and cited(concern):
+                    finding(result, f"{role}_concern", max(1, result.checkpoint), concern["message"][:1200], "warning")
+            for missing in output.get("missing_components", [])[:15]:
+                if isinstance(missing, dict) and cited(missing):
+                    finding(result, f"{role}_missing_component", max(1, result.checkpoint), missing["message"][:1200], "warning")
+            for proposed in output.get("proposed_assumptions", [])[:10]:
+                citation = cited(proposed) if isinstance(proposed, dict) else None
+                if citation:
+                    evidence_id, quote = citation
+                    identity = hashlib.sha256(
+                        f"{role}|{proposed['field']}|{proposed['value']}|{evidence_id}|{quote}".encode()
+                    ).hexdigest()[:16]
+                    if not any(a.id == f"rag:{identity}" for a in result.assumptions):
+                        result.assumptions.append(
+                            Assumption(
+                                id=f"rag:{identity}", field=proposed["field"][:200], value=proposed["value"][:500],
+                                reason=proposed["reason"][:1000], source_ids=[evidence_id], status="proposed"
+                            )
+                        )
             return usage
         except Exception:
             finding(
@@ -776,7 +813,7 @@ class Specialists:
                 finding(
                     result, "broken_evidence_link", 3, f"Evidence {evidence.id} references a missing parent."
                 )
-            if evidence.kind == "document":
+            if evidence.kind in {"document", "retrieved"}:
                 if not evidence.snapshot_ref or not evidence.content_hash:
                     finding(
                         result, "missing_snapshot", 3, f"Source {evidence.title} lacks a source snapshot."

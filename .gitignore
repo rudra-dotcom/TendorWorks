@@ -8,5 +8,6 @@ __pycache__/
 var/
 dist/
 test-results/
+outputs/
 playwright-report/
 .DS_Store

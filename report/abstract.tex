@@ -1,0 +1,10 @@
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+Preparing an early-stage works estimate from a project brief requires a consistent scope, defensible quantities, applicable rates, and traceable evidence. TenderWorks is a prototype workspace that turns a structured building brief and a reviewed domain package into a concept design, quantity schedule, priced bill of quantities (BOQ), and supporting report. Its web application combines incremental source-document ingestion, a persistent workflow, deterministic geometry and decimal arithmetic, and optional language-model assistance.
+
+The workflow is organized into three checkpoints. It first routes a brief to an applicable package, plans scope, creates supported rectangular-building concept geometry, computes quantities, and verifies coverage. It then matches exact component specifications, units, and effective dates to scheduled or resource-built rates and calculates amounts using decimal arithmetic. Finally, it audits evidence and calculation links before compiling exportable artifacts. Retrieved passages and model findings are advisory; they do not supply quantities, rates, or totals. Unsupported inputs remain visible as unresolved items rather than being silently assigned zero.
+
+The implementation provides a FastAPI workspace, persistent LangGraph checkpoints, tenant-scoped relational storage, content-addressed source snapshots, and PDF, XLSX, DOCX, SVG, DXF, and JSON exports. The bundled domain examples and reference cases use synthetic data. The automated test suite completed with 36 passing tests during preparation of this report. This demonstrates tested software behavior, not real-world price or engineering accuracy. TenderWorks is an estimating aid for concept-stage review, not a sanctioned estimate, construction design, or tender publication system.
+
+\noindent\textbf{Keywords:} tender estimation, bill of quantities, quantity take-off, evidence provenance, retrieval-augmented generation, deterministic calculation, human review
+\clearpage

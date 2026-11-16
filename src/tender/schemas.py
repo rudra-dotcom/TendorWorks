@@ -265,7 +265,7 @@ class DesignRevision(Contract):
 
 class EvidenceRecord(Contract):
     id: str
-    kind: Literal["document", "user_input", "design", "assumption", "calculation"]
+    kind: Literal["document", "retrieved", "user_input", "design", "assumption", "calculation"]
     title: str
     source_id: str | None = None
     version: str = ""

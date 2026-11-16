@@ -264,6 +264,39 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             "message": "Feedback is queued for review; source data is unchanged.",
         }
 
+    @app.post("/api/revisions/{revision_id}/feedback/import", status_code=201)
+    async def import_feedback(revision_id: str, file: UploadFile, actor: Identity = Depends(writer)):
+        from tempfile import NamedTemporaryFile
+
+        from tender.evaluation_reports import import_feedback as import_workbook
+
+        row = app.state.repo.get_revision(revision_id, actor.tenant)
+        with NamedTemporaryFile(suffix=".xlsx") as temporary:
+            temporary.write(await file.read())
+            temporary.flush()
+
+            def create(category, item_id, comment, value):
+                payload = {
+                    "category": category,
+                    "item_id": item_id if item_id in {b["id"] for b in row.result["boq"]} else None,
+                    "comment": comment[:4000],
+                    "proposed_value": value[:500] if value else None,
+                    "workbook_row_id": item_id,
+                }
+                with app.state.repo.session.begin() as session:
+                    session.add(
+                        FeedbackRow(
+                            tenant=actor.tenant, revision_id=revision_id, author=actor.user, payload=payload
+                        )
+                    )
+
+            count = import_workbook(Path(temporary.name), revision_id, create)
+        return {
+            "status": "pending",
+            "imported": count,
+            "message": "Feedback is queued; results and source data are unchanged.",
+        }
+
     @app.get("/api/feedback")
     def feedback_list(actor: Identity = Depends(identity)):
         with app.state.repo.session() as session:

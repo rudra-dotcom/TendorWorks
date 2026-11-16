@@ -1,4 +1,5 @@
 import io
+from datetime import date
 from decimal import Decimal
 
 from conftest import run_project
@@ -8,6 +9,7 @@ from openpyxl import load_workbook
 from pypdf import PdfReader
 
 from tender.app import create_app
+from tender.schemas import SourceDocument
 
 
 def test_full_workflow_has_reproducible_totals_evidence_and_exports(client, brief):
@@ -136,6 +138,32 @@ def test_interrupt_survives_application_restart(settings, brief):
         assert all(a["status"] == "accepted" for a in result["assumptions"])
         roles = [t["role"] for t in result["agent_trace"]]
         assert roles.count("quantity_estimator") == 1
+
+
+def test_checkpoint_one_retrieval_is_persisted_and_advisory(settings, brief):
+    settings.rag_enabled = True
+    with TestClient(create_app(settings)) as client:
+        gateway = client.app.state.gateway
+        gateway.index_document(
+            SourceDocument(
+                id="advisory", title="advisory", version="1", authority="cpwd", state="Delhi",
+                kind="specification", effective_from=date(2020, 1, 1),
+                text="[Page 1]\nSchool accessibility and fire safety review clause.", trust="approved",
+            ),
+            "demo",
+        )
+        first = run_project(client, {**brief, "review_design": True})
+        assert first["status"] == "awaiting_review"
+        assert any(e["kind"] == "retrieved" for e in first["evidence"])
+        retrieved = first["metrics"]["retrieved_chunks"]
+        response = client.post(
+            f"/api/revisions/{first['revision_id']}/review",
+            json={"decision": "accept_design", "note": "Proceed with the preliminary concept."},
+        )
+        assert response.status_code == 200
+        result = client.get(f"/api/revisions/{first['revision_id']}").json()
+        assert result["metrics"]["retrieved_chunks"] == retrieved
+        assert [trace["role"] for trace in result["agent_trace"]].count("retrieve_context") == 1
 
 
 def test_feedback_does_not_mutate_rates_or_completed_estimate(client, brief):

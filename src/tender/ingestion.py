@@ -14,6 +14,7 @@ from pypdf import PdfReader
 from sqlalchemy import select
 
 from tender.db import DocumentRow, FileImport
+from tender.drafts import DraftPackGenerator
 from tender.knowledge import KnowledgeGateway, key
 from tender.schemas import DomainPack, Identity, SourceDocument, now
 
@@ -69,6 +70,7 @@ def extract(content: bytes, suffix: str) -> str:
 class FolderIngestor:
     def __init__(self, gateway: KnowledgeGateway):
         self.gateway, self.repo = gateway, gateway.repo
+        self.drafts = DraftPackGenerator(gateway.settings)
         self.lock = threading.Lock()
         self.last_report = {"added": 0, "updated": 0, "skipped": 0, "failed": 0, "files": []}
 
@@ -100,7 +102,7 @@ class FolderIngestor:
                     id=key(tenant, digest),
                     title=metadata.get("title", path.stem),
                     version=metadata.get("version", digest[:12]),
-                    kind=metadata.get("kind", "web"),
+                    kind="rule" if metadata.get("kind") == "norms" else metadata.get("kind", "web"),
                     authority=metadata.get("authority", "unknown"),
                     state=metadata.get("state", ""),
                     discipline=metadata.get("discipline", "all"),
@@ -173,5 +175,38 @@ class FolderIngestor:
                     result = {"path": str(path.relative_to(root)), "status": "failed", "error": str(exc)}
                 report[result["status"]] += 1
                 report["files"].append(result)
+                if path.suffix.lower() == ".pdf" and result["status"] in {"added", "updated"}:
+                    metadata_path = path.with_name(path.name + ".meta.json")
+                    metadata = json.loads(metadata_path.read_bytes()) if metadata_path.is_file() else {}
+                    if metadata.get("kind") in {"schedule", "specification", "rule", "norms"}:
+                        try:
+                            report.setdefault("drafts", []).append(
+                                self.drafts.generate(path, metadata, path.read_bytes())
+                            )
+                        except Exception as exc:
+                            report.setdefault("drafts", []).append(
+                                {"path": str(path.relative_to(root)), "status": "failed", "error": str(exc)[:1200]}
+                            )
+            report["embedding_backfilled"] = self.gateway.backfill_embeddings(tenant)
             self.last_report = report
         return report
+
+    def draft_files(self, tenant: str | None = None) -> list[dict]:
+        """Manually rebuild review artifacts; never imports a generated package."""
+        tenant = tenant or self.gateway.settings.database_tenant
+        if tenant != self.gateway.settings.database_tenant:
+            return [{"status": "skipped", "message": "Server inbox belongs to a different tenant; use uploads."}]
+        root = self.gateway.settings.database_dir.resolve()
+        results = []
+        for path in sorted(root.rglob("*.pdf")):
+            if not path.resolve().is_relative_to(root):
+                continue
+            metadata_path = path.with_name(path.name + ".meta.json")
+            metadata = json.loads(metadata_path.read_bytes()) if metadata_path.is_file() else {}
+            if metadata.get("kind") not in {"schedule", "specification", "rule", "norms"}:
+                continue
+            try:
+                results.append(self.drafts.generate(path, metadata, path.read_bytes()))
+            except Exception as exc:
+                results.append({"path": str(path.relative_to(root)), "status": "failed", "error": str(exc)[:1200]})
+        return results

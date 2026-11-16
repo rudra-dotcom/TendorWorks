@@ -60,11 +60,14 @@ Copy `.env.example` to `.env` and configure only the services you need.
 | Capability | Configuration |
 |---|---|
 | Live specialist reasoning | `TENDER_MODEL_PROVIDER=anthropic`, explicit `TENDER_MODEL_NAME`, `TENDER_MODEL_API_KEY` |
-| Hybrid retrieval | `TENDER_EMBEDDING_URL` and optional `TENDER_EMBEDDING_KEY` |
+| NVIDIA RAG + specialist reviews | `TENDER_MODEL_PROVIDER=nvidia`, `TENDER_NVIDIA_API_KEY`, chat/embedding/rerank model names; optional `TENDER_NVIDIA_BASE_URL` for a self-hosted NIM, plus `TENDER_RAG_ENABLED=true` |
+| Legacy hybrid retrieval | `TENDER_EMBEDDING_URL` and optional `TENDER_EMBEDDING_KEY` |
 | Public-source research | `TENDER_WEB_ENABLED=true`, `TENDER_WEB_SEARCH_KEY` for Brave Search, allowed official hosts |
 | PostgreSQL + pgvector | `TENDER_DATABASE_URL=postgresql+psycopg://...` |
 | S3 object storage | `TENDER_OBJECT_BACKEND=s3`, `TENDER_S3_BUCKET`, optional endpoint; use the standard AWS credential chain |
 | Authenticated deployment | `TENDER_MODE=production`, `TENDER_SEED_DEMO=false`, `TENDER_API_KEYS` |
+
+NVIDIA RAG indexes searchable PDFs page-by-page with NVIDIA passage embeddings, retrieves with query embeddings, then reranks a bounded hybrid candidate pool. Retrieved passages are advisory data: only exact quoted citations may become Checkpoint 1 warnings, findings, or proposed assumptions. They cannot change quantities, rates or totals. If NVIDIA is unavailable, indexing retains text for keyword search and the workflow continues.
 
 Live agents have a bounded, read-only tool loop. They can search the tenant's knowledge but cannot write rates, execute arbitrary code, approve estimates or override deterministic calculations. Without credentials, the interface explicitly identifies local template/rule operation. Embeddings are optional; without them RAG uses keyword retrieval rather than claiming semantic search.
 
@@ -81,6 +84,20 @@ For production, use approved hosting, set strong database credentials, configure
 The first run creates relational tables and LangGraph checkpoint tables. PostgreSQL setup needs permission to install `vector` or a DBA must install it first. Subsequent schema changes require migrations; this initial release does not silently transform an existing external database.
 
 ## Test and evaluate
+
+## Evaluation reports
+
+Every completed, failed, or paused estimate writes a read-only checkpoint evaluation workbook to `outputs/`. It contains trace timing, retrieval/evidence and pricing detail, findings, and reviewer feedback columns. Workbook feedback is imported into the existing review queue only; it never edits an estimate, rate, or package directly.
+
+```sh
+uv run tender evaluation-report <revision-id>
+```
+
+## Database migrations and tracing
+
+Run `uv run tender db upgrade` at deployment and create an Alembic migration for every SQLAlchemy model change (`uv run tender db revision --message "..."`). Existing pre-Alembic application databases are stamped at the baseline without recreating tables; LangGraph checkpoint tables remain LangGraph-managed.
+
+Optional self-hosted Langfuse tracing uses `TENDER_TRACING_ENABLED`, host, public/secret keys, and `TENDER_TRACING_REDACT_TEXT`. Tracing failures are non-fatal and credentials are never included in trace metadata.
 
 ```sh
 uv run pytest -q

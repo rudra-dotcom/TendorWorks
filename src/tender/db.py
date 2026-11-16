@@ -154,8 +154,29 @@ class Repository:
         else:
             with self.engine.begin() as conn:
                 conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
-        Base.metadata.create_all(self.engine)
+        self._migrate()
         self.session = sessionmaker(self.engine, expire_on_commit=False)
+
+    def _migrate(self):
+        """Upgrade app tables only; LangGraph owns its checkpoint tables."""
+        from pathlib import Path
+
+        from alembic.config import Config
+        from sqlalchemy import inspect
+
+        from alembic import command
+
+        root = Path(__file__).resolve().parents[2]
+        cfg = Config(str(root / "alembic.ini"))
+        # Alembic resolves a relative script_location from the process CWD,
+        # which is often eval/ for the diagnostic probes.
+        cfg.set_main_option("script_location", str(root / "alembic"))
+        cfg.set_main_option("sqlalchemy.url", self.settings.database_url)
+        tables = set(inspect(self.engine).get_table_names())
+        app_tables = set(Base.metadata.tables)
+        if tables & app_tables and "alembic_version" not in tables:
+            command.stamp(cfg, "head")
+        command.upgrade(cfg, "head")
 
     def audit(self, identity: Identity, action: str, target: str, payload: dict):
         with self.session.begin() as session:

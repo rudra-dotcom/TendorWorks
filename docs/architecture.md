@@ -3,7 +3,8 @@
 ```mermaid
 flowchart TD
   I[Incremental database-folder ingestion] --> A[Intake and authority routing]
-  A --> R[Rules and applicability]
+  A --> G[Checkpoint 1 advisory retrieval]
+  G --> R[Rules and applicability]
   R --> S[Scope planner]
   S --> D[Concept geometry]
   D --> Q[Quantity engine]
@@ -32,7 +33,9 @@ Every use of a document has a locator-specific evidence record, so several price
 
 ## Specialist reasoning
 
-The provider interface is isolated in `providers.py`. Local mode extracts explicit fields and applies reviewed templates. The Anthropic adapter provides a four-turn maximum tool loop with `search_knowledge` and typed `submit_result` tools. Model findings supplement deterministic checks. Prices, measurement expressions, authority package selection and final totals cannot be overwritten by generated text.
+The provider interface is isolated in `providers.py`. Local mode extracts explicit fields and applies reviewed templates. The Anthropic adapter provides a four-turn maximum tool loop with `search_knowledge` and typed `submit_result` tools; the NVIDIA adapter uses `ChatNVIDIA` structured output at temperature zero with no tool loop. Model findings supplement deterministic checks. Prices, measurement expressions, authority package selection and final totals cannot be overwritten by generated text.
+
+When enabled, the one-time Checkpoint 1 retrieval node runs after package routing and before rules. It forms fixed building-norm and component queries, applies tenant/authority/state/date filters, deduplicates and caps passages, and records them as `retrieved` evidence with source hash and page locator. `NVIDIAEmbeddings` uses document/passages for indexing and queries for retrieval; chunks are page-aware and bounded before embedding. NVIDIA reranking is best-effort after hybrid candidate generation. Review output must cite a retrieved evidence ID and an exact quote in that chunk; invalid citations are dropped and counted. Retrieved content is never calculation input and is presented to models as untrusted data. The node is checkpointed before the design-review interrupt, so resume does not retrieve again.
 
 ## Retry and interruption policy
 

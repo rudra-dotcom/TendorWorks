@@ -12,11 +12,12 @@ from langgraph.types import Command, interrupt
 
 from tender.agents import Specialists, finding
 from tender.db import Repository
+from tender.evaluation_reports import write_evaluation_workbook
 from tender.exports import ReportCompiler
 from tender.ingestion import FolderIngestor
 from tender.knowledge import KnowledgeGateway
 from tender.providers import ModelAdapter
-from tender.schemas import DomainPack, EstimateResult, Identity
+from tender.schemas import DomainPack, EstimateResult, EvidenceRecord, Identity
 
 logger = logging.getLogger(__name__)
 
@@ -51,6 +52,7 @@ class EstimationWorkflow:
         for name in (
             "ingest",
             "intake",
+            "retrieve_context",
             "rules",
             "scope",
             "design",
@@ -69,8 +71,9 @@ class EstimationWorkflow:
             graph.add_node(name, getattr(self, name))
         graph.add_edge(START, "ingest")
         graph.add_edge("ingest", "intake")
-        graph.add_conditional_edges("intake", lambda s: "rules" if s.get("pack") else "report")
+        graph.add_conditional_edges("intake", lambda s: "retrieve_context" if s.get("pack") else "report")
         for a, b in [
+            ("retrieve_context", "rules"),
             ("rules", "scope"),
             ("scope", "design"),
             ("design", "quantities"),
@@ -149,6 +152,51 @@ class EstimationWorkflow:
         self.agents.rules(result, self.pack(state))
         usage = self.agents.model_review("rules", result, state["tenant"])
         return self.save(state, result, "rules_and_applicability", start, usage)
+
+    def retrieve_context(self, state):
+        """Retrieve advisory context once; this evidence never participates in calculation inputs."""
+        start, result = time.perf_counter(), self.result(state)
+        if not self.repo.settings.rag_enabled or any(e.kind == "retrieved" for e in result.evidence):
+            return self.save(state, result, "retrieve_context", start)
+        pack = self.pack(state)
+        components = ", ".join(component.key for component in pack.components[:12])
+        queries = [
+            f"{result.brief.building_type} {components} requirements exclusions",
+            f"{result.brief.authority} building fire accessibility sanitation requirements",
+            f"{result.brief.authority} building measurement specification clauses",
+        ]
+        seen: set[tuple[str, str]] = set()
+        for query in queries:
+            found = self.gateway.search(
+                query,
+                state["tenant"],
+                authority=result.brief.authority,
+                state=result.brief.state,
+                as_of=result.brief.estimate_date,
+                limit=8,
+            )
+            for item in found["results"]:
+                marker = (item["document_id"], item["locator"])
+                if marker in seen or len(seen) >= 12:
+                    continue
+                seen.add(marker)
+                evidence_id = f"retrieved:{item['document_id']}:{len(seen)}"
+                result.evidence.append(
+                    EvidenceRecord(
+                        id=evidence_id,
+                        kind="retrieved",
+                        title=item["title"],
+                        source_id=item["source_id"],
+                        version=item["version"],
+                        locator=item["locator"],
+                        snapshot_ref=item["snapshot_ref"],
+                        content_hash=item["content_hash"],
+                        value=item["content"],
+                        trust=item["trust"],
+                    )
+                )
+        result.metrics["retrieved_chunks"] = len(seen)
+        return self.save(state, result, "retrieve_context", start)
 
     def scope(self, state):
         start, result = time.perf_counter(), self.result(state)
@@ -318,4 +366,11 @@ class EstimationWorkflow:
             )
             self.repo.save_result(result, token)
         finally:
+            try:
+                row = self.repo.get_revision(revision_id, identity.tenant)
+                write_evaluation_workbook(
+                    EstimateResult.model_validate(row.result), self.repo.settings.outputs_dir
+                )
+            except Exception:
+                logger.exception("Evaluation workbook failed: %s", revision_id)
             self.repo.release(revision_id, token)
