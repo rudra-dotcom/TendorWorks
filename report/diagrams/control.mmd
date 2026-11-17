@@ -1,0 +1,8 @@
+flowchart TB
+ A["Execute checkpoint"] --> B["Deterministic validation<br/>and bounded model critique"]
+ B --> C{"Eligible repair, budget left,<br/>and no skip request?"}
+ C -->|Yes| D["Apply targeted repair<br/>Increment attempt counter"]
+ D --> A
+ C -->|No| E["Advance; preserve all findings"]
+ E --> H["At CP1: pause for engineer review<br/>if requested; persist state"]
+ H --> F["Proceed to next checkpoint / report<br/>Retain blockers and incomplete totals"]

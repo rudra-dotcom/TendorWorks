@@ -1,0 +1,10 @@
+{
+  "pdf_pages": 21,
+  "figures": 7,
+  "tables": 13,
+  "latex_compilation": "passed",
+  "overfull_boxes": 0,
+  "audited_saved_experiments": 11,
+  "primary_comparison": "Matched V3 pair only; no pooled historical runs",
+  "model_experiments_rerun": false
+}

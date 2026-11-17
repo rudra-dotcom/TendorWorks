@@ -1,0 +1,7 @@
+flowchart LR
+ B["Brief + assumed dimensions"] --> G["Rectangular geometry and stable element IDs"]
+ G --> D["SVG / PDF / DXF schematic"]
+ G --> Q["Measurement recipes / allowances"]
+ Q --> R["Rate application"] --> T["Estimate"]
+ M["Missing engineering design: soil, structure, reinforcement, MEP sizing"] -. "limits validity" .-> G
+ M -. "limits accuracy" .-> Q

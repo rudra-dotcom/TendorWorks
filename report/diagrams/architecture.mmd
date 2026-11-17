@@ -1,0 +1,47 @@
+flowchart TB
+  subgraph START["Controlled project intake"]
+    direction LR
+    U["Project brief + dimensions"] --> G["Scope guard + intake"]
+    G --> R["Route by authority, place, date and discipline"]
+  end
+  subgraph CP1["COMPONENT 1 — Scope, design and quantities"]
+    direction LR
+    A["Rules and applicability"] --> B["Scope planner: mandatory / optional / excluded"]
+    B --> C["Basic layout and explicit assumptions"]
+    C --> D["Geometry + measurement engines"]
+    D --> E["Quantity and scope critique"]
+    E -. "eligible repair, within budget" .-> B
+  end
+  START --> CP1
+  CP1 --> H["Optional engineer review / persistent pause"]
+  subgraph CP2["COMPONENT 2 — Rates, adjustments and costs"]
+    direction LR
+    P["Exact specification + unit rate match"] --> Q["Economics: inclusions and adjustments"]
+    Q --> S["Decimal cost engine"] --> V["Price and arithmetic critique"]
+    V -. "eligible repair, within budget" .-> P
+  end
+  H --> CP2
+  subgraph CP3["COMPONENT 3 — Evidence assurance and reporting"]
+    direction LR
+    X["Evidence dependency audit"] --> Y["Evidence critique and unresolved findings"]
+    Y --> Z["Deterministic document compiler"]
+  end
+  CP2 --> CP3
+  subgraph FINISH["Draft output and review"]
+    direction LR
+    O["BOQ + drawings + calculations + sources"] --> HR["Engineer review / revision / feedback"]
+  end
+  CP3 --> FINISH
+  K[("Shared knowledge: rate tables, BM25 text, immutable snapshots")]
+  W["Controlled web research: candidate evidence only"]
+  L[("Evidence ledger, checkpoints and JSONL execution logs")]
+  K -. "retrieved context supplied by controller" .-> CP1
+  K -.-> CP2
+  W -.-> K
+  CP1 -.-> L
+  CP2 -.-> L
+  CP3 -.-> L
+  classDef control fill:#e8eef5,stroke:#284b63,color:#102a43;
+  classDef gate fill:#fff1d6,stroke:#ae7520,color:#5e410a;
+  class G,R,H,HR control;
+  class E,V,Y gate;

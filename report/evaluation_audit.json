@@ -1,0 +1,95 @@
+{
+  "method": "Recomputed each saved score using score_output; checked counts, macro means, medians, p95 order statistics, paired hashes and source manifests. No experiments rerun.",
+  "experiments": [
+    {
+      "experiment": "20261117T013939-offline-workflow",
+      "runs": 3,
+      "passes": 3,
+      "scores_recomputed": true,
+      "summary_sha256": "b32b88e8b04d643fc375cb1ccb677de1b4b502aa1b66dcd979564e94850c82ad",
+      "runs_sha256": "5f531c6143cb5e7e193f6abc649c6375dcb1e9a7beb2049b211c5aa615d31126"
+    },
+    {
+      "experiment": "20261117T014023-qwen2.5-3b-all",
+      "runs": 14,
+      "passes": 5,
+      "scores_recomputed": true,
+      "summary_sha256": "acb443413ca04831cd9a44de5810a9208d6de69c68f425bf45276fa405a249f0",
+      "runs_sha256": "20fac07b95eb4d55e179d11bfd8fce527c2138ec10d22bf41bd9b2d06d7ba43e"
+    },
+    {
+      "experiment": "final-gemma-agents",
+      "runs": 12,
+      "passes": 7,
+      "scores_recomputed": true,
+      "summary_sha256": "d0c37f7ced8a49e3ec77876eaa57bada1c088521706f3b038482fdb3514e1bc7",
+      "runs_sha256": "7f80cdf55e05fb1b11d61a25c40d344a1c09f2d982e1b274698280302345cbb8"
+    },
+    {
+      "experiment": "final-qwen-agents",
+      "runs": 12,
+      "passes": 5,
+      "scores_recomputed": true,
+      "summary_sha256": "40b64bc2eb145d74dd70d1447cd37a6b3719db5f67bd37bb2273296d771ee019",
+      "runs_sha256": "6cdfa31b7577715fd325cbdc7fb874ca91b7ff9da42cb241bc74dc89f275adbc"
+    },
+    {
+      "experiment": "offline-checkpoints",
+      "runs": 4,
+      "passes": 4,
+      "scores_recomputed": true,
+      "summary_sha256": "e471a0d9b770750d8932615faf6b7d2036e1fc925daa826379d7ca787d6dfb73",
+      "runs_sha256": "4ebbb4d29d533c53e7ea46dbb63c74a00fc0ba2dc4788385db218c3c75e0cef7"
+    },
+    {
+      "experiment": "offline-retrieval",
+      "runs": 1,
+      "passes": 1,
+      "scores_recomputed": true,
+      "summary_sha256": "30b57ce986c662b9e7927436d54630cc153e537ab9cb0fab1bbeb8fcc1777ede",
+      "runs_sha256": "bfc7df5e83483c8708faa24f9d9ebeb1da79b14393c6f991fd856d599b8f82fc"
+    },
+    {
+      "experiment": "offline-workflow",
+      "runs": 3,
+      "passes": 3,
+      "scores_recomputed": true,
+      "summary_sha256": "3636cd408f58590955a1139b1b757bc1c4ee1de0b03d4b261bead9603b4a4a03",
+      "runs_sha256": "a7ccdf38c92ef16fd674e49d283a33bb21f1cba11d81f7dbe591d40acf72643e"
+    },
+    {
+      "experiment": "qwen2.5-3b",
+      "runs": 25,
+      "passes": 19,
+      "scores_recomputed": true,
+      "summary_sha256": "208ce5a7c6cb9963d83a0aa18279ee3a968497d4693f776846f8c4ddcc4c08b4",
+      "runs_sha256": "e4fb356f6b5bb2915b8ba9c6c6dcf85f7b5dced624ff71fa4c1a3b7ef38bd65f"
+    },
+    {
+      "experiment": "v3-gemma-agents",
+      "runs": 14,
+      "passes": 9,
+      "scores_recomputed": true,
+      "summary_sha256": "95fb05bc2947cc6708bb494a0a3328441da71a1856a4999d958c73a6f052713a",
+      "runs_sha256": "c5b1430438ee83a7ef6b251d427ec42d7f6b6a5d643a3a80ddda59b4ef3e4d71"
+    },
+    {
+      "experiment": "v3-offline-workflow",
+      "runs": 3,
+      "passes": 3,
+      "scores_recomputed": true,
+      "summary_sha256": "42d0eabe42e53c9528312a6e3051b4a85cf233483136f93a6b5cad8a45d19055",
+      "runs_sha256": "34a6dfb8d342b430bb8f3d7d9f0d6ecf7cdfd1a81ed6b9f9e7f137f7ffe1e563"
+    },
+    {
+      "experiment": "v3-qwen-agents",
+      "runs": 14,
+      "passes": 5,
+      "scores_recomputed": true,
+      "summary_sha256": "7a40866e2c33420ae179be139ac73474f759f7ede4d5f14dd1263090618f3627",
+      "runs_sha256": "234361ac711656514b4b0d3bffdcaaded431d53eeeee47109cd06765ee7fe565"
+    }
+  ],
+  "matched_v3_hashes": true,
+  "source_files_verified": 3
+}
