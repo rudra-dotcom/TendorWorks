@@ -189,6 +189,17 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         tasks.add_task(app.state.workflow.execute, revision_id, actor, token)
         return {"revision_id": revision_id, "status": "running"}
 
+    @app.post("/api/revisions/{revision_id}/skip-corrections")
+    def skip_corrections(revision_id: str, actor: Identity = Depends(writer)):
+        row = app.state.repo.get_revision(revision_id, actor.tenant)
+        if row.status not in {"queued", "running", "awaiting_review"}:
+            raise HTTPException(409, "Only an active revision can skip remaining correction attempts")
+        app.state.repo.audit(actor, "skip_corrections", revision_id, {"reason": "user_requested"})
+        return {
+            "status": "corrections_skipped",
+            "message": "The current step will finish; remaining retries are skipped. Blocking findings remain visible.",
+        }
+
     @app.post("/api/revisions/{revision_id}/review")
     def review(
         revision_id: str, body: ReviewRequest, tasks: BackgroundTasks, actor: Identity = Depends(reviewer)

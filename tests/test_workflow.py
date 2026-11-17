@@ -146,9 +146,15 @@ def test_checkpoint_one_retrieval_is_persisted_and_advisory(settings, brief):
         gateway = client.app.state.gateway
         gateway.index_document(
             SourceDocument(
-                id="advisory", title="advisory", version="1", authority="cpwd", state="Delhi",
-                kind="specification", effective_from=date(2020, 1, 1),
-                text="[Page 1]\nSchool accessibility and fire safety review clause.", trust="approved",
+                id="advisory",
+                title="advisory",
+                version="1",
+                authority="cpwd",
+                state="Delhi",
+                kind="specification",
+                effective_from=date(2020, 1, 1),
+                text="[Page 1]\nSchool accessibility and fire safety review clause.",
+                trust="approved",
             ),
             "demo",
         )

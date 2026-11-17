@@ -178,6 +178,21 @@ class Repository:
             command.stamp(cfg, "head")
         command.upgrade(cfg, "head")
 
+    def corrections_stopped(self, revision_id: str, tenant: str) -> bool:
+        with self.session() as session:
+            return (
+                session.scalar(
+                    select(AuditRow.id)
+                    .where(
+                        AuditRow.tenant == tenant,
+                        AuditRow.target == revision_id,
+                        AuditRow.action == "skip_corrections",
+                    )
+                    .limit(1)
+                )
+                is not None
+            )
+
     def audit(self, identity: Identity, action: str, target: str, payload: dict):
         with self.session.begin() as session:
             session.add(

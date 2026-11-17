@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Literal
 
-from pydantic import model_validator
+from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -16,10 +16,18 @@ class Settings(BaseSettings):
     database_tenant: str = "demo"
     seed_demo: bool = True
     api_keys: dict[str, dict[str, str]] = {}
-    model_provider: Literal["offline", "anthropic", "nvidia"] = "offline"
+    model_provider: Literal["offline", "anthropic", "nvidia", "ollama"] = "offline"
     model_name: str = ""
     model_api_key: str = ""
     model_base_url: str = "https://api.anthropic.com"
+    model_timeout_seconds: float = Field(default=120, gt=0, le=600)
+    model_output_tokens: int = Field(default=900, ge=128, le=2400)
+    model_context_tokens: int = Field(default=8192, ge=2048, le=32768)
+    correction_limit: int = Field(default=2, ge=0, le=5)
+    logs_enabled: bool = True
+    logs_redact_text: bool = False
+    logs_retention_days: int = Field(default=30, ge=1)
+    web_provider: Literal["official", "brave"] = "official"
     embedding_url: str = ""
     embedding_key: str = ""
     nvidia_api_key: str = ""
@@ -61,6 +69,11 @@ class Settings(BaseSettings):
             raise ValueError("Live models require an API key and an explicitly selected model")
         if self.model_provider == "nvidia" and not (self.nvidia_api_key and self.nvidia_chat_model):
             raise ValueError("NVIDIA chat requires TENDER_NVIDIA_API_KEY and TENDER_NVIDIA_CHAT_MODEL")
+        if self.model_provider == "ollama":
+            if not self.model_name:
+                raise ValueError("Ollama requires TENDER_MODEL_NAME")
+            if "model_base_url" not in self.model_fields_set:
+                self.model_base_url = "http://127.0.0.1:11434"
         if self.object_backend == "s3" and not self.s3_bucket:
             raise ValueError("S3 storage requires a bucket")
         return self

@@ -24,3 +24,13 @@ $SCRATCH = "D:\College\Semester  (7)\BTP\TendorWorks\empty"
 | probe_eval.py | the bundled evaluation cases with and without demo-pack seeding |
 
 Caveats: the retrieval corpus, the intake sentences and their gold labels were written for these probes, so the numbers show mechanisms, not real-world accuracy. All prices in the repo's demo packs are synthetic. `real-test-cases.json` lists which facts came from a read-only fetch and still need checking against a downloaded PDF.
+
+## Final layered evaluation harness
+
+The probes above remain diagnostics. Use `../evals_final.md` for the final protocol and `../src/tender/benchmarks.py` for automated LangSmith experiments. The versioned cases are in `datasets/final.json`; machine-readable measurements are in `results/`. No synthetic score or single probe establishes production engineering accuracy.
+
+```sh
+uv run python -m tender.benchmarks --model qwen2.5:3b
+uv run python -m tender.benchmarks --model gemma3:latest
+uv run python -m tender.benchmarks --provider offline --model offline --layer workflow
+```

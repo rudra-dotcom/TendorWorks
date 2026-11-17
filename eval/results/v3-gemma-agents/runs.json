@@ -1,0 +1,1096 @@
+[
+  {
+    "case_id": "intake-0",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "intake",
+      "context": {
+        "description": "Build a CPWD office in Delhi with floor area 300 m2."
+      }
+    },
+    "reference": {
+      "facts": {
+        "authority": "cpwd",
+        "building_type": "office",
+        "floor_area": "300",
+        "location": "Delhi"
+      }
+    },
+    "output": {
+      "answer": {
+        "facts": [
+          {
+            "field": "authority",
+            "value": "cpwd",
+            "quote": "CPWD office"
+          },
+          {
+            "field": "building_type",
+            "value": "office",
+            "quote": ""
+          },
+          {
+            "field": "location",
+            "value": "Delhi",
+            "quote": ""
+          },
+          {
+            "field": "floor_area",
+            "value": "300",
+            "quote": "floor area 300 m2."
+          }
+        ]
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 337,
+        "output_tokens": 91,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "facts": [
+            {
+              "field": "authority",
+              "value": "cpwd",
+              "quote": "CPWD office"
+            },
+            {
+              "field": "building_type",
+              "value": "office",
+              "quote": ""
+            },
+            {
+              "field": "location",
+              "value": "Delhi",
+              "quote": ""
+            },
+            {
+              "field": "floor_area",
+              "value": "300",
+              "quote": "floor area 300 m2."
+            }
+          ]
+        }
+      },
+      "latency_ms": 14168
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "field_recall": 1.0,
+      "field_precision": 1.0,
+      "quote_grounding": 0.0,
+      "reference_correctness": 0.0
+    }
+  },
+  {
+    "case_id": "intake-1",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "intake",
+      "context": {
+        "description": "Build a school with floor area 2,400 sq m."
+      }
+    },
+    "reference": {
+      "facts": {
+        "building_type": "school",
+        "floor_area": "2400"
+      }
+    },
+    "output": {
+      "answer": {
+        "facts": [
+          {
+            "field": "building_type",
+            "value": "school",
+            "quote": "Build a school"
+          },
+          {
+            "field": "floor_area",
+            "value": "2400",
+            "quote": "with floor area 2,400 sq m."
+          }
+        ]
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 335,
+        "output_tokens": 60,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "facts": [
+            {
+              "field": "building_type",
+              "value": "school",
+              "quote": "Build a school"
+            },
+            {
+              "field": "floor_area",
+              "value": "2400",
+              "quote": "with floor area 2,400 sq m."
+            }
+          ]
+        }
+      },
+      "latency_ms": 4453
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "field_recall": 1.0,
+      "field_precision": 1.0,
+      "quote_grounding": 1.0,
+      "reference_correctness": 1.0
+    }
+  },
+  {
+    "case_id": "intake-2",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "intake",
+      "context": {
+        "description": "Prepare an estimate; the authority and location have not been supplied."
+      }
+    },
+    "reference": {
+      "facts": {}
+    },
+    "output": {
+      "answer": {
+        "facts": [
+          {
+            "field": "authority",
+            "value": "not supplied",
+            "quote": "the authority and location have not been supplied."
+          }
+        ]
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 333,
+        "output_tokens": 31,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "facts": [
+            {
+              "field": "authority",
+              "value": "not supplied",
+              "quote": "the authority and location have not been supplied."
+            }
+          ]
+        }
+      },
+      "latency_ms": 2488
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "field_recall": 0.0,
+      "field_precision": 0.0,
+      "quote_grounding": 1.0,
+      "reference_correctness": 0.0
+    }
+  },
+  {
+    "case_id": "scope-defect",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "scope",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "Mandatory project requirement: provide a manual fire alarm. The current scope omits the fire alarm.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "reference": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "output": {
+      "answer": {
+        "concerns": [
+          {
+            "message": "The scope lacks a requirement for a fire alarm.",
+            "evidence_id": "fixture-1",
+            "quote": "Mandatory project requirement: provide a manual fire alarm."
+          }
+        ],
+        "missing_components": [
+          {
+            "message": "The scope does not include a manual fire alarm.",
+            "evidence_id": "fixture-1",
+            "quote": "Mandatory project requirement: provide a manual fire alarm."
+          }
+        ],
+        "proposed_assumptions": [
+          {
+            "field": "fire alarm",
+            "value": "manual",
+            "reason": "The scope states a manual fire alarm is a mandatory requirement.",
+            "evidence_id": "fixture-1",
+            "quote": "Mandatory project requirement: provide a manual fire alarm."
+          }
+        ],
+        "summary": "The scope is missing the requirement for a manual fire alarm, as indicated by the provided evidence."
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 557,
+        "output_tokens": 175,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "concerns": [
+            {
+              "message": "The scope lacks a requirement for a fire alarm.",
+              "evidence_id": "fixture-1",
+              "quote": "Mandatory project requirement: provide a manual fire alarm."
+            }
+          ],
+          "missing_components": [
+            {
+              "message": "The scope does not include a manual fire alarm.",
+              "evidence_id": "fixture-1",
+              "quote": "Mandatory project requirement: provide a manual fire alarm."
+            }
+          ],
+          "proposed_assumptions": [
+            {
+              "field": "fire alarm",
+              "value": "manual",
+              "reason": "The scope states a manual fire alarm is a mandatory requirement.",
+              "evidence_id": "fixture-1",
+              "quote": "Mandatory project requirement: provide a manual fire alarm."
+            }
+          ],
+          "summary": "The scope is missing the requirement for a manual fire alarm, as indicated by the provided evidence."
+        }
+      },
+      "latency_ms": 14745
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "citation_grounding": 1.0,
+      "defect_recall_proxy": 1.0,
+      "false_positive_free": 1.0,
+      "reference_correctness": 1.0
+    }
+  },
+  {
+    "case_id": "design-defect",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "design",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "Supplied floor height is 3.60 m. The proposed design uses 3.00 m, contradicting the supplied height.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "reference": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "output": {
+      "answer": {
+        "concerns": [
+          {
+            "message": "The proposed design\u2019s floor height of 3.00 m contradicts the supplied floor height of 3.60 m.",
+            "evidence_id": "fixture-1",
+            "quote": "Supplied floor height is 3.60 m. The proposed design uses 3.00 m, contradicting the supplied height."
+          }
+        ],
+        "missing_components": [],
+        "proposed_assumptions": [],
+        "summary": "The design\u2019s floor height is inconsistent with the provided specification."
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 561,
+        "output_tokens": 110,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "concerns": [
+            {
+              "message": "The proposed design\u2019s floor height of 3.00 m contradicts the supplied floor height of 3.60 m.",
+              "evidence_id": "fixture-1",
+              "quote": "Supplied floor height is 3.60 m. The proposed design uses 3.00 m, contradicting the supplied height."
+            }
+          ],
+          "missing_components": [],
+          "proposed_assumptions": [],
+          "summary": "The design\u2019s floor height is inconsistent with the provided specification."
+        }
+      },
+      "latency_ms": 10466
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "citation_grounding": 1.0,
+      "defect_recall_proxy": 1.0,
+      "false_positive_free": 1.0,
+      "reference_correctness": 1.0
+    }
+  },
+  {
+    "case_id": "rules-defect",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "rules",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "This rate package applies only to Delhi. The project is in Kerala; applicability is unresolved.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "reference": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "output": {
+      "answer": {
+        "concerns": [
+          {
+            "message": "The rate package\u2019s applicability is unresolved due to the project location in Kerala.",
+            "evidence_id": "fixture-1",
+            "quote": "This rate package applies only to Delhi. The project is in Kerala; applicability is unresolved."
+          }
+        ],
+        "missing_components": [],
+        "proposed_assumptions": [],
+        "summary": "The rate package's applicability is unresolved due to the project location."
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 552,
+        "output_tokens": 90,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "concerns": [
+            {
+              "message": "The rate package\u2019s applicability is unresolved due to the project location in Kerala.",
+              "evidence_id": "fixture-1",
+              "quote": "This rate package applies only to Delhi. The project is in Kerala; applicability is unresolved."
+            }
+          ],
+          "missing_components": [],
+          "proposed_assumptions": [],
+          "summary": "The rate package's applicability is unresolved due to the project location."
+        }
+      },
+      "latency_ms": 9109
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "citation_grounding": 1.0,
+      "defect_recall_proxy": 1.0,
+      "false_positive_free": 1.0,
+      "reference_correctness": 1.0
+    }
+  },
+  {
+    "case_id": "quantity_verifier-defect",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "quantity_verifier",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "Wall W1 length 10 m, height 3 m and thickness 0.2 m gives volume 6 m3. The worksheet reports 60 m3.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "reference": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "output": {
+      "answer": {
+        "concerns": [
+          {
+            "message": "The calculated volume (6 m3) does not match the reported worksheet value (60 m3).",
+            "evidence_id": "fixture-1",
+            "quote": "Wall W1 length 10 m, height 3 m and thickness 0.2 m gives volume 6 m3."
+          }
+        ],
+        "missing_components": [],
+        "proposed_assumptions": [],
+        "summary": "A discrepancy exists between the calculated and reported volumes."
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 568,
+        "output_tokens": 101,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "concerns": [
+            {
+              "message": "The calculated volume (6 m3) does not match the reported worksheet value (60 m3).",
+              "evidence_id": "fixture-1",
+              "quote": "Wall W1 length 10 m, height 3 m and thickness 0.2 m gives volume 6 m3."
+            }
+          ],
+          "missing_components": [],
+          "proposed_assumptions": [],
+          "summary": "A discrepancy exists between the calculated and reported volumes."
+        }
+      },
+      "latency_ms": 10104
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "citation_grounding": 1.0,
+      "defect_recall_proxy": 1.0,
+      "false_positive_free": 1.0,
+      "reference_correctness": 1.0
+    }
+  },
+  {
+    "case_id": "rate_estimator-defect",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "rate_estimator",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "The selected rate is for M25 concrete in m3. The required item is M30 concrete in m3. The grade does not match.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "reference": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "output": {
+      "answer": {
+        "concerns": [
+          {
+            "message": "The rate specifies M25 concrete, while the required item is M30 concrete.",
+            "evidence_id": "fixture-1",
+            "quote": "The grade does not match."
+          }
+        ],
+        "missing_components": [],
+        "proposed_assumptions": [],
+        "summary": "The concrete grade specified in the rate does not match the required grade."
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 567,
+        "output_tokens": 80,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "concerns": [
+            {
+              "message": "The rate specifies M25 concrete, while the required item is M30 concrete.",
+              "evidence_id": "fixture-1",
+              "quote": "The grade does not match."
+            }
+          ],
+          "missing_components": [],
+          "proposed_assumptions": [],
+          "summary": "The concrete grade specified in the rate does not match the required grade."
+        }
+      },
+      "latency_ms": 9134
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "citation_grounding": 1.0,
+      "defect_recall_proxy": 1.0,
+      "false_positive_free": 1.0,
+      "reference_correctness": 1.0
+    }
+  },
+  {
+    "case_id": "economics-defect",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "economics",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "The selected unit rate already includes overhead. The estimate adds overhead a second time.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "reference": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "output": {
+      "answer": {
+        "concerns": [
+          {
+            "message": "The estimate adds overhead a second time, creating potential double counting.",
+            "evidence_id": "fixture-1",
+            "quote": "The selected unit rate already includes overhead. The estimate adds overhead a second time."
+          }
+        ],
+        "missing_components": [],
+        "proposed_assumptions": [],
+        "summary": "The retrieved context indicates a potential for double counting overhead."
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 549,
+        "output_tokens": 82,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "concerns": [
+            {
+              "message": "The estimate adds overhead a second time, creating potential double counting.",
+              "evidence_id": "fixture-1",
+              "quote": "The selected unit rate already includes overhead. The estimate adds overhead a second time."
+            }
+          ],
+          "missing_components": [],
+          "proposed_assumptions": [],
+          "summary": "The retrieved context indicates a potential for double counting overhead."
+        }
+      },
+      "latency_ms": 10299
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "citation_grounding": 1.0,
+      "defect_recall_proxy": 1.0,
+      "false_positive_free": 1.0,
+      "reference_correctness": 1.0
+    }
+  },
+  {
+    "case_id": "pricing_verifier-defect",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "pricing_verifier",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "The selected rate is for M25 concrete in m3. The required item is M30 concrete in m3. The grade does not match.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "reference": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "output": {
+      "answer": {
+        "concerns": [
+          {
+            "message": "The selected rate is for M25 concrete, while the required item is M30 concrete.",
+            "evidence_id": "fixture-1",
+            "quote": "The grade does not match."
+          }
+        ],
+        "missing_components": [],
+        "proposed_assumptions": [],
+        "summary": "A rate mismatch exists between M25 and M30 concrete grades."
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 564,
+        "output_tokens": 83,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "concerns": [
+            {
+              "message": "The selected rate is for M25 concrete, while the required item is M30 concrete.",
+              "evidence_id": "fixture-1",
+              "quote": "The grade does not match."
+            }
+          ],
+          "missing_components": [],
+          "proposed_assumptions": [],
+          "summary": "A rate mismatch exists between M25 and M30 concrete grades."
+        }
+      },
+      "latency_ms": 10127
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "citation_grounding": 1.0,
+      "defect_recall_proxy": 1.0,
+      "false_positive_free": 1.0,
+      "reference_correctness": 1.0
+    }
+  },
+  {
+    "case_id": "evidence_audit-defect",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "evidence_audit",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "The citation claims a concrete price of INR 999 per m3, but the cited excerpt only states a wall dimension and contains no price.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "reference": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "output": {
+      "answer": {
+        "concerns": [
+          {
+            "message": "The evidence states a concrete price of INR 999 per m3, but the excerpt lacks a corresponding price.",
+            "evidence_id": "fixture-1",
+            "quote": "The cited excerpt only states a wall dimension and contains no price."
+          }
+        ],
+        "missing_components": [],
+        "proposed_assumptions": [],
+        "summary": "The evidence identifies a missing concrete price within the provided excerpt."
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 568,
+        "output_tokens": 91,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "concerns": [
+            {
+              "message": "The evidence states a concrete price of INR 999 per m3, but the excerpt lacks a corresponding price.",
+              "evidence_id": "fixture-1",
+              "quote": "The cited excerpt only states a wall dimension and contains no price."
+            }
+          ],
+          "missing_components": [],
+          "proposed_assumptions": [],
+          "summary": "The evidence identifies a missing concrete price within the provided excerpt."
+        }
+      },
+      "latency_ms": 9194
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "citation_grounding": 0.0,
+      "defect_recall_proxy": 0.0,
+      "false_positive_free": 1.0,
+      "reference_correctness": 0.0
+    }
+  },
+  {
+    "case_id": "critic-clean",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "pricing_verifier",
+      "context": {
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-clean",
+            "text": "Required grade M25, unit m3. Selected applicable approved rate: M25, m3, INR 100. Quantity 2 m3; amount INR 200. No adjustments. All evidence is present.",
+            "locator": "Controlled fixture"
+          }
+        ]
+      }
+    },
+    "reference": {
+      "defect_evidence_ids": []
+    },
+    "output": {
+      "answer": {
+        "concerns": [
+          {
+            "message": "The quantity of 2 m3 does not match the specified unit of m3.",
+            "evidence_id": "fixture-clean",
+            "quote": "Quantity 2 m3; amount INR 200."
+          }
+        ],
+        "missing_components": [],
+        "proposed_assumptions": [],
+        "summary": "A quantity discrepancy exists between the specified unit and the quantity provided."
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 567,
+        "output_tokens": 85,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "concerns": [
+            {
+              "message": "The quantity of 2 m3 does not match the specified unit of m3.",
+              "evidence_id": "fixture-clean",
+              "quote": "Quantity 2 m3; amount INR 200."
+            }
+          ],
+          "missing_components": [],
+          "proposed_assumptions": [],
+          "summary": "A quantity discrepancy exists between the specified unit and the quantity provided."
+        }
+      },
+      "latency_ms": 9935
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "citation_grounding": 1.0,
+      "defect_recall_proxy": 0.0,
+      "false_positive_free": 0.0,
+      "reference_correctness": 0.0
+    }
+  },
+  {
+    "case_id": "intake-unseen-railway",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "intake",
+      "context": {
+        "description": "Build a railway school in Patna for 120 students."
+      }
+    },
+    "reference": {
+      "facts": {
+        "authority": "railway",
+        "building_type": "school",
+        "location": "Patna",
+        "capacity": "120"
+      }
+    },
+    "output": {
+      "answer": {
+        "facts": [
+          {
+            "field": "authority",
+            "value": "railway",
+            "quote": "railway"
+          },
+          {
+            "field": "building_type",
+            "value": "school",
+            "quote": "school"
+          },
+          {
+            "field": "location",
+            "value": "Patna",
+            "quote": "Patna"
+          },
+          {
+            "field": "capacity",
+            "value": "120",
+            "quote": "120 students"
+          }
+        ]
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 333,
+        "output_tokens": 88,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "facts": [
+            {
+              "field": "authority",
+              "value": "railway",
+              "quote": "railway"
+            },
+            {
+              "field": "building_type",
+              "value": "school",
+              "quote": "school"
+            },
+            {
+              "field": "location",
+              "value": "Patna",
+              "quote": "Patna"
+            },
+            {
+              "field": "capacity",
+              "value": "120",
+              "quote": "120 students"
+            }
+          ]
+        }
+      },
+      "latency_ms": 8714
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "field_recall": 1.0,
+      "field_precision": 1.0,
+      "quote_grounding": 1.0,
+      "reference_correctness": 1.0
+    }
+  },
+  {
+    "case_id": "intake-unseen-office",
+    "layer": "agent",
+    "inputs": {
+      "layer": "agent",
+      "role": "intake",
+      "context": {
+        "description": "Build a CPWD office with floor area 450 m2, 3 floors, capacity 60 occupants and duration 12 months. Location is Mumbai and state is Maharashtra."
+      }
+    },
+    "reference": {
+      "facts": {
+        "authority": "cpwd",
+        "building_type": "office",
+        "floor_area": "450",
+        "floors": "3",
+        "capacity": "60",
+        "duration_months": "12",
+        "location": "Mumbai",
+        "state": "Maharashtra"
+      }
+    },
+    "output": {
+      "answer": {
+        "facts": [
+          {
+            "field": "authority",
+            "value": "cpwd",
+            "quote": "CPWD office"
+          },
+          {
+            "field": "building_type",
+            "value": "office",
+            "quote": ""
+          },
+          {
+            "field": "state",
+            "value": "Maharashtra",
+            "quote": "state is Maharashtra"
+          },
+          {
+            "field": "floor_area",
+            "value": "450",
+            "quote": "floor area 450 m2"
+          },
+          {
+            "field": "floors",
+            "value": "3",
+            "quote": "3 floors"
+          },
+          {
+            "field": "capacity",
+            "value": "60",
+            "quote": "capacity 60 occupants"
+          },
+          {
+            "field": "duration_months",
+            "value": "12",
+            "quote": "duration 12 months"
+          },
+          {
+            "field": "location",
+            "value": "Mumbai",
+            "quote": "Location is Mumbai"
+          }
+        ]
+      },
+      "usage": {
+        "provider": "ollama",
+        "model": "gemma3:latest",
+        "prompt_version": "2026-11-17-bounded-review-v3",
+        "input_tokens": 359,
+        "output_tokens": 182,
+        "tool_calls": 0,
+        "context_tokens": 8192,
+        "output_token_limit": 900,
+        "status": "ok",
+        "structured_output": {
+          "facts": [
+            {
+              "field": "authority",
+              "value": "cpwd",
+              "quote": "CPWD office"
+            },
+            {
+              "field": "building_type",
+              "value": "office",
+              "quote": ""
+            },
+            {
+              "field": "state",
+              "value": "Maharashtra",
+              "quote": "state is Maharashtra"
+            },
+            {
+              "field": "floor_area",
+              "value": "450",
+              "quote": "floor area 450 m2"
+            },
+            {
+              "field": "floors",
+              "value": "3",
+              "quote": "3 floors"
+            },
+            {
+              "field": "capacity",
+              "value": "60",
+              "quote": "capacity 60 occupants"
+            },
+            {
+              "field": "duration_months",
+              "value": "12",
+              "quote": "duration 12 months"
+            },
+            {
+              "field": "location",
+              "value": "Mumbai",
+              "quote": "Location is Mumbai"
+            }
+          ]
+        }
+      },
+      "latency_ms": 12674
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "field_recall": 1.0,
+      "field_precision": 1.0,
+      "quote_grounding": 0.0,
+      "reference_correctness": 0.0
+    }
+  }
+]

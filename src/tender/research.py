@@ -2,7 +2,9 @@
 
 import hashlib
 import ipaddress
+import json
 import socket
+import time
 from datetime import date
 from urllib.parse import urljoin, urlparse
 
@@ -33,19 +35,55 @@ class ResearchWorker:
         self.gateway, self.settings = gateway, gateway.settings
 
     def discover(self, authority: str, component_key: str, tenant: str) -> dict:
-        if not self.settings.web_enabled or not self.settings.web_search_key:
+        if not self.settings.web_enabled:
             return {"status": "disabled", "candidates": []}
         # No project title, description, address, capacity or uploaded content leaves the server.
         query = f"{authority} schedule of rates {component_key.replace('_', ' ')} official"
-        response = httpx.get(
-            "https://api.search.brave.com/res/v1/web/search",
-            params={"q": query, "count": 5},
-            headers={"X-Subscription-Token": self.settings.web_search_key},
-            timeout=20,
+        cache_path = (
+            self.settings.data_dir
+            / "web_cache"
+            / (key(tenant, authority, component_key, self.settings.web_provider) + ".json")
         )
-        response.raise_for_status()
+        if cache_path.is_file() and time.time() - cache_path.stat().st_mtime < 86400:
+            cached = json.loads(cache_path.read_text())
+            return {**cached, "cached": True}
+        if self.settings.web_provider == "brave":
+            if not self.settings.web_search_key:
+                return {
+                    "status": "unavailable",
+                    "candidates": [],
+                    "errors": ["Brave API key is not configured"],
+                }
+            response = httpx.get(
+                "https://api.search.brave.com/res/v1/web/search",
+                params={"q": query, "count": 5},
+                headers={"X-Subscription-Token": self.settings.web_search_key},
+                timeout=20,
+            )
+            response.raise_for_status()
+            items = response.json().get("web", {}).get("results", [])
+        else:
+            # Key-free search within an official publication index, not a general search engine.
+            index = "https://rb.indianrailways.gov.in/show-directorate/preview/169"
+            if authority not in {"cpwd", "railway"} or not allowed_url(
+                index, self.settings.web_allowed_hosts
+            ):
+                return {"status": "no_official_index", "candidates": []}
+            with httpx.stream("GET", index, timeout=25, follow_redirects=False) as response:
+                response.raise_for_status()
+                content = bytearray()
+                for chunk in response.iter_bytes():
+                    content.extend(chunk)
+                    if len(content) > self.settings.max_upload_bytes:
+                        raise ValueError("Publication index exceeds size limit")
+            soup = BeautifulSoup(bytes(content), "html.parser")
+            items = [
+                {"url": urljoin(index, a.get("href", "")), "title": a.get_text(" ", strip=True)}
+                for a in soup.find_all("a")
+                if "plinth area rates 2025" in a.get_text(" ", strip=True).lower()
+            ]
         results, errors = [], []
-        for item in response.json().get("web", {}).get("results", []):
+        for item in items:
             if len(results) >= self.settings.max_research_documents:
                 break
             url = item.get("url", "")
@@ -56,7 +94,17 @@ class ResearchWorker:
                 results.append(doc_id)
             except (httpx.HTTPError, ValueError, OSError) as exc:
                 errors.append(str(exc)[:200])
-        return {"status": "candidates_require_review", "candidates": results, "errors": errors}
+        outcome = {
+            "status": "candidates_require_review",
+            "candidates": results,
+            "errors": errors,
+            "provider": self.settings.web_provider,
+            "query": query,
+        }
+        if results:
+            cache_path.parent.mkdir(parents=True, exist_ok=True)
+            cache_path.write_text(json.dumps(outcome))
+        return outcome
 
     def fetch(self, url: str, title: str, authority: str, tenant: str) -> str:
         for _ in range(4):
@@ -86,6 +134,8 @@ class ResearchWorker:
                     for tag in soup(["script", "style", "nav"]):
                         tag.decompose()
                     text = soup.get_text("\n", strip=True)[:500000]
+                    if "request rejected" in text.lower() or len(text.strip()) < 40:
+                        raise ValueError("Source returned a block page or insufficient content")
                 digest = hashlib.sha256(raw).hexdigest()
                 document = SourceDocument(
                     id=key(url, digest),

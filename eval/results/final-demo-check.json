@@ -1,0 +1,61 @@
+{
+  "revision_id": "8690eaa8-fe78-49f8-9770-620f440f110e",
+  "status": "draft",
+  "base_total": "11028540.00",
+  "model_failures": [],
+  "ollama_calls": 9,
+  "evidence_coverage": 1.0,
+  "retrieved_chunks": 12,
+  "web_research": {
+    "status": "candidates_require_review",
+    "candidates": [
+      "04749108fbb339b36424fac770826f63d8cb2881"
+    ],
+    "errors": [],
+    "provider": "official",
+    "query": "cpwd schedule of rates building official",
+    "cached": true
+  },
+  "artifact_checks": [
+    {
+      "name": "boq.xlsx",
+      "status": 200,
+      "bytes": 21114
+    },
+    {
+      "name": "estimate.pdf",
+      "status": 200,
+      "bytes": 5039
+    },
+    {
+      "name": "estimate.docx",
+      "status": 200,
+      "bytes": 38577
+    },
+    {
+      "name": "concept.svg",
+      "status": 200,
+      "bytes": 6153
+    },
+    {
+      "name": "concept.pdf",
+      "status": 200,
+      "bytes": 2375
+    },
+    {
+      "name": "concept.dxf",
+      "status": 200,
+      "bytes": 22829
+    },
+    {
+      "name": "estimate.json",
+      "status": 200,
+      "bytes": 91177
+    },
+    {
+      "name": "estimate-bundle.zip",
+      "status": 200,
+      "bytes": 80645
+    }
+  ]
+}

@@ -1,0 +1,1834 @@
+[
+  {
+    "case_id": "workflow-cpwd",
+    "layer": "workflow",
+    "inputs": {
+      "layer": "workflow",
+      "brief": {
+        "title": "CPWD office preliminary demo",
+        "description": "Prepare a CPWD preliminary estimate for a 300 m2 single-storey office in New Delhi. RCC frame, 3.60 m height, downcomer and manual alarm scenario, internal water and electrical services only. Exclude external works, land, lifts, HVAC, consultancy, TPQA and escalation.",
+        "authority": "cpwd",
+        "state": "Delhi",
+        "location": "New Delhi",
+        "work_category": "preliminary_cpwd",
+        "building_type": "office",
+        "floor_area": "300",
+        "length": "20",
+        "width": "15",
+        "floors": 1,
+        "height": "3.6",
+        "capacity": 30,
+        "duration_months": "12",
+        "estimate_date": "2025-07-31",
+        "execution_year": 2025,
+        "correction_limit": 2,
+        "allow_demo": true
+      }
+    },
+    "reference": {
+      "status": "draft",
+      "base_total": "11028540.00",
+      "minimum_evidence_coverage": 1,
+      "minimum_retrieved": 1
+    },
+    "output": {
+      "result": {
+        "project_id": "461329e6-42d0-4bd8-a01f-4f789175aa13",
+        "revision_id": "9f825486-6e9e-4730-a914-b0cf52612a1e",
+        "revision": 1,
+        "brief": {
+          "title": "CPWD office preliminary demo",
+          "description": "Prepare a CPWD preliminary estimate for a 300 m2 single-storey office in New Delhi. RCC frame, 3.60 m height, downcomer and manual alarm scenario, internal water and electrical services only. Exclude external works, land, lifts, HVAC, consultancy, TPQA and escalation.",
+          "authority": "cpwd",
+          "state": "Delhi",
+          "location": "New Delhi",
+          "building_type": "office",
+          "work_category": "preliminary_cpwd",
+          "estimate_date": "2025-07-31",
+          "execution_year": 2025,
+          "floor_area": "300",
+          "length": "20",
+          "width": "15",
+          "floors": 1,
+          "height": "3.6",
+          "capacity": 30,
+          "duration_months": "12",
+          "site_area": null,
+          "selected_options": [],
+          "specifications": {},
+          "supplied_quantities": {},
+          "review_design": false,
+          "allow_demo": true,
+          "correction_limit": 2
+        },
+        "pack_id": "d0ef7ee5cede88ebccef96055f21ec76584530aa",
+        "pack_version": "1.0",
+        "demo": true,
+        "status": "draft",
+        "checkpoint": 3,
+        "design": {
+          "template": "rectangular_concept_v1",
+          "length": "20",
+          "width": "15",
+          "floors": 1,
+          "height": "3.6",
+          "wall_thickness": "0.23",
+          "elements": [
+            {
+              "id": "F01-SLAB",
+              "kind": "slab",
+              "floor": 0,
+              "label": "Floor plate",
+              "x": "0.000000",
+              "y": "0.000000",
+              "width": "15.000000",
+              "length": "20.000000",
+              "height": "0.150000"
+            },
+            {
+              "id": "F01-C",
+              "kind": "circulation",
+              "floor": 0,
+              "label": "Corridor",
+              "x": "6.500000",
+              "y": "0.230000",
+              "width": "2.000000",
+              "length": "19.540000",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-WN",
+              "kind": "wall",
+              "floor": 0,
+              "label": "North wall",
+              "x": "0.000000",
+              "y": "0.000000",
+              "width": "15.000000",
+              "length": "0.230000",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-WS",
+              "kind": "wall",
+              "floor": 0,
+              "label": "South wall",
+              "x": "0.000000",
+              "y": "19.770000",
+              "width": "15.000000",
+              "length": "0.230000",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-WW",
+              "kind": "wall",
+              "floor": 0,
+              "label": "West wall",
+              "x": "0.000000",
+              "y": "0.230000",
+              "width": "0.230000",
+              "length": "19.540000",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-WE",
+              "kind": "wall",
+              "floor": 0,
+              "label": "East wall",
+              "x": "14.770000",
+              "y": "0.230000",
+              "width": "0.230000",
+              "length": "19.540000",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-P0",
+              "kind": "partition",
+              "floor": 0,
+              "label": "Corridor partition",
+              "x": "6.385000",
+              "y": "0.230000",
+              "width": "0.115000",
+              "length": "19.540000",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-R000",
+              "kind": "room",
+              "floor": 0,
+              "label": "Room 1",
+              "x": "0.230000",
+              "y": "0.230000",
+              "width": "6.155000",
+              "length": "6.436667",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-D000",
+              "kind": "door",
+              "floor": 0,
+              "label": "Door opening",
+              "x": "6.385000",
+              "y": "0.830000",
+              "width": "0.115000",
+              "length": "0.900000",
+              "height": "2.100000"
+            },
+            {
+              "id": "F01-V000",
+              "kind": "window",
+              "floor": 0,
+              "label": "Window opening",
+              "x": "0.000000",
+              "y": "2.698333",
+              "width": "0.230000",
+              "length": "1.500000",
+              "height": "1.200000"
+            },
+            {
+              "id": "F01-R001",
+              "kind": "room",
+              "floor": 0,
+              "label": "Room 2",
+              "x": "0.230000",
+              "y": "6.781667",
+              "width": "6.155000",
+              "length": "6.436667",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-D001",
+              "kind": "door",
+              "floor": 0,
+              "label": "Door opening",
+              "x": "6.385000",
+              "y": "7.381667",
+              "width": "0.115000",
+              "length": "0.900000",
+              "height": "2.100000"
+            },
+            {
+              "id": "F01-V001",
+              "kind": "window",
+              "floor": 0,
+              "label": "Window opening",
+              "x": "0.000000",
+              "y": "9.250000",
+              "width": "0.230000",
+              "length": "1.500000",
+              "height": "1.200000"
+            },
+            {
+              "id": "F01-P001",
+              "kind": "partition",
+              "floor": 0,
+              "label": "Room partition",
+              "x": "0.230000",
+              "y": "6.666667",
+              "width": "6.155000",
+              "length": "0.115000",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-R002",
+              "kind": "room",
+              "floor": 0,
+              "label": "Room 3",
+              "x": "0.230000",
+              "y": "13.333333",
+              "width": "6.155000",
+              "length": "6.436667",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-D002",
+              "kind": "door",
+              "floor": 0,
+              "label": "Door opening",
+              "x": "6.385000",
+              "y": "13.933333",
+              "width": "0.115000",
+              "length": "0.900000",
+              "height": "2.100000"
+            },
+            {
+              "id": "F01-V002",
+              "kind": "window",
+              "floor": 0,
+              "label": "Window opening",
+              "x": "0.000000",
+              "y": "15.801667",
+              "width": "0.230000",
+              "length": "1.500000",
+              "height": "1.200000"
+            },
+            {
+              "id": "F01-P002",
+              "kind": "partition",
+              "floor": 0,
+              "label": "Room partition",
+              "x": "0.230000",
+              "y": "13.218333",
+              "width": "6.155000",
+              "length": "0.115000",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-P1",
+              "kind": "partition",
+              "floor": 0,
+              "label": "Corridor partition",
+              "x": "8.500000",
+              "y": "0.230000",
+              "width": "0.115000",
+              "length": "19.540000",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-R100",
+              "kind": "room",
+              "floor": 0,
+              "label": "Room 4",
+              "x": "8.615000",
+              "y": "0.230000",
+              "width": "6.155000",
+              "length": "6.436667",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-D100",
+              "kind": "door",
+              "floor": 0,
+              "label": "Door opening",
+              "x": "8.500000",
+              "y": "0.830000",
+              "width": "0.115000",
+              "length": "0.900000",
+              "height": "2.100000"
+            },
+            {
+              "id": "F01-V100",
+              "kind": "window",
+              "floor": 0,
+              "label": "Window opening",
+              "x": "14.770000",
+              "y": "2.698333",
+              "width": "0.230000",
+              "length": "1.500000",
+              "height": "1.200000"
+            },
+            {
+              "id": "F01-R101",
+              "kind": "room",
+              "floor": 0,
+              "label": "Room 5",
+              "x": "8.615000",
+              "y": "6.781667",
+              "width": "6.155000",
+              "length": "6.436667",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-D101",
+              "kind": "door",
+              "floor": 0,
+              "label": "Door opening",
+              "x": "8.500000",
+              "y": "7.381667",
+              "width": "0.115000",
+              "length": "0.900000",
+              "height": "2.100000"
+            },
+            {
+              "id": "F01-V101",
+              "kind": "window",
+              "floor": 0,
+              "label": "Window opening",
+              "x": "14.770000",
+              "y": "9.250000",
+              "width": "0.230000",
+              "length": "1.500000",
+              "height": "1.200000"
+            },
+            {
+              "id": "F01-P101",
+              "kind": "partition",
+              "floor": 0,
+              "label": "Room partition",
+              "x": "8.615000",
+              "y": "6.666667",
+              "width": "6.155000",
+              "length": "0.115000",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-R102",
+              "kind": "room",
+              "floor": 0,
+              "label": "Services / WC",
+              "x": "8.615000",
+              "y": "13.333333",
+              "width": "6.155000",
+              "length": "6.436667",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-D102",
+              "kind": "door",
+              "floor": 0,
+              "label": "Door opening",
+              "x": "8.500000",
+              "y": "13.933333",
+              "width": "0.115000",
+              "length": "0.900000",
+              "height": "2.100000"
+            },
+            {
+              "id": "F01-V102",
+              "kind": "window",
+              "floor": 0,
+              "label": "Window opening",
+              "x": "14.770000",
+              "y": "15.801667",
+              "width": "0.230000",
+              "length": "1.500000",
+              "height": "1.200000"
+            },
+            {
+              "id": "F01-P102",
+              "kind": "partition",
+              "floor": 0,
+              "label": "Room partition",
+              "x": "8.615000",
+              "y": "13.218333",
+              "width": "6.155000",
+              "length": "0.115000",
+              "height": "3.600000"
+            },
+            {
+              "id": "F01-EXIT0",
+              "kind": "exit",
+              "floor": 0,
+              "label": "Concept entry / exit",
+              "x": "6.750000",
+              "y": "0.000000",
+              "width": "1.500000",
+              "length": "0.230000",
+              "height": "2.100000"
+            },
+            {
+              "id": "F01-EXIT1",
+              "kind": "exit",
+              "floor": 0,
+              "label": "Concept entry / exit",
+              "x": "6.750000",
+              "y": "19.770000",
+              "width": "1.500000",
+              "length": "0.230000",
+              "height": "2.100000"
+            },
+            {
+              "id": "ROOF-01",
+              "kind": "roof",
+              "floor": 1,
+              "label": "Roof",
+              "x": "0.000000",
+              "y": "0.000000",
+              "width": "15.000000",
+              "length": "20.000000",
+              "height": "0.150000"
+            }
+          ],
+          "metrics": {
+            "gross_floor_area": "300.000",
+            "net_floor_area": "276.786",
+            "roof_area": "300.000",
+            "footprint": "300.000",
+            "wall_volume": "78.333",
+            "wall_finish_area": "899.136",
+            "door_area": "17.640",
+            "window_area": "10.800",
+            "room_count": "6.000",
+            "perimeter": "70.000",
+            "floors": "1.000",
+            "height": "3.600",
+            "duration_months": "12.000",
+            "capacity": "30.000",
+            "site_area": "450.000",
+            "wet_area": "39.618"
+          },
+          "assumptions": [
+            {
+              "id": "assumption-layout",
+              "field": "layout",
+              "value": "Rectangular footprint; 0.23 m exterior walls; 0.115 m partitions; 2 m corridor",
+              "reason": "Illustrative concept geometry; wall construction, circulation and structural design need validation.",
+              "source_ids": [
+                "academic-scope-v1"
+              ],
+              "status": "proposed"
+            },
+            {
+              "id": "assumption-site_area",
+              "field": "site_area",
+              "value": "450.000",
+              "reason": "Concept template default; replace with measured project information.",
+              "source_ids": [
+                "academic-scope-v1"
+              ],
+              "status": "proposed"
+            }
+          ],
+          "limitations": [
+            "Concept drawing only; not approved for construction.",
+            "Setbacks, access, occupancy, egress, accessibility and site conditions require engineering review.",
+            "Foundations, reinforcement and service capacities are allowances until detailed engineering is supplied.",
+            "Stair reserves indicate space only; stair geometry and structural design are not generated."
+          ]
+        },
+        "assumptions": [
+          {
+            "id": "assumption-layout",
+            "field": "layout",
+            "value": "Rectangular footprint; 0.23 m exterior walls; 0.115 m partitions; 2 m corridor",
+            "reason": "Illustrative concept geometry; wall construction, circulation and structural design need validation.",
+            "source_ids": [
+              "academic-scope-v1"
+            ],
+            "status": "proposed"
+          },
+          {
+            "id": "assumption-site_area",
+            "field": "site_area",
+            "value": "450.000",
+            "reason": "Concept template default; replace with measured project information.",
+            "source_ids": [
+              "academic-scope-v1"
+            ],
+            "status": "proposed"
+          }
+        ],
+        "rules": [
+          {
+            "id": "preliminary-only",
+            "text": "Restricted demonstration: office, rectangular layout, up to three floors, height 3.60 m, normal foundation. Gross floor area is assumed equal to measured plinth area; engineer must verify Annexure V. Scope includes civil building shell, assumed downcomer and manual alarm, internal water and electrical services. Excludes external connections, local approval charges, external development, land, lifts, HVAC, solar, TPQA, consultancy and escalation. No tax added: commercial tax basis requires review. Fire system selection is a scenario assumption, not a compliance determination.",
+            "source_id": "academic-scope-v1",
+            "locator": "Scope v1",
+            "required_components": [
+              "building_shell",
+              "fire_safety",
+              "fire_alarm"
+            ],
+            "blocking": true
+          }
+        ],
+        "boq": [
+          {
+            "id": "boq:building_shell",
+            "key": "building_shell",
+            "category": "Preliminary CPWD building scope",
+            "description": "Office RCC framed building, 3.60 m floor height",
+            "unit": "m2",
+            "use": "Whole office building; scenario assumptions require review",
+            "classification": "mandatory",
+            "selected": true,
+            "specification": {
+              "basis": "PAR2025-office-3.6m"
+            },
+            "element_ids": [
+              "F01-SLAB"
+            ],
+            "quantity": "300.000",
+            "quantity_basis": "template_allowance",
+            "quantity_calculation_id": "quantity:building_shell",
+            "unit_rate": "30920.000000",
+            "rate_basis": "scheduled",
+            "rate_id": "par-1.1.1",
+            "item_code": "1.1.1",
+            "cost_behavior": "quantity",
+            "amount": "9276000.00",
+            "amount_calculation_id": "amount:building_shell",
+            "evidence_ids": [
+              "source:academic-scope-v1:1:f751512d42ce",
+              "quantity:building_shell",
+              "source:cpwd-par-2025:2025-base-2025-04-01:b638f30e96f6"
+            ],
+            "inclusions": [
+              "PAR composite item"
+            ],
+            "exclusions": [
+              "separately listed services"
+            ],
+            "status": "priced"
+          },
+          {
+            "id": "boq:fire_safety",
+            "key": "fire_safety",
+            "category": "Preliminary CPWD building scope",
+            "description": "Downcomer system, assumed scenario",
+            "unit": "m2",
+            "use": "Whole office building; scenario assumptions require review",
+            "classification": "mandatory",
+            "selected": true,
+            "specification": {
+              "basis": "PAR2025-office-3.6m"
+            },
+            "element_ids": [
+              "F01-SLAB"
+            ],
+            "quantity": "300.000",
+            "quantity_basis": "template_allowance",
+            "quantity_calculation_id": "quantity:fire_safety",
+            "unit_rate": "460.000000",
+            "rate_basis": "scheduled",
+            "rate_id": "par-1.5.1",
+            "item_code": "1.5.1",
+            "cost_behavior": "quantity",
+            "amount": "138000.00",
+            "amount_calculation_id": "amount:fire_safety",
+            "evidence_ids": [
+              "source:academic-scope-v1:1:f751512d42ce",
+              "quantity:fire_safety",
+              "source:cpwd-par-2025:2025-base-2025-04-01:2772f850638a"
+            ],
+            "inclusions": [
+              "PAR composite item"
+            ],
+            "exclusions": [
+              "separately listed services"
+            ],
+            "status": "priced"
+          },
+          {
+            "id": "boq:fire_alarm",
+            "key": "fire_alarm",
+            "category": "Preliminary CPWD building scope",
+            "description": "Manual fire alarm, assumed scenario",
+            "unit": "m2",
+            "use": "Whole office building; scenario assumptions require review",
+            "classification": "mandatory",
+            "selected": true,
+            "specification": {
+              "basis": "PAR2025-office-3.6m"
+            },
+            "element_ids": [
+              "F01-SLAB"
+            ],
+            "quantity": "300.000",
+            "quantity_basis": "template_allowance",
+            "quantity_calculation_id": "quantity:fire_alarm",
+            "unit_rate": "280.000000",
+            "rate_basis": "scheduled",
+            "rate_id": "par-1.6.1",
+            "item_code": "1.6.1",
+            "cost_behavior": "quantity",
+            "amount": "84000.00",
+            "amount_calculation_id": "amount:fire_alarm",
+            "evidence_ids": [
+              "source:academic-scope-v1:1:f751512d42ce",
+              "quantity:fire_alarm",
+              "source:cpwd-par-2025:2025-base-2025-04-01:e1a4c9b58ff5"
+            ],
+            "inclusions": [
+              "PAR composite item"
+            ],
+            "exclusions": [
+              "separately listed services"
+            ],
+            "status": "priced"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "input:brief",
+            "kind": "user_input",
+            "title": "Project brief",
+            "source_id": null,
+            "version": "1",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "{\"title\":\"CPWD office preliminary demo\",\"description\":\"Prepare a CPWD preliminary estimate for a 300 m2 single-storey office in New Delhi. RCC frame, 3.60 m height, downcomer and manual alarm scenario, internal water and electrical services only. Exclude external works, land, lifts, HVAC, consultancy, TPQA and escalation.\",\"authority\":\"cpwd\",\"state\":\"Delhi\",\"location\":\"New Delhi\",\"building_type\":\"office\",\"work_category\":\"preliminary_cpwd\",\"estimate_date\":\"2025-07-31\",\"execution_year\":2025,\"floor_area\":\"300\",\"length\":\"20\",\"width\":\"15\",\"floors\":1,\"height\":\"3.6\",\"capacity\":30,\"duration_months\":\"12\",\"site_area\":null,\"selected_options\":[],\"specifications\":{},\"supplied_quantities\":{},\"review_design\":false,\"allow_demo\":true,\"correction_limit\":2}",
+            "trust": "supplied",
+            "parent_ids": []
+          },
+          {
+            "id": "retrieved:0fe37913c11b86305c90803e0eba0e2e56a3590a:1",
+            "kind": "retrieved",
+            "title": "Synthetic rate catalogue \u2014 not CPWD, USSOR or PWD prices",
+            "source_id": "demo-cpwd-rates",
+            "version": "1",
+            "locator": "chunk 6",
+            "url": "",
+            "snapshot_ref": "sha256/86/8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "content_hash": "8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "value": "\"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-electrical\",\n    \"item_code\": \"DEMO.016\",\n    \"component_key\": \"electrical\",\n    \"description\": \"Electrical installation allowance\",\n    \"unit\": \"m2\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"760\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 16; DEMO.016\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-earthing\",\n    \"item_code\": \"DEMO.017\",\n    \"component_key\": \"earthing\",\n    \"description\": \"Earthing installation allowance\",\n    \"unit\": \"item\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"38000\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"fixed\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 17; DEMO.017\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-fire_safety\",\n    \"item_code\": \"DEMO.018\",\n    \"component_key\": \"fire_safety\",\n    \"description\": \"Fire safety provision allowance\",\n    \"unit\": \"m2\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"175\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 18;",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "retrieved:18c5f092576e6231d84419e6a21b137f9673719b:2",
+            "kind": "retrieved",
+            "title": "Demonstration completeness checks \u2014 not statutory rules",
+            "source_id": "demo-cpwd-rules",
+            "version": "1",
+            "locator": "chunk 1",
+            "url": "",
+            "snapshot_ref": "sha256/66/6618368e64290028efc065c3d1fb2fcc9ea8abea16ce47dd598989865e765018",
+            "content_hash": "6618368e64290028efc065c3d1fb2fcc9ea8abea16ce47dd598989865e765018",
+            "value": "Example scope check: include fire_safety, earthing and accessibility. Actual government and local requirements must be imported and reviewed.",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "retrieved:0fe37913c11b86305c90803e0eba0e2e56a3590a:3",
+            "kind": "retrieved",
+            "title": "Synthetic rate catalogue \u2014 not CPWD, USSOR or PWD prices",
+            "source_id": "demo-cpwd-rates",
+            "version": "1",
+            "locator": "chunk 4",
+            "url": "",
+            "snapshot_ref": "sha256/86/8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "content_hash": "8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "value": "\"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-windows\",\n    \"item_code\": \"DEMO.010\",\n    \"component_key\": \"windows\",\n    \"description\": \"Glazed windows\",\n    \"unit\": \"m2\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"4700\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 10; DEMO.010\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-plaster\",\n    \"item_code\": \"DEMO.011\",\n    \"component_key\": \"plaster\",\n    \"description\": \"Wall plaster\",\n    \"unit\": \"m2\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"260\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 11; DEMO.011\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-painting\",\n    \"item_code\": \"DEMO.012\",\n    \"component_key\": \"painting\",\n    \"description\": \"Wall painting\",\n    \"unit\": \"m2\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"155\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 12; DEMO.012\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "retrieved:0fe37913c11b86305c90803e0eba0e2e56a3590a:4",
+            "kind": "retrieved",
+            "title": "Synthetic rate catalogue \u2014 not CPWD, USSOR or PWD prices",
+            "source_id": "demo-cpwd-rates",
+            "version": "1",
+            "locator": "chunk 8",
+            "url": "",
+            "snapshot_ref": "sha256/86/8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "content_hash": "8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "value": "\"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 21; DEMO.021\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-site_facilities\",\n    \"item_code\": \"DEMO.022\",\n    \"component_key\": \"site_facilities\",\n    \"description\": \"Temporary site facilities\",\n    \"unit\": \"month\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"9500\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"time\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 22; DEMO.022\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-hvac\",\n    \"item_code\": \"DEMO.023\",\n    \"component_key\": \"hvac\",\n    \"description\": \"Comfort air-conditioning allowance\",\n    \"unit\": \"m2\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"1700\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 23; DEMO.023\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-solar\",\n    \"item_code\": \"DEMO.024\",\n    \"component_key\": \"solar\",\n    \"description\": \"Rooftop solar allowance\",\n    \"unit\": \"item\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": null,\n    \"basis\": \"non_scheduled\",",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "retrieved:0fe37913c11b86305c90803e0eba0e2e56a3590a:5",
+            "kind": "retrieved",
+            "title": "Synthetic rate catalogue \u2014 not CPWD, USSOR or PWD prices",
+            "source_id": "demo-cpwd-rates",
+            "version": "1",
+            "locator": "chunk 3",
+            "url": "",
+            "snapshot_ref": "sha256/86/8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "content_hash": "8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "value": "[\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-masonry\",\n    \"item_code\": \"DEMO.007\",\n    \"component_key\": \"masonry\",\n    \"description\": \"Brick masonry, including mortar\",\n    \"unit\": \"m3\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"5850\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 7; DEMO.007\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-waterproofing\",\n    \"item_code\": \"DEMO.008\",\n    \"component_key\": \"waterproofing\",\n    \"description\": \"Roof waterproofing\",\n    \"unit\": \"m2\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"420\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 8; DEMO.008\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-doors\",\n    \"item_code\": \"DEMO.009\",\n    \"component_key\": \"doors\",\n    \"description\": \"Doors and frames\",\n    \"unit\": \"m2\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"3900\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 9; DEMO.009\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "retrieved:0fe37913c11b86305c90803e0eba0e2e56a3590a:6",
+            "kind": "retrieved",
+            "title": "Synthetic rate catalogue \u2014 not CPWD, USSOR or PWD prices",
+            "source_id": "demo-cpwd-rates",
+            "version": "1",
+            "locator": "chunk 7",
+            "url": "",
+            "snapshot_ref": "sha256/86/8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "content_hash": "8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "value": "DEMO.018\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-accessibility\",\n    \"item_code\": \"DEMO.019\",\n    \"component_key\": \"accessibility\",\n    \"description\": \"Accessible access and signage allowance\",\n    \"unit\": \"item\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"85000\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"fixed\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 19; DEMO.019\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-external\",\n    \"item_code\": \"DEMO.020\",\n    \"component_key\": \"external\",\n    \"description\": \"External paving and drainage allowance\",\n    \"unit\": \"m2\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"900\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 20; DEMO.020\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-testing\",\n    \"item_code\": \"DEMO.021\",\n    \"component_key\": \"testing\",\n    \"description\": \"Testing and commissioning allowance\",\n    \"unit\": \"item\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"32000\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"fixed\",",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "retrieved:0fe37913c11b86305c90803e0eba0e2e56a3590a:7",
+            "kind": "retrieved",
+            "title": "Synthetic rate catalogue \u2014 not CPWD, USSOR or PWD prices",
+            "source_id": "demo-cpwd-rates",
+            "version": "1",
+            "locator": "chunk 5",
+            "url": "",
+            "snapshot_ref": "sha256/86/8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "content_hash": "8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "value": "\"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-flooring\",\n    \"item_code\": \"DEMO.013\",\n    \"component_key\": \"flooring\",\n    \"description\": \"Standard floor finish\",\n    \"unit\": \"m2\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"890\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 13; DEMO.013\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-plumbing\",\n    \"item_code\": \"DEMO.014\",\n    \"component_key\": \"plumbing\",\n    \"description\": \"Water supply and sanitary installation allowance\",\n    \"unit\": \"m2\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"430\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 14; DEMO.014\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-drainage\",\n    \"item_code\": \"DEMO.015\",\n    \"component_key\": \"drainage\",\n    \"description\": \"Drainage connection allowance\",\n    \"unit\": \"item\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"48000\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"fixed\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 15; DEMO.015\",\n    \"effective_from\": \"2020-01-01\",",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "retrieved:0fe37913c11b86305c90803e0eba0e2e56a3590a:8",
+            "kind": "retrieved",
+            "title": "Synthetic rate catalogue \u2014 not CPWD, USSOR or PWD prices",
+            "source_id": "demo-cpwd-rates",
+            "version": "1",
+            "locator": "chunk 2",
+            "url": "",
+            "snapshot_ref": "sha256/86/8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "content_hash": "8681fa558a3d24f702b53aaafe53402385d2760293dbacdc047a6422300ad01f",
+            "value": "\"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-rcc\",\n    \"item_code\": \"DEMO.004\",\n    \"component_key\": \"rcc\",\n    \"description\": \"RCC frame and slab allowance, excluding reinforcement\",\n    \"unit\": \"m3\",\n    \"specification\": {\n      \"grade\": \"M25\"\n    },\n    \"value\": \"7800\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 4; DEMO.004\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-reinforcement\",\n    \"item_code\": \"DEMO.005\",\n    \"component_key\": \"reinforcement\",\n    \"description\": \"Reinforcement steel allowance\",\n    \"unit\": \"kg\",\n    \"specification\": {\n      \"grade\": \"Fe500\"\n    },\n    \"value\": \"82\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 5; DEMO.005\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\": [\n      \"materials\",\n      \"labour\",\n      \"overhead\"\n    ],\n    \"exclusions\": [\n      \"tax\"\n    ],\n    \"resources\": [],\n    \"supersedes\": null\n  },\n  {\n    \"id\": \"rate-formwork\",\n    \"item_code\": \"DEMO.006\",\n    \"component_key\": \"formwork\",\n    \"description\": \"Formwork allowance\",\n    \"unit\": \"m2\",\n    \"specification\": {\n      \"finish\": \"standard\"\n    },\n    \"value\": \"610\",\n    \"basis\": \"scheduled\",\n    \"cost_behavior\": \"quantity\",\n    \"source_id\": \"demo-cpwd-rates\",\n    \"locator\": \"Synthetic row 6; DEMO.006\",\n    \"effective_from\": \"2020-01-01\",\n    \"effective_to\": null,\n    \"inclusions\":",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "retrieved:d5b275416d6be0a33b9c9796fdf0010417cb5ed9:9",
+            "kind": "retrieved",
+            "title": "CPWD PAR 2025, official Railway Board hosted copy",
+            "source_id": "cpwd-par-2025",
+            "version": "2025-base-2025-04-01",
+            "locator": "PDF pages 12-15; printed pages 2-5; chunk 92",
+            "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+            "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "value": "[PDF page 60]\nPlinth Area Rates 2025\nCPWD 171 Year of Engineering Excellence\n50\nItem \nNo.\nDescription Brief Specifications\n9.2 Ducting The Staircase, Lift Lobby & Lift Well pressurisation shall be \ndesigned and provided as per provisions given in NBC 2016 and \nLocal by laws. Scope of works include GSS ducting, grills, louvers \nand all associated works and shall be executed as per CPWD \nspecifications;\nThe pressurization system shall be integrated with fire alarm system \nfor automatic operation on command from fire detection system\n10 Lifts The lifts shall be with power operated centre opening/side opening \ndoors, and AC variable voltage & variable frequency controls, Car \nsafety & Governor, Guides, guide rails, ropes, car platform, cabin \nfinishes (stainless steel), car & landing doors (stainless steel), \nhoist motors, braking system, Automatic Rescue Device (ARD) etc \ncomplete as per the CPWD Specifications and related IS standards \nupto date. \n(Lifts can be with Machine room or Machine room less depending \nupon site requirement)\nProvision of lifts will be made as per National Building Code-2016 / \nrelevant BIS amended upto date) considering no of floors, height of \nthe building and speed of elevators;\nAt least one lift in each block be made compliant to barrier free and \naccessibility requirements as per CPWD specifications & capacity to \nbe minimum 13 passengers for barrier free lift;\nOne lift in each tower should be goods / bed lift, with size and \ncapacity of lift car to be designed accordingly. Provision of fire lifts \nshall also be ensured as per local fire authorities requirements/ bye \nlaws.\n11 Sewage/Effluent \nTreatment Plant\nSTP/ETP shall be based on suitable technology  to meet the requisite \nnorms of treatment of sewage to achieve required quality of",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "retrieved:d5b275416d6be0a33b9c9796fdf0010417cb5ed9:10",
+            "kind": "retrieved",
+            "title": "CPWD PAR 2025, official Railway Board hosted copy",
+            "source_id": "cpwd-par-2025",
+            "version": "2025-base-2025-04-01",
+            "locator": "PDF pages 12-15; printed pages 2-5; chunk 41",
+            "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+            "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "value": "62040-3 to provide continuous power to life safety \ncircuits and sensitive equipment It must have both static bypass switch and \nmanually operated bypass switch for maintenance, Battery banks shall be \ndesigned to provide at least 30 minutes back-up at full load.\n10 Lifts\nTwo regenerative lifts of 20 persons capacity each, with speed of 1.5 mis, \nmicroprocessor-based control, and variable voltage variable frequency \ndrive system for AC motor. It should be equipped with automatic rescue \ndevice and maintenance free dry batteries. It should meet accessibility \nrequirements for especially abled persons, like minimum lift size of 1500 \nmmx1500 mm, minimum door width of 900 mm, call button, control panel, \nhand rails, and audio and visual indicators,\n11 Air-conditioning\nTwo modular air cooled variable refrigerant flow outdoor units of 20 HP \ncapacity each with inverter type scroll compressor and R410 A refrigerant, \nsuitable to deliver coefficient of performance (CoP) of minimum 4.7 at 50% \nload. High wall type indoor units of 2 TR capacity each.\n12 Fire alarm system The intelligent addressable fire alarm system (AFAS) will integrate public \naddress, lifts, fire fighting, pressurization and smoke management systems.",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "retrieved:d5b275416d6be0a33b9c9796fdf0010417cb5ed9:11",
+            "kind": "retrieved",
+            "title": "CPWD PAR 2025, official Railway Board hosted copy",
+            "source_id": "cpwd-par-2025",
+            "version": "2025-base-2025-04-01",
+            "locator": "PDF pages 12-15; printed pages 2-5; chunk 81",
+            "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+            "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "value": "GENERAL NOTES\n1. All Electrical & Mechanical works shall be as per the guidelines/ specifications mentioned herein, which \nshall represent the minimum requirement compliant to the related CPWD specifications and relevant \nIndian standards/ International standards as applicable including installation, testing and commissioning.\n2. The requirement of the energy efficiency measures shall be complied as per the provisions of the local \nbody and provisions as per minimum \u201cGreen rating\u201d as per Green Rating Manual 2021 and ECBC 2017 \n[minimum ECBC building] (as applicable for individual service/ item).\n3. The scale of amenities and the provisions for different services shall be as per the client\u2019s requirement/ \napproved yardstick if any/ local body /statutory requirements as applicable.\n4. Equipment\u2019s capacity/selection and design shall also be made as per good engineering practices, based \non design/ site / client requirements, CPWD Specifications, Relevant BIS standards, NBC -2016, Local \nby-laws, Local Fire authority Rules as modified up to date.\n5. Clearances from local authorities as per norms shall be with the scope of work.\n6. For the purpose of the interpretation of the specifications, the order of preference shall be:\na. Preliminary Estimate items description & Additional conditions as per site requirements.\nb. CPWD specifications \nc. Bureau of Indian Standards (BIS)\nd. Manufacturer\u2019s standard practice/ specifications\ne. International Standards\n7. Detailed specifications have to be drafted as per the intended purpose of the building conforming to \napplicable local bylaws, regulations, norms, codal provisions, work wise, building wise, room wise \ndepending upon the functional, architectural, electrical and mechanical works requirements of the client \nspecific to the",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "retrieved:d5b275416d6be0a33b9c9796fdf0010417cb5ed9:12",
+            "kind": "retrieved",
+            "title": "CPWD PAR 2025, official Railway Board hosted copy",
+            "source_id": "cpwd-par-2025",
+            "version": "2025-base-2025-04-01",
+            "locator": "PDF pages 12-15; printed pages 2-5; chunk 120",
+            "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+            "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "value": "[PDF page 78]\nPlinth Area Rates 2025\nCPWD 171 Year of Engineering Excellence\n68\nPressurization and smoke extraction requirement to be indicated for \nS. \nNo.\nLocation Applicable parameters to \nbe filled by NIT Authority \nfor normal condition\nApplicable parameters \nto be filled by NIT \nAuthority for Fire \ncondition\n1. Lift Shaft/s\n2. Lift Lobby/ies\n3. Staircase/s\n4. Staircase Lobby/ies\n5. Fire Shafts\n6. Fire Exit Routes\n7. Any other room/ area as per site requirement\nFor the equipment involved NIT authority to indicate applicable Energy Efficiency and Performance \nParameters along with stand by/ spare requirements (e.g. CoP, EER, IEER, Efficiency (full load and \nPart Load), Inlet and outlet water temperatures, Fan Efficiency, Motor efficiency, R-Value of Duct Insulation, \nR-Value of Pipe Insulation, dB levels, Velocity, requirement of VFD, Fire safety features/requirements or any \nother parameters as applicable) for:\nS. \nNo.\nName Of Equipment/ item (as \napplicable)\nLocation Name of \nParameters\nValue of \nParameters\nDetails of spare/\nstandby required\nTo be Filled by NIT Authority\n1. Chillers\n2. Primary chilled water Pumps\n3. Secondary chilled water pumps\n4. Hot Water Generator\n5. Heat Pumps\n6. Hot Water Circulation Pumps\n7. Cooling Towers\n8. Cooling Tower Water Circulation \nPumps\n9. AHUs\n10. FCUs\n11. Unitary Window Unit\n12. Smoke Extraction Fans\n13. Ventilation Fans\n14. Pressurization Fans\n15. Heat Recovery Wheel\n16. Ducting\n17. Piping \n18. Any other equipment/ systems as per \nsite requirement\nNote: \n1. Requirement of Control, Operation, Measurement and Monitoring of various equipment / systems \ncovered in the NIT including BMS to be indicated by NIT authority.\n2. Clearances from local body and local fire authority as applicable to be indicated, defining the scope \nand",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "source:academic-scope-v1:1",
+            "kind": "document",
+            "title": "Academic demonstration scope and geometry assumptions; not official design",
+            "source_id": "academic-scope-v1",
+            "version": "1",
+            "locator": "Scope v1",
+            "url": "",
+            "snapshot_ref": "sha256/ff/ff5efb28821a8cea026db1c6acb5014f8ddd2b746eccc89856ca5e015e9311f7",
+            "content_hash": "ff5efb28821a8cea026db1c6acb5014f8ddd2b746eccc89856ca5e015e9311f7",
+            "value": "Restricted demonstration: office, rectangular layout, up to three floors, height 3.60 m, normal foundation. Gross floor area is assumed equal to measured plinth area; engineer must verify Annexure V. Scope includes civil building shell, assumed downcomer and manual alarm, internal water and electrical services. Excludes external connections, local approval charges, external development, land, lifts, HVAC, solar, TPQA, consultancy and escalation. No tax added: commercial tax basis requires review. Fire system selection is a scenario assumption, not a compliance determination.",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "source:academic-scope-v1:1:59eac6542231",
+            "kind": "document",
+            "title": "Academic demonstration scope and geometry assumptions; not official design",
+            "source_id": "academic-scope-v1",
+            "version": "1",
+            "locator": "Scope v1",
+            "url": "",
+            "snapshot_ref": "sha256/ff/ff5efb28821a8cea026db1c6acb5014f8ddd2b746eccc89856ca5e015e9311f7",
+            "content_hash": "ff5efb28821a8cea026db1c6acb5014f8ddd2b746eccc89856ca5e015e9311f7",
+            "value": "",
+            "trust": "demo",
+            "parent_ids": [
+              "source:academic-scope-v1:1"
+            ]
+          },
+          {
+            "id": "source:academic-scope-v1:1:f751512d42ce",
+            "kind": "document",
+            "title": "Academic demonstration scope and geometry assumptions; not official design",
+            "source_id": "academic-scope-v1",
+            "version": "1",
+            "locator": "Academic scope v1",
+            "url": "",
+            "snapshot_ref": "sha256/ff/ff5efb28821a8cea026db1c6acb5014f8ddd2b746eccc89856ca5e015e9311f7",
+            "content_hash": "ff5efb28821a8cea026db1c6acb5014f8ddd2b746eccc89856ca5e015e9311f7",
+            "value": "",
+            "trust": "demo",
+            "parent_ids": [
+              "source:academic-scope-v1:1"
+            ]
+          },
+          {
+            "id": "assumption-layout",
+            "kind": "assumption",
+            "title": "Illustrative concept geometry; wall construction, circulation and structural design need validation.",
+            "source_id": null,
+            "version": "",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "layout: Rectangular footprint; 0.23 m exterior walls; 0.115 m partitions; 2 m corridor",
+            "trust": "",
+            "parent_ids": [
+              "source:academic-scope-v1:1",
+              "input:brief"
+            ]
+          },
+          {
+            "id": "assumption-site_area",
+            "kind": "assumption",
+            "title": "Concept template default; replace with measured project information.",
+            "source_id": null,
+            "version": "",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "site_area: 450.000",
+            "trust": "",
+            "parent_ids": [
+              "source:academic-scope-v1:1",
+              "input:brief"
+            ]
+          },
+          {
+            "id": "design:model",
+            "kind": "design",
+            "title": "Dimensioned concept model",
+            "source_id": null,
+            "version": "1",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "{\"template\":\"rectangular_concept_v1\",\"length\":\"20\",\"width\":\"15\",\"floors\":1,\"height\":\"3.6\",\"wall_thickness\":\"0.23\",\"elements\":[{\"id\":\"F01-SLAB\",\"kind\":\"slab\",\"floor\":0,\"label\":\"Floor plate\",\"x\":\"0.000000\",\"y\":\"0.000000\",\"width\":\"15.000000\",\"length\":\"20.000000\",\"height\":\"0.150000\"},{\"id\":\"F01-C\",\"kind\":\"circulation\",\"floor\":0,\"label\":\"Corridor\",\"x\":\"6.500000\",\"y\":\"0.230000\",\"width\":\"2.000000\",\"length\":\"19.540000\",\"height\":\"3.600000\"},{\"id\":\"F01-WN\",\"kind\":\"wall\",\"floor\":0,\"label\":\"North wall\",\"x\":\"0.000000\",\"y\":\"0.000000\",\"width\":\"15.000000\",\"length\":\"0.230000\",\"height\":\"3.600000\"},{\"id\":\"F01-WS\",\"kind\":\"wall\",\"floor\":0,\"label\":\"South wall\",\"x\":\"0.000000\",\"y\":\"19.770000\",\"width\":\"15.000000\",\"length\":\"0.230000\",\"height\":\"3.600000\"},{\"id\":\"F01-WW\",\"kind\":\"wall\",\"floor\":0,\"label\":\"West wall\",\"x\":\"0.000000\",\"y\":\"0.230000\",\"width\":\"0.230000\",\"length\":\"19.540000\",\"height\":\"3.600000\"},{\"id\":\"F01-WE\",\"kind\":\"wall\",\"floor\":0,\"label\":\"East wall\",\"x\":\"14.770000\",\"y\":\"0.230000\",\"width\":\"0.230000\",\"length\":\"19.540000\",\"height\":\"3.600000\"},{\"id\":\"F01-P0\",\"kind\":\"partition\",\"floor\":0,\"label\":\"Corridor partition\",\"x\":\"6.385000\",\"y\":\"0.230000\",\"width\":\"0.115000\",\"length\":\"19.540000\",\"height\":\"3.600000\"},{\"id\":\"F01-R000\",\"kind\":\"room\",\"floor\":0,\"label\":\"Room 1\",\"x\":\"0.230000\",\"y\":\"0.230000\",\"width\":\"6.155000\",\"length\":\"6.436667\",\"height\":\"3.600000\"},{\"id\":\"F01-D000\",\"kind\":\"door\",\"floor\":0,\"label\":\"Door opening\",\"x\":\"6.385000\",\"y\":\"0.830000\",\"width\":\"0.115000\",\"length\":\"0.900000\",\"height\":\"2.100000\"},{\"id\":\"F01-V000\",\"kind\":\"window\",\"floor\":0,\"label\":\"Window opening\",\"x\":\"0.000000\",\"y\":\"2.698333\",\"width\":\"0.230000\",\"length\":\"1.500000\",\"height\":\"1.200000\"},{\"id\":\"F01-R001\",\"kind\":\"room\",\"floor\":0,\"label\":\"Room 2\",\"x\":\"0.230000\",\"y\":\"6.781667\",\"width\":\"6.155000\",\"length\":\"6.436667\",\"height\":\"3.600000\"},{\"id\":\"F01-D001\",\"kind\":\"door\",\"floor\":0,\"label\":\"Door opening\",\"x\":\"6.385000\",\"y\":\"7.381667\",\"width\":\"0.115000\",\"length\":\"0.900000\",\"height\":\"2.100000\"},{\"id\":\"F01-V001\",\"kind\":\"window\",\"floor\":0,\"label\":\"Window opening\",\"x\":\"0.000000\",\"y\":\"9.250000\",\"width\":\"0.230000\",\"length\":\"1.500000\",\"height\":\"1.200000\"},{\"id\":\"F01-P001\",\"kind\":\"partition\",\"floor\":0,\"label\":\"Room partition\",\"x\":\"0.230000\",\"y\":\"6.666667\",\"width\":\"6.155000\",\"length\":\"0.115000\",\"height\":\"3.600000\"},{\"id\":\"F01-R002\",\"kind\":\"room\",\"floor\":0,\"label\":\"Room 3\",\"x\":\"0.230000\",\"y\":\"13.333333\",\"width\":\"6.155000\",\"length\":\"6.436667\",\"height\":\"3.600000\"},{\"id\":\"F01-D002\",\"kind\":\"door\",\"floor\":0,\"label\":\"Door opening\",\"x\":\"6.385000\",\"y\":\"13.933333\",\"width\":\"0.115000\",\"length\":\"0.900000\",\"height\":\"2.100000\"},{\"id\":\"F01-V002\",\"kind\":\"window\",\"floor\":0,\"label\":\"Window opening\",\"x\":\"0.000000\",\"y\":\"15.801667\",\"width\":\"0.230000\",\"length\":\"1.500000\",\"height\":\"1.200000\"},{\"id\":\"F01-P002\",\"kind\":\"partition\",\"floor\":0,\"label\":\"Room partition\",\"x\":\"0.230000\",\"y\":\"13.218333\",\"width\":\"6.155000\",\"length\":\"0.115000\",\"height\":\"3.600000\"},{\"id\":\"F01-P1\",\"kind\":\"partition\",\"floor\":0,\"label\":\"Corridor partition\",\"x\":\"8.500000\",\"y\":\"0.230000\",\"width\":\"0.115000\",\"length\":\"19.540000\",\"height\":\"3.600000\"},{\"id\":\"F01-R100\",\"kind\":\"room\",\"floor\":0,\"label\":\"Room 4\",\"x\":\"8.615000\",\"y\":\"0.230000\",\"width\":\"6.155000\",\"length\":\"6.436667\",\"height\":\"3.600000\"},{\"id\":\"F01-D100\",\"kind\":\"door\",\"floor\":0,\"label\":\"Door opening\",\"x\":\"8.500000\",\"y\":\"0.830000\",\"width\":\"0.115000\",\"length\":\"0.900000\",\"height\":\"2.100000\"},{\"id\":\"F01-V100\",\"kind\":\"window\",\"floor\":0,\"label\":\"Window opening\",\"x\":\"14.770000\",\"y\":\"2.698333\",\"width\":\"0.230000\",\"length\":\"1.500000\",\"height\":\"1.200000\"},{\"id\":\"F01-R101\",\"kind\":\"room\",\"floor\":0,\"label\":\"Room 5\",\"x\":\"8.615000\",\"y\":\"6.781667\",\"width\":\"6.155000\",\"length\":\"6.436667\",\"height\":\"3.600000\"},{\"id\":\"F01-D101\",\"kind\":\"door\",\"floor\":0,\"label\":\"Door opening\",\"x\":\"8.500000\",\"y\":\"7.381667\",\"width\":\"0.115000\",\"length\":\"0.900000\",\"height\":\"2.100000\"},{\"id\":\"F01-V101\",\"kind\":\"window\",\"floor\":0,\"label\":\"Window opening\",\"x\":\"14.770000\",\"y\":\"9.250000\",\"width\":\"0.230000\",\"length\":\"1.500000\",\"height\":\"1.200000\"},{\"id\":\"F01-P101\",\"kind\":\"partition\",\"floor\":0,\"label\":\"Room partition\",\"x\":\"8.615000\",\"y\":\"6.666667\",\"width\":\"6.155000\",\"length\":\"0.115000\",\"height\":\"3.600000\"},{\"id\":\"F01-R102\",\"kind\":\"room\",\"floor\":0,\"label\":\"Services / WC\",\"x\":\"8.615000\",\"y\":\"13.333333\",\"width\":\"6.155000\",\"length\":\"6.436667\",\"height\":\"3.600000\"},{\"id\":\"F01-D102\",\"kind\":\"door\",\"floor\":0,\"label\":\"Door opening\",\"x\":\"8.500000\",\"y\":\"13.933333\",\"width\":\"0.115000\",\"length\":\"0.900000\",\"height\":\"2.100000\"},{\"id\":\"F01-V102\",\"kind\":\"window\",\"floor\":0,\"label\":\"Window opening\",\"x\":\"14.770000\",\"y\":\"15.801667\",\"width\":\"0.230000\",\"length\":\"1.500000\",\"height\":\"1.200000\"},{\"id\":\"F01-P102\",\"kind\":\"partition\",\"floor\":0,\"label\":\"Room partition\",\"x\":\"8.615000\",\"y\":\"13.218333\",\"width\":\"6.155000\",\"length\":\"0.115000\",\"height\":\"3.600000\"},{\"id\":\"F01-EXIT0\",\"kind\":\"exit\",\"floor\":0,\"label\":\"Concept entry / exit\",\"x\":\"6.750000\",\"y\":\"0.000000\",\"width\":\"1.500000\",\"length\":\"0.230000\",\"height\":\"2.100000\"},{\"id\":\"F01-EXIT1\",\"kind\":\"exit\",\"floor\":0,\"label\":\"Concept entry / exit\",\"x\":\"6.750000\",\"y\":\"19.770000\",\"width\":\"1.500000\",\"length\":\"0.230000\",\"height\":\"2.100000\"},{\"id\":\"ROOF-01\",\"kind\":\"roof\",\"floor\":1,\"label\":\"Roof\",\"x\":\"0.000000\",\"y\":\"0.000000\",\"width\":\"15.000000\",\"length\":\"20.000000\",\"height\":\"0.150000\"}],\"metrics\":{\"gross_floor_area\":\"300.000\",\"net_floor_area\":\"276.786\",\"roof_area\":\"300.000\",\"footprint\":\"300.000\",\"wall_volume\":\"78.333\",\"wall_finish_area\":\"899.136\",\"door_area\":\"17.640\",\"window_area\":\"10.800\",\"room_count\":\"6.000\",\"perimeter\":\"70.000\",\"floors\":\"1.000\",\"height\":\"3.600\",\"duration_months\":\"12.000\",\"capacity\":\"30.000\",\"site_area\":\"450.000\",\"wet_area\":\"39.618\"},\"assumptions\":[{\"id\":\"assumption-layout\",\"field\":\"layout\",\"value\":\"Rectangular footprint; 0.23 m exterior walls; 0.115 m partitions; 2 m corridor\",\"reason\":\"Illustrative concept geometry; wall construction, circulation and structural design need validation.\",\"source_ids\":[\"academic-scope-v1\"],\"status\":\"proposed\"},{\"id\":\"assumption-site_area\",\"field\":\"site_area\",\"value\":\"450.000\",\"reason\":\"Concept template default; replace with measured project information.\",\"source_ids\":[\"academic-scope-v1\"],\"status\":\"proposed\"}],\"limitations\":[\"Concept drawing only; not approved for construction.\",\"Setbacks, access, occupancy, egress, accessibility and site conditions require engineering review.\",\"Foundations, reinforcement and service capacities are allowances until detailed engineering is supplied.\",\"Stair reserves indicate space only; stair geometry and structural design are not generated.\"]}",
+            "trust": "",
+            "parent_ids": [
+              "input:brief",
+              "source:academic-scope-v1:1",
+              "assumption-layout",
+              "assumption-site_area"
+            ]
+          },
+          {
+            "id": "quantity:building_shell",
+            "kind": "calculation",
+            "title": "gross_floor_area",
+            "source_id": null,
+            "version": "",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "300.000 m2",
+            "trust": "",
+            "parent_ids": [
+              "design:model",
+              "source:academic-scope-v1:1:f751512d42ce"
+            ]
+          },
+          {
+            "id": "quantity:fire_safety",
+            "kind": "calculation",
+            "title": "gross_floor_area",
+            "source_id": null,
+            "version": "",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "300.000 m2",
+            "trust": "",
+            "parent_ids": [
+              "design:model",
+              "source:academic-scope-v1:1:f751512d42ce"
+            ]
+          },
+          {
+            "id": "quantity:fire_alarm",
+            "kind": "calculation",
+            "title": "gross_floor_area",
+            "source_id": null,
+            "version": "",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "300.000 m2",
+            "trust": "",
+            "parent_ids": [
+              "design:model",
+              "source:academic-scope-v1:1:f751512d42ce"
+            ]
+          },
+          {
+            "id": "source:cpwd-par-2025:2025-base-2025-04-01",
+            "kind": "document",
+            "title": "CPWD PAR 2025, official Railway Board hosted copy",
+            "source_id": "cpwd-par-2025",
+            "version": "2025-base-2025-04-01",
+            "locator": "PDF page 13; item 1.1.1; offices column",
+            "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+            "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "value": "[PDF page 1]\nCentral Public Works Department\nPLINTH AREA RATES (PAR)\n2025\ndsanzh; yksd fuekZ.k foHkkx\ndqlhZ {ks= njsa\n..\n... .. ...\n.\n....... ... .. ...\n.\n.... .. ... .. .. ..\n.\n.\n.\n.\n.\n... .. .. .... .. ..\n.\n.\n.\n.\n.\n... .. ...... .. ..\n.\n.\n.\n.\n.\n.\n.\n.. .. .......\n..\n..\n..\n.\n..\n.\n..\n.\n.\n.. .\n.\n.\n..\n.\n..\n..\n..\n..\n..\n..\n..\n.\n..\n.\n..\n.\n.\n.\n.\n.\n...\n.\n..\n.\n.\n..\n...\n..\n..\n.\n..\n.\n..\n.\n..\n.\n.\n.\n.\n.\n.......\n.\n.\n..\n......\n.\n..\n.\n..\n.\n..\n.\n.\n.\n.\n.\n.......\n.\n.\n..\n......\n.\n..\n.\n..\n.\n.\n.\n.\n.\n.\n.\n.......\n.\n.\n..\n...........\n.\n.\n.\n...\n. .\n.\n. .\n...\n..\n.\n..\n.\n.\n.\n..\n. .\n.\n.\n.\n.. .\n.\n. .\n.\n.. .. ..\n.....\nMPs\u2019 FLATS, BKS MARG\n\n[PDF page 2]\n\n\n[PDF page 3]\nPLINTH AREA RATES\n2025\nJuly 2025\nPublished under the Authority of Director General, CPWD, New Delhi\negkfuns\u201dkd] ds-yks-fu-fo-] ubZ fnYyh ds izkf/kdkj ds v/khu izdkf\u201dkregkfuns\u201dkd] ds-yks-fu-fo-] ubZ fnYyh ds izkf/kdkj ds v/khu izdkf\u201dkregkfuns\u201dkd] ds-yks-fu-fo-] ubZ fnYyh ds izkf/kdkj ds v/khu izdkf\u201dkregkfuns\u201dkd] ds-yks-fu-fo-] ubZ fnYyh ds izkf/kdkj ds v/khu izdkf\u201dkregkfuns\u201dkd] ds-yks-fu-fo-] ubZ fnYyh ds izkf/kdkj ds v/khu izdkf\u201dkr\n2023\nHHHHHkkjr ljdkj kkjr ljdkjkkjr ljdkj kkjr ljdkjkkjr ljdkj\ndqlhZ {ks= njsa \nGOVERNMENT OF INDIA\nPLINTH AREA RATES \n(w.e.f. 01-08-2023)\n\n[PDF page 4]\n\u00a9 All rights reserved. No part of this publication, either in English or in Hindi, may be reproduced in any form or by \nany means, electronic or mechanical including photocopy, recording or any information storage and retrieval system, \nwithout permission, in writing, from the Director General, CPWD, New Delhi.\nFor feedback and suggestions, please contact SE(TAS), CPWD, Room No. 418, \u201cA\u201d Wing, Nirman Bhawan, \nNew Delhi- 110011. Tel. No. 011-23062339, Email: delsetascsq.cpwd@nic.in\nAlso available at\nAll Leading Booksellers & Authorised Govt. Dealers In India\nPrice : Rs. 200/- excluding postage and forwarding charges etc.\n(Includes downloadable QR Links for Forms)\nA GOVERNMENT OF INDIA PUBLICATION\nPublished by\nDIRECTOR GENERAL\nCPWD, Nirman Bhawan, New Delhi -",
+            "trust": "demo",
+            "parent_ids": []
+          },
+          {
+            "id": "source:cpwd-par-2025:2025-base-2025-04-01:b638f30e96f6",
+            "kind": "document",
+            "title": "CPWD PAR 2025, official Railway Board hosted copy",
+            "source_id": "cpwd-par-2025",
+            "version": "2025-base-2025-04-01",
+            "locator": "PDF page 13; item 1.1.1; offices column",
+            "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+            "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "value": "",
+            "trust": "demo",
+            "parent_ids": [
+              "source:cpwd-par-2025:2025-base-2025-04-01"
+            ]
+          },
+          {
+            "id": "source:cpwd-par-2025:2025-base-2025-04-01:2772f850638a",
+            "kind": "document",
+            "title": "CPWD PAR 2025, official Railway Board hosted copy",
+            "source_id": "cpwd-par-2025",
+            "version": "2025-base-2025-04-01",
+            "locator": "PDF page 14; item 1.5.1; offices column",
+            "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+            "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "value": "",
+            "trust": "demo",
+            "parent_ids": [
+              "source:cpwd-par-2025:2025-base-2025-04-01"
+            ]
+          },
+          {
+            "id": "source:cpwd-par-2025:2025-base-2025-04-01:e1a4c9b58ff5",
+            "kind": "document",
+            "title": "CPWD PAR 2025, official Railway Board hosted copy",
+            "source_id": "cpwd-par-2025",
+            "version": "2025-base-2025-04-01",
+            "locator": "PDF page 14; item 1.6.1; offices column",
+            "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+            "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "value": "",
+            "trust": "demo",
+            "parent_ids": [
+              "source:cpwd-par-2025:2025-base-2025-04-01"
+            ]
+          },
+          {
+            "id": "amount:building_shell",
+            "kind": "calculation",
+            "title": "quantity * unit_rate",
+            "source_id": null,
+            "version": "",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "9276000.00 INR",
+            "trust": "",
+            "parent_ids": [
+              "source:academic-scope-v1:1:f751512d42ce",
+              "quantity:building_shell",
+              "source:cpwd-par-2025:2025-base-2025-04-01:b638f30e96f6"
+            ]
+          },
+          {
+            "id": "amount:fire_safety",
+            "kind": "calculation",
+            "title": "quantity * unit_rate",
+            "source_id": null,
+            "version": "",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "138000.00 INR",
+            "trust": "",
+            "parent_ids": [
+              "source:academic-scope-v1:1:f751512d42ce",
+              "quantity:fire_safety",
+              "source:cpwd-par-2025:2025-base-2025-04-01:2772f850638a"
+            ]
+          },
+          {
+            "id": "amount:fire_alarm",
+            "kind": "calculation",
+            "title": "quantity * unit_rate",
+            "source_id": null,
+            "version": "",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "84000.00 INR",
+            "trust": "",
+            "parent_ids": [
+              "source:academic-scope-v1:1:f751512d42ce",
+              "quantity:fire_alarm",
+              "source:cpwd-par-2025:2025-base-2025-04-01:e1a4c9b58ff5"
+            ]
+          },
+          {
+            "id": "source:cpwd-par-2025:2025-base-2025-04-01:7c839f988f53",
+            "kind": "document",
+            "title": "CPWD PAR 2025, official Railway Board hosted copy",
+            "source_id": "cpwd-par-2025",
+            "version": "2025-base-2025-04-01",
+            "locator": "PDF page 14, item 2.1, offices 4%",
+            "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+            "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "value": "",
+            "trust": "demo",
+            "parent_ids": [
+              "source:cpwd-par-2025:2025-base-2025-04-01"
+            ]
+          },
+          {
+            "id": "adjustment:water",
+            "kind": "calculation",
+            "title": "base * percent / 100",
+            "source_id": null,
+            "version": "",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "371040.00 INR",
+            "trust": "",
+            "parent_ids": [
+              "source:cpwd-par-2025:2025-base-2025-04-01:7c839f988f53",
+              "amount:building_shell"
+            ]
+          },
+          {
+            "id": "source:cpwd-par-2025:2025-base-2025-04-01:133e85790947",
+            "kind": "document",
+            "title": "CPWD PAR 2025, official Railway Board hosted copy",
+            "source_id": "cpwd-par-2025",
+            "version": "2025-base-2025-04-01",
+            "locator": "PDF page 15, item 2.3, offices 12.5%",
+            "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+            "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+            "value": "",
+            "trust": "demo",
+            "parent_ids": [
+              "source:cpwd-par-2025:2025-base-2025-04-01"
+            ]
+          },
+          {
+            "id": "adjustment:electrical",
+            "kind": "calculation",
+            "title": "base * percent / 100",
+            "source_id": null,
+            "version": "",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "1159500.00 INR",
+            "trust": "",
+            "parent_ids": [
+              "source:cpwd-par-2025:2025-base-2025-04-01:133e85790947",
+              "amount:building_shell"
+            ]
+          }
+        ],
+        "calculations": [
+          {
+            "id": "quantity:building_shell",
+            "formula": "gross_floor_area",
+            "inputs": {
+              "gross_floor_area": "300.000"
+            },
+            "result": "300.000",
+            "unit": "m2",
+            "evidence_ids": [
+              "design:model",
+              "source:academic-scope-v1:1:f751512d42ce"
+            ]
+          },
+          {
+            "id": "quantity:fire_safety",
+            "formula": "gross_floor_area",
+            "inputs": {
+              "gross_floor_area": "300.000"
+            },
+            "result": "300.000",
+            "unit": "m2",
+            "evidence_ids": [
+              "design:model",
+              "source:academic-scope-v1:1:f751512d42ce"
+            ]
+          },
+          {
+            "id": "quantity:fire_alarm",
+            "formula": "gross_floor_area",
+            "inputs": {
+              "gross_floor_area": "300.000"
+            },
+            "result": "300.000",
+            "unit": "m2",
+            "evidence_ids": [
+              "design:model",
+              "source:academic-scope-v1:1:f751512d42ce"
+            ]
+          },
+          {
+            "id": "amount:building_shell",
+            "formula": "quantity * unit_rate",
+            "inputs": {
+              "quantity": "300.000",
+              "unit_rate": "30920.000000"
+            },
+            "result": "9276000.00",
+            "unit": "INR",
+            "evidence_ids": [
+              "source:academic-scope-v1:1:f751512d42ce",
+              "quantity:building_shell",
+              "source:cpwd-par-2025:2025-base-2025-04-01:b638f30e96f6"
+            ]
+          },
+          {
+            "id": "amount:fire_safety",
+            "formula": "quantity * unit_rate",
+            "inputs": {
+              "quantity": "300.000",
+              "unit_rate": "460.000000"
+            },
+            "result": "138000.00",
+            "unit": "INR",
+            "evidence_ids": [
+              "source:academic-scope-v1:1:f751512d42ce",
+              "quantity:fire_safety",
+              "source:cpwd-par-2025:2025-base-2025-04-01:2772f850638a"
+            ]
+          },
+          {
+            "id": "amount:fire_alarm",
+            "formula": "quantity * unit_rate",
+            "inputs": {
+              "quantity": "300.000",
+              "unit_rate": "280.000000"
+            },
+            "result": "84000.00",
+            "unit": "INR",
+            "evidence_ids": [
+              "source:academic-scope-v1:1:f751512d42ce",
+              "quantity:fire_alarm",
+              "source:cpwd-par-2025:2025-base-2025-04-01:e1a4c9b58ff5"
+            ]
+          },
+          {
+            "id": "adjustment:water",
+            "formula": "base * percent / 100",
+            "inputs": {
+              "base": "9276000.00",
+              "percent": "4"
+            },
+            "result": "371040.00",
+            "unit": "INR",
+            "evidence_ids": [
+              "source:cpwd-par-2025:2025-base-2025-04-01:7c839f988f53",
+              "amount:building_shell"
+            ]
+          },
+          {
+            "id": "adjustment:electrical",
+            "formula": "base * percent / 100",
+            "inputs": {
+              "base": "9276000.00",
+              "percent": "12.5"
+            },
+            "result": "1159500.00",
+            "unit": "INR",
+            "evidence_ids": [
+              "source:cpwd-par-2025:2025-base-2025-04-01:133e85790947",
+              "amount:building_shell"
+            ]
+          }
+        ],
+        "adjustments": [
+          {
+            "id": "water",
+            "label": "PAR 2.1 internal water and sanitary installations",
+            "kind": "other",
+            "scenario": "base",
+            "percent": "4",
+            "base": "9276000.00",
+            "amount": "371040.00",
+            "item_ids": [
+              "boq:building_shell"
+            ],
+            "evidence_ids": [
+              "source:cpwd-par-2025:2025-base-2025-04-01:7c839f988f53"
+            ]
+          },
+          {
+            "id": "electrical",
+            "label": "PAR 2.3 internal electric installations",
+            "kind": "other",
+            "scenario": "base",
+            "percent": "12.5",
+            "base": "9276000.00",
+            "amount": "1159500.00",
+            "item_ids": [
+              "boq:building_shell"
+            ],
+            "evidence_ids": [
+              "source:cpwd-par-2025:2025-base-2025-04-01:133e85790947"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "code": "preliminary_scope",
+            "checkpoint": 1,
+            "severity": "warning",
+            "message": "Scope-limited preliminary estimate, not a detailed tender BOQ. External works, land, lifts, HVAC, TPQA, consultancy and escalation are excluded; tax treatment and fire-system suitability require review.",
+            "item_id": null
+          },
+          {
+            "code": "synthetic_demo",
+            "checkpoint": 1,
+            "severity": "warning",
+            "message": "Demonstration package: source registers distinguish official rate transcriptions from synthetic fixtures. Assumed quantities and applicability require engineer review; not for procurement.",
+            "item_id": null
+          },
+          {
+            "code": "unverified_retrieval",
+            "checkpoint": 1,
+            "severity": "warning",
+            "message": "12 retrieved excerpts are unreviewed or demonstration evidence. They are advisory only, not validated pricing inputs.",
+            "item_id": null
+          }
+        ],
+        "known_subtotal": "9498000.00",
+        "base_total": "11028540.00",
+        "optional_subtotal": "0",
+        "category_totals": {
+          "Preliminary CPWD building scope": "9498000.00"
+        },
+        "scenario_totals": {},
+        "artifacts": {
+          "boq.xlsx": "sha256/69/693ec632c9cd6921c8deeb5c01e63a8fa65e02d1c8dd87bfd33ba8780c936ee1",
+          "estimate.pdf": "sha256/86/86aeed9e78f62d90cc8234f9018ff947338ae9313da7b3a58b855fc2f8cfe23b",
+          "estimate.docx": "sha256/35/35fe96045568ccda0d787f69d20e0d7cc78b0a7fc6d76ad4f017514eebaf4c9a",
+          "concept.svg": "sha256/ca/ca05690730346a883422d07b6be70098b1f116976e5da6068a379ff3646b5957",
+          "concept.pdf": "sha256/88/882170fbb2c4c469c37581d13ff1bb8beae05a63306e7766c651cd4bbc00feca",
+          "concept.dxf": "sha256/fc/fc56637eee28e4966d3054ce2dbea69b9656d2032336b9565fc2f39135d33f6c",
+          "estimate.json": "sha256/a2/a28b136f2c13414beaa7ba8f6d99116fa4fbc571b0b7b10317929de1d9419777",
+          "estimate-bundle.zip": "sha256/d4/d4bb8cec327273d275cd36f6bee7dc7a243af7d2ef791ffec5f03afdc1545583"
+        },
+        "pending": null,
+        "metrics": {
+          "ingestion": {
+            "added": 0,
+            "updated": 0,
+            "skipped": 0,
+            "failed": 0,
+            "at": "2026-11-16T23:31:09.427015+00:00",
+            "embedding_backfilled": 0
+          },
+          "scope_guard": {
+            "allowed": true,
+            "code": "in_scope",
+            "message": "Scope screening passed; applicability still requires validation."
+          },
+          "retrieved_chunks": 12,
+          "priced_rows": 3,
+          "total_rows": 3,
+          "evidence_coverage": 1.0,
+          "unresolved_selected_rows": 0,
+          "blocking_findings": 0,
+          "scope_repairs": 0,
+          "price_repairs": 0
+        },
+        "agent_trace": [
+          {
+            "role": "ingestion",
+            "checkpoint": 0,
+            "duration_ms": 1,
+            "usage": {
+              "provider": "deterministic"
+            }
+          },
+          {
+            "role": "intake_and_routing",
+            "checkpoint": 1,
+            "duration_ms": 6,
+            "usage": {
+              "provider": "offline",
+              "mode": "explicit_text_extraction"
+            }
+          },
+          {
+            "role": "retrieve_context",
+            "checkpoint": 1,
+            "duration_ms": 235,
+            "usage": {
+              "provider": "deterministic"
+            }
+          },
+          {
+            "role": "rules_and_applicability",
+            "checkpoint": 1,
+            "duration_ms": 1,
+            "usage": {
+              "provider": "offline",
+              "mode": "template_and_rules",
+              "tool_calls": 0
+            }
+          },
+          {
+            "role": "scope_planner",
+            "checkpoint": 1,
+            "duration_ms": 0,
+            "usage": {
+              "provider": "offline",
+              "mode": "template_and_rules",
+              "tool_calls": 0
+            }
+          },
+          {
+            "role": "concept_design",
+            "checkpoint": 1,
+            "duration_ms": 1,
+            "usage": {
+              "provider": "offline",
+              "mode": "template_and_rules",
+              "tool_calls": 0
+            }
+          },
+          {
+            "role": "quantity_estimator",
+            "checkpoint": 1,
+            "duration_ms": 1,
+            "usage": {
+              "provider": "deterministic"
+            }
+          },
+          {
+            "role": "scope_and_quantity_verifier",
+            "checkpoint": 1,
+            "duration_ms": 1,
+            "usage": {
+              "provider": "offline",
+              "mode": "template_and_rules",
+              "tool_calls": 0
+            }
+          },
+          {
+            "role": "rate_estimator",
+            "checkpoint": 2,
+            "duration_ms": 3,
+            "usage": {
+              "provider": "offline",
+              "mode": "template_and_rules",
+              "tool_calls": 0
+            }
+          },
+          {
+            "role": "economics",
+            "checkpoint": 2,
+            "duration_ms": 1,
+            "usage": {
+              "provider": "offline",
+              "mode": "template_and_rules",
+              "tool_calls": 0
+            }
+          },
+          {
+            "role": "cost_engine",
+            "checkpoint": 2,
+            "duration_ms": 1,
+            "usage": {
+              "provider": "deterministic"
+            }
+          },
+          {
+            "role": "pricing_verifier",
+            "checkpoint": 2,
+            "duration_ms": 1,
+            "usage": {
+              "provider": "offline",
+              "mode": "template_and_rules",
+              "tool_calls": 0
+            }
+          },
+          {
+            "role": "evidence_audit",
+            "checkpoint": 3,
+            "duration_ms": 3,
+            "usage": {
+              "provider": "offline",
+              "mode": "template_and_rules",
+              "tool_calls": 0
+            }
+          },
+          {
+            "role": "report_compiler",
+            "checkpoint": 3,
+            "duration_ms": 82,
+            "usage": {
+              "provider": "deterministic"
+            }
+          }
+        ],
+        "created_at": "2026-11-16T23:31:09.419281+00:00"
+      },
+      "artifacts": {
+        "boq.xlsx": "sha256/69/693ec632c9cd6921c8deeb5c01e63a8fa65e02d1c8dd87bfd33ba8780c936ee1",
+        "estimate.pdf": "sha256/86/86aeed9e78f62d90cc8234f9018ff947338ae9313da7b3a58b855fc2f8cfe23b",
+        "estimate.docx": "sha256/35/35fe96045568ccda0d787f69d20e0d7cc78b0a7fc6d76ad4f017514eebaf4c9a",
+        "concept.svg": "sha256/ca/ca05690730346a883422d07b6be70098b1f116976e5da6068a379ff3646b5957",
+        "concept.pdf": "sha256/88/882170fbb2c4c469c37581d13ff1bb8beae05a63306e7766c651cd4bbc00feca",
+        "concept.dxf": "sha256/fc/fc56637eee28e4966d3054ce2dbea69b9656d2032336b9565fc2f39135d33f6c",
+        "estimate.json": "sha256/a2/a28b136f2c13414beaa7ba8f6d99116fa4fbc571b0b7b10317929de1d9419777",
+        "estimate-bundle.zip": "sha256/d4/d4bb8cec327273d275cd36f6bee7dc7a243af7d2ef791ffec5f03afdc1545583"
+      },
+      "latency_ms": 622
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "arithmetic_exact": 1.0,
+      "reference_correctness": 1.0,
+      "model_availability": 1.0,
+      "evidence_coverage": 1.0
+    }
+  },
+  {
+    "case_id": "workflow-off-topic",
+    "layer": "workflow",
+    "inputs": {
+      "layer": "workflow",
+      "brief": {
+        "title": "CPWD office preliminary demo",
+        "description": "Please write a recipe for a chocolate cake.",
+        "authority": "cpwd",
+        "state": "Delhi",
+        "location": "New Delhi",
+        "work_category": "preliminary_cpwd",
+        "building_type": "office",
+        "floor_area": "300",
+        "length": "20",
+        "width": "15",
+        "floors": 1,
+        "height": "3.6",
+        "capacity": 30,
+        "duration_months": "12",
+        "estimate_date": "2025-07-31",
+        "execution_year": 2025,
+        "correction_limit": 2,
+        "allow_demo": true
+      }
+    },
+    "reference": {
+      "status": "needs_input",
+      "base_total": null,
+      "finding_codes": [
+        "out_of_scope"
+      ]
+    },
+    "output": {
+      "result": {
+        "project_id": "cd3c977e-a448-4195-8308-38f2ee9e50a4",
+        "revision_id": "5192ee1e-15a1-490e-ae9c-e03bbf6a7832",
+        "revision": 1,
+        "brief": {
+          "title": "CPWD office preliminary demo",
+          "description": "Please write a recipe for a chocolate cake.",
+          "authority": "cpwd",
+          "state": "Delhi",
+          "location": "New Delhi",
+          "building_type": "office",
+          "work_category": "preliminary_cpwd",
+          "estimate_date": "2025-07-31",
+          "execution_year": 2025,
+          "floor_area": "300",
+          "length": "20",
+          "width": "15",
+          "floors": 1,
+          "height": "3.6",
+          "capacity": 30,
+          "duration_months": "12",
+          "site_area": null,
+          "selected_options": [],
+          "specifications": {},
+          "supplied_quantities": {},
+          "review_design": false,
+          "allow_demo": true,
+          "correction_limit": 2
+        },
+        "pack_id": null,
+        "pack_version": null,
+        "demo": false,
+        "status": "needs_input",
+        "checkpoint": 1,
+        "design": null,
+        "assumptions": [],
+        "rules": [],
+        "boq": [],
+        "evidence": [],
+        "calculations": [],
+        "adjustments": [],
+        "findings": [
+          {
+            "code": "out_of_scope",
+            "checkpoint": 1,
+            "severity": "blocking",
+            "message": "Tenderworks supports public-works estimates. Describe the construction or maintenance work, authority and location.",
+            "item_id": null
+          }
+        ],
+        "known_subtotal": "0",
+        "base_total": null,
+        "optional_subtotal": "0",
+        "category_totals": {},
+        "scenario_totals": {},
+        "artifacts": {},
+        "pending": {
+          "kind": "scope",
+          "message": "Tenderworks supports public-works estimates. Describe the construction or maintenance work, authority and location."
+        },
+        "metrics": {
+          "ingestion": {
+            "added": 0,
+            "updated": 0,
+            "skipped": 0,
+            "failed": 0,
+            "at": "2026-11-16T23:31:09.912954+00:00",
+            "embedding_backfilled": 0
+          },
+          "scope_guard": {
+            "allowed": false,
+            "code": "out_of_scope",
+            "message": "Tenderworks supports public-works estimates. Describe the construction or maintenance work, authority and location."
+          }
+        },
+        "agent_trace": [
+          {
+            "role": "ingestion",
+            "checkpoint": 0,
+            "duration_ms": 0,
+            "usage": {
+              "provider": "deterministic"
+            }
+          },
+          {
+            "role": "scope_guard",
+            "checkpoint": 1,
+            "duration_ms": 0,
+            "usage": {
+              "provider": "deterministic"
+            }
+          },
+          {
+            "role": "report_compiler",
+            "checkpoint": 1,
+            "duration_ms": 0,
+            "usage": {
+              "provider": "deterministic"
+            }
+          }
+        ],
+        "created_at": "2026-11-16T23:31:09.906977+00:00"
+      },
+      "artifacts": {},
+      "latency_ms": 100
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "arithmetic_exact": 1.0,
+      "reference_correctness": 1.0,
+      "model_availability": 1.0,
+      "evidence_coverage": 0
+    }
+  },
+  {
+    "case_id": "workflow-unsupported",
+    "layer": "workflow",
+    "inputs": {
+      "layer": "workflow",
+      "brief": {
+        "title": "CPWD office preliminary demo",
+        "description": "Prepare a CPWD preliminary estimate for a 300 m2 single-storey office in New Delhi. RCC frame, 3.60 m height, downcomer and manual alarm scenario, internal water and electrical services only. Exclude external works, land, lifts, HVAC, consultancy, TPQA and escalation.",
+        "authority": "state_pwd",
+        "state": "Kerala",
+        "location": "New Delhi",
+        "work_category": "building",
+        "building_type": "office",
+        "floor_area": "300",
+        "length": "20",
+        "width": "15",
+        "floors": 1,
+        "height": "3.6",
+        "capacity": 30,
+        "duration_months": "12",
+        "estimate_date": "2025-07-31",
+        "execution_year": 2025,
+        "correction_limit": 2,
+        "allow_demo": true
+      }
+    },
+    "reference": {
+      "status": "needs_input",
+      "base_total": null,
+      "finding_codes": [
+        "missing_domain_pack"
+      ]
+    },
+    "output": {
+      "result": {
+        "project_id": "adbd6525-57e7-4256-b8b2-c0024c1b7b1b",
+        "revision_id": "6023276a-2749-441f-8af0-d617fb20349a",
+        "revision": 1,
+        "brief": {
+          "title": "CPWD office preliminary demo",
+          "description": "Prepare a CPWD preliminary estimate for a 300 m2 single-storey office in New Delhi. RCC frame, 3.60 m height, downcomer and manual alarm scenario, internal water and electrical services only. Exclude external works, land, lifts, HVAC, consultancy, TPQA and escalation.",
+          "authority": "state_pwd",
+          "state": "Kerala",
+          "location": "New Delhi",
+          "building_type": "office",
+          "work_category": "building",
+          "estimate_date": "2025-07-31",
+          "execution_year": 2025,
+          "floor_area": "300",
+          "length": "20",
+          "width": "15",
+          "floors": 1,
+          "height": "3.6",
+          "capacity": 30,
+          "duration_months": "12",
+          "site_area": null,
+          "selected_options": [],
+          "specifications": {},
+          "supplied_quantities": {},
+          "review_design": false,
+          "allow_demo": true,
+          "correction_limit": 2
+        },
+        "pack_id": null,
+        "pack_version": null,
+        "demo": false,
+        "status": "needs_input",
+        "checkpoint": 1,
+        "design": null,
+        "assumptions": [],
+        "rules": [],
+        "boq": [],
+        "evidence": [
+          {
+            "id": "input:brief",
+            "kind": "user_input",
+            "title": "Project brief",
+            "source_id": null,
+            "version": "1",
+            "locator": "",
+            "url": "",
+            "snapshot_ref": "",
+            "content_hash": "",
+            "value": "{\"title\":\"CPWD office preliminary demo\",\"description\":\"Prepare a CPWD preliminary estimate for a 300 m2 single-storey office in New Delhi. RCC frame, 3.60 m height, downcomer and manual alarm scenario, internal water and electrical services only. Exclude external works, land, lifts, HVAC, consultancy, TPQA and escalation.\",\"authority\":\"state_pwd\",\"state\":\"Kerala\",\"location\":\"New Delhi\",\"building_type\":\"office\",\"work_category\":\"building\",\"estimate_date\":\"2025-07-31\",\"execution_year\":2025,\"floor_area\":\"300\",\"length\":\"20\",\"width\":\"15\",\"floors\":1,\"height\":\"3.6\",\"capacity\":30,\"duration_months\":\"12\",\"site_area\":null,\"selected_options\":[],\"specifications\":{},\"supplied_quantities\":{},\"review_design\":false,\"allow_demo\":true,\"correction_limit\":2}",
+            "trust": "supplied",
+            "parent_ids": []
+          }
+        ],
+        "calculations": [],
+        "adjustments": [],
+        "findings": [
+          {
+            "code": "missing_domain_pack",
+            "checkpoint": 1,
+            "severity": "blocking",
+            "message": "No reviewed domain package covers this authority, location, date and work category. Add source documents and a validated package.",
+            "item_id": null
+          }
+        ],
+        "known_subtotal": "0",
+        "base_total": null,
+        "optional_subtotal": "0",
+        "category_totals": {},
+        "scenario_totals": {},
+        "artifacts": {},
+        "pending": {
+          "kind": "routing",
+          "message": "Revise the project or add an applicable reviewed domain package."
+        },
+        "metrics": {
+          "ingestion": {
+            "added": 0,
+            "updated": 0,
+            "skipped": 0,
+            "failed": 0,
+            "at": "2026-11-16T23:31:10.023315+00:00",
+            "embedding_backfilled": 0
+          },
+          "scope_guard": {
+            "allowed": true,
+            "code": "in_scope",
+            "message": "Scope screening passed; applicability still requires validation."
+          }
+        },
+        "agent_trace": [
+          {
+            "role": "ingestion",
+            "checkpoint": 0,
+            "duration_ms": 0,
+            "usage": {
+              "provider": "deterministic"
+            }
+          },
+          {
+            "role": "intake_and_routing",
+            "checkpoint": 1,
+            "duration_ms": 4,
+            "usage": {
+              "provider": "offline",
+              "mode": "explicit_text_extraction"
+            }
+          },
+          {
+            "role": "report_compiler",
+            "checkpoint": 1,
+            "duration_ms": 0,
+            "usage": {
+              "provider": "deterministic"
+            }
+          }
+        ],
+        "created_at": "2026-11-16T23:31:10.016565+00:00"
+      },
+      "artifacts": {},
+      "latency_ms": 110
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "arithmetic_exact": 1.0,
+      "reference_correctness": 1.0,
+      "model_availability": 1.0,
+      "evidence_coverage": 0
+    }
+  }
+]

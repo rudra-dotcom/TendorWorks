@@ -138,3 +138,33 @@ var/                      Local databases and artifacts (gitignored)
 ```
 
 Read [architecture and operational behavior](docs/architecture.md) for the data contracts, retry policy and remaining integration boundaries.
+
+## Final demonstration and evaluation build (November 2026)
+
+This updated copy lives in `btp2/TendorWorks`; run commands from this directory, not the older workspace root. On a fresh clone, copy `.env.ollama.example` to `.env` before starting; preserve any existing credentials/configuration.
+
+```sh
+uv sync --frozen
+# In a separate terminal, if Ollama is not already running:
+ollama serve
+# Installed model used by the supplied .env:
+ollama pull qwen2.5:3b
+uv run tender ingest
+uv run tender serve --port 8000
+```
+
+Open http://127.0.0.1:8000 and select **CPWD official-rate demo**. Keep the prefilled scope, 2025 execution year and 3.60 m height for this fixed-rate scenario. The sample is a **defined-scope preliminary office estimate**, not a detailed sanctioned tender. It uses official PAR rates with explicitly assumed quantities and remains labelled demonstration data. The expected defined-scope total is **INR 11,028,540**. Other sample building projects remain available through the synthetic demo packages; unsupported types return visible findings.
+
+To generate a persistent demo revision, logs and artifacts without the browser:
+
+```sh
+uv run python scripts/run_demo.py
+# Fast deterministic smoke test (does not call the LLM or web):
+uv run python scripts/run_demo.py --offline
+```
+
+`outputs/demo-result.json` contains the revision and artifacts. Open the URL printed by the script while the app server is running. In the form, **Correction attempts per checkpoint** accepts 0–5. During a run, **Skip remaining retries** finishes the current step and skips later repair attempts; it never deletes blocking findings.
+
+The downloaded CPWD PDF and its source-backed demonstration package are already under `database/cpwd/`. Other-authority documents are archived outside the inbox. The old large DAR PDF is preserved under `reference_documents/cpwd/`. For a fresh source download use `uv run python scripts/download_sources.py`; package construction is documented in `scripts/prepare_cpwd_demo.py`.
+
+Read [guardrails and trust](docs/GUARDRAILS.md), [data provenance](docs/DATA_SOURCES.md), [evaluation methodology/viva guide](evals_final.md), and [final report](report/FINAL_REPORT.md). Measured run records are under `eval/results/`. Optional LangSmith cloud upload requires your own key; local SDK experiments work without one.

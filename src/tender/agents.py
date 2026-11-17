@@ -127,18 +127,46 @@ class Specialists:
     def model_review(self, role: str, result: EstimateResult, tenant: str, context: dict | None = None):
         try:
             retrieved = [
-                {"evidence_id": e.id, "locator": e.locator, "text": e.value}
+                {"evidence_id": e.id, "locator": e.locator, "trust": e.trust, "text": e.value[:800]}
                 for e in result.evidence
                 if e.kind == "retrieved"
-            ]
+            ][:4]
             review_context = context or {
                 "authority": result.brief.authority,
                 "brief": result.brief.model_dump(mode="json"),
                 "rules": [r.model_dump(mode="json") for r in result.rules],
                 "assumptions": [a.model_dump(mode="json") for a in result.assumptions],
-                "boq": [b.model_dump(mode="json") for b in result.boq],
+                "boq": [
+                    {
+                        k: v
+                        for k, v in b.model_dump(mode="json").items()
+                        if k
+                        in {
+                            "key",
+                            "description",
+                            "unit",
+                            "quantity",
+                            "unit_rate",
+                            "amount",
+                            "specification",
+                            "status",
+                        }
+                    }
+                    for b in result.boq
+                ],
                 "findings": [f.model_dump(mode="json") for f in result.findings],
             }
+            # Bound advisory model context; full artifacts remain in the ledger and deterministic checks.
+            if "findings" in review_context:
+                findings = review_context["findings"]
+                review_context["findings"] = sorted(findings, key=lambda f: f.get("severity") != "blocking")[
+                    :8
+                ]
+            if "assumptions" in review_context:
+                review_context["assumptions"] = review_context["assumptions"][:10]
+            review_context["coverage_note"] = (
+                "Bounded advisory context, not the complete ledger. Deterministic validators inspect full artifacts."
+            )
             if retrieved:
                 review_context = {**review_context, "retrieved_context": retrieved}
             output, usage = self.models.run(
@@ -150,8 +178,15 @@ class Specialists:
 
             def cited(item: dict) -> tuple[str, str] | None:
                 evidence_id, quote = item.get("evidence_id", ""), item.get("quote", "")
-                if not isinstance(quote, str) or not quote or evidence_id not in evidence or quote not in evidence[evidence_id].value:
-                    result.metrics["retrieval_citation_drops"] = result.metrics.get("retrieval_citation_drops", 0) + 1
+                if (
+                    not isinstance(quote, str)
+                    or not quote
+                    or evidence_id not in evidence
+                    or quote not in evidence[evidence_id].value
+                ):
+                    result.metrics["retrieval_citation_drops"] = (
+                        result.metrics.get("retrieval_citation_drops", 0) + 1
+                    )
                     return None
                 return evidence_id, quote
 
@@ -159,10 +194,22 @@ class Specialists:
                 if isinstance(concern, str):
                     finding(result, f"{role}_concern", max(1, result.checkpoint), concern[:1200], "warning")
                 elif isinstance(concern, dict) and cited(concern):
-                    finding(result, f"{role}_concern", max(1, result.checkpoint), concern["message"][:1200], "warning")
+                    finding(
+                        result,
+                        f"{role}_concern",
+                        max(1, result.checkpoint),
+                        concern["message"][:1200],
+                        "warning",
+                    )
             for missing in output.get("missing_components", [])[:15]:
                 if isinstance(missing, dict) and cited(missing):
-                    finding(result, f"{role}_missing_component", max(1, result.checkpoint), missing["message"][:1200], "warning")
+                    finding(
+                        result,
+                        f"{role}_missing_component",
+                        max(1, result.checkpoint),
+                        missing["message"][:1200],
+                        "warning",
+                    )
             for proposed in output.get("proposed_assumptions", [])[:10]:
                 citation = cited(proposed) if isinstance(proposed, dict) else None
                 if citation:
@@ -173,8 +220,12 @@ class Specialists:
                     if not any(a.id == f"rag:{identity}" for a in result.assumptions):
                         result.assumptions.append(
                             Assumption(
-                                id=f"rag:{identity}", field=proposed["field"][:200], value=proposed["value"][:500],
-                                reason=proposed["reason"][:1000], source_ids=[evidence_id], status="proposed"
+                                id=f"rag:{identity}",
+                                field=proposed["field"][:200],
+                                value=proposed["value"][:500],
+                                reason=proposed["reason"][:1000],
+                                source_ids=[evidence_id],
+                                status="proposed",
                             )
                         )
             return usage
@@ -191,7 +242,7 @@ class Specialists:
     def intake(self, result: EstimateResult, tenant: str) -> dict:
         brief = result.brief.model_dump(mode="json")
         text = result.brief.description
-        lower = text.lower()
+        lower = re.sub(r"(?<=\d),(?=\d{3}(?:\D|$))", "", text.lower())
         if brief["authority"] == "unknown":
             matches = []
             if re.search(r"\bcpwd\b", lower):
@@ -226,11 +277,15 @@ class Specialists:
                 if match:
                     brief[field] = match.group(1)
         for option, pattern in {"hvac": r"\bhvac\b|air.condition", "solar": r"\bsolar\b"}.items():
-            if re.search(pattern, lower) and not re.search(
-                r"(?:no|without|exclude)\s+(?:\w+\s+){0,2}" + pattern, lower
-            ):
-                if option not in brief["selected_options"]:
-                    brief["selected_options"].append(option)
+            # Respect exclusion lists across commas; do not convert exclusions into additions.
+            clauses = re.split(r"[.;\n]", lower)
+            requested = any(
+                re.search(pattern, clause)
+                and not re.search(r"\b(no|without|exclude|excluding|excluded)\b", clause)
+                for clause in clauses
+            )
+            if requested and option not in brief["selected_options"]:
+                brief["selected_options"].append(option)
         usage = {"provider": "offline", "mode": "explicit_text_extraction"}
         if self.models.enabled:
             try:
@@ -320,13 +375,28 @@ class Specialists:
             )
             return None
         id_, pack = candidates[0]
+        if pack.id == "cpwd-par-office-demo":
+            if (brief.height is not None and brief.height != D("3.6")) or brief.execution_year != 2025:
+                finding(
+                    result,
+                    "par_basis_mismatch",
+                    1,
+                    "This demonstration fixes 3.60 m storey height and 2025 execution at PAR base rates. Height adjustments or escalation require a reviewed extension.",
+                )
+            finding(
+                result,
+                "preliminary_scope",
+                1,
+                "Scope-limited preliminary estimate, not a detailed tender BOQ. External works, land, lifts, HVAC, TPQA, consultancy and escalation are excluded; tax treatment and fire-system suitability require review.",
+                "warning",
+            )
         result.pack_id, result.pack_version, result.demo = id_, pack.version, pack.trust == "demo"
         if result.demo:
             finding(
                 result,
                 "synthetic_demo",
                 1,
-                "All demonstration prices and quantity norms are synthetic. Do not use this estimate for procurement.",
+                "Demonstration package: source registers distinguish official rate transcriptions from synthetic fixtures. Assumed quantities and applicability require engineer review; not for procurement.",
                 "warning",
             )
         return id_, pack

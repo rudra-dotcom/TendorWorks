@@ -156,8 +156,13 @@ class KnowledgeGateway:
         with self.repo.session.begin() as session:
             row = session.get(DocumentRow, doc_id)
             if row is None:
-                row = DocumentRow(id=doc_id, tenant=tenant, authority=document.authority, trust=document.trust,
-                                  payload=document.model_dump(mode="json"))
+                row = DocumentRow(
+                    id=doc_id,
+                    tenant=tenant,
+                    authority=document.authority,
+                    trust=document.trust,
+                    payload=document.model_dump(mode="json"),
+                )
                 session.add(row)
             else:
                 session.query(ChunkRow).filter(ChunkRow.document_id == doc_id).delete()
@@ -202,9 +207,16 @@ class KnowledgeGateway:
             with self.repo.session.begin() as session:
                 session.query(ChunkRow).filter(ChunkRow.document_id == doc_id).delete()
                 for position, ((text, _), vector) in enumerate(zip(data, vectors, strict=True)):
-                    session.add(ChunkRow(id=f"{doc_id}-{position}", document_id=doc_id, position=position,
-                                         content=text, embedding=vector,
-                                         embedding_model=self.embedding_model_id if vector is not None else ""))
+                    session.add(
+                        ChunkRow(
+                            id=f"{doc_id}-{position}",
+                            document_id=doc_id,
+                            position=position,
+                            content=text,
+                            embedding=vector,
+                            embedding_model=self.embedding_model_id if vector is not None else "",
+                        )
+                    )
             refreshed += 1
         return refreshed
 
@@ -402,10 +414,15 @@ class KnowledgeGateway:
                 from langchain_core.documents import Document
                 from langchain_nvidia_ai_endpoints import NVIDIARerank
 
-                options = {"model": self.settings.nvidia_rerank_model, "api_key": self.settings.nvidia_api_key}
+                options = {
+                    "model": self.settings.nvidia_rerank_model,
+                    "api_key": self.settings.nvidia_api_key,
+                }
                 if self.settings.nvidia_base_url:
                     options["base_url"] = self.settings.nvidia_base_url
-                candidates = [Document(page_content=rows[i][0].content, metadata={"index": i}) for i in candidate_ids]
+                candidates = [
+                    Document(page_content=rows[i][0].content, metadata={"index": i}) for i in candidate_ids
+                ]
                 reranked = NVIDIARerank(**options).compress_documents(candidates, query)
                 candidate_ids = [item.metadata["index"] for item in reranked if "index" in item.metadata]
                 mode = "hybrid_reranked" if mode == "hybrid" else "keyword_reranked"
@@ -418,16 +435,22 @@ class KnowledgeGateway:
                 {
                     "document_id": doc.id,
                     "source_id": doc.payload["id"],
+                    "url": doc.payload.get("url", ""),
                     "title": doc.payload["title"],
                     "version": doc.payload["version"],
                     "trust": doc.trust,
                     "authority": doc.authority,
                     "content": chunk.content,
                     "locator": "; ".join(
-                        value for value in (doc.payload.get("locator", ""),
-                                              re.search(r"\[Page (\d+)\]", chunk.content).group(0).strip("[]")
-                                              if re.search(r"\[Page (\d+)\]", chunk.content) else "",
-                                              f"chunk {chunk.position + 1}") if value
+                        value
+                        for value in (
+                            doc.payload.get("locator", ""),
+                            re.search(r"\[Page (\d+)\]", chunk.content).group(0).strip("[]")
+                            if re.search(r"\[Page (\d+)\]", chunk.content)
+                            else "",
+                            f"chunk {chunk.position + 1}",
+                        )
+                        if value
                     ),
                     "snapshot_ref": doc.payload["snapshot_ref"],
                     "content_hash": doc.payload["content_hash"],

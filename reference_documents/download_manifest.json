@@ -1,0 +1,26 @@
+[
+  {
+    "path": "database/cpwd/PAR_2025.pdf",
+    "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+    "sha256": "b15a64ebad675d0d645d5a3812c4f9aeba9828fd814a552cff3652cc26bcf241",
+    "bytes": 5341115,
+    "in_ingestion_folder": true,
+    "checked_at": "2026-11-16T22:45:39.897953+00:00"
+  },
+  {
+    "path": "reference_documents/railway/CPWD_adoption_2025.pdf",
+    "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/2025_11_13%20Adoption%20of%20CPWD%20Delhi%20Schedules%20of%20Rates-%202023%20(DSR-Vol_%20I,%20DSR-Vol_%20II,%20Analysis%20of%20Rates%20for%20DSR%20(AOR-Vol_I,%20AOR-Vol_II)_pdf.pdf",
+    "sha256": "dab0b064ee17f0ba1066936f019ae441c7c1f15307e75dadd41d7d6b777093d2",
+    "bytes": 189422,
+    "in_ingestion_folder": false,
+    "checked_at": "2026-11-16T22:45:39.899172+00:00"
+  },
+  {
+    "path": "reference_documents/state_pwd/Maharashtra_SSR_2022_23.pdf",
+    "url": "https://cdnbbsr.s3waas.gov.in/s3ea80421fc06a2ed5c7adc1018e0026df/uploads/2025/07/202507031303590066.pdf",
+    "sha256": "cb7b3eda96aadd52180b837078c10268e77e7e36d053f79329443adc05c8fc2a",
+    "bytes": 8296605,
+    "in_ingestion_folder": false,
+    "checked_at": "2026-11-16T22:45:39.907608+00:00"
+  }
+]

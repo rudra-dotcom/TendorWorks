@@ -1,0 +1,32 @@
+{
+  "cases": [
+    {
+      "name": "Synthetic school with explicit geometry",
+      "revision_id": "cac23b3f-e1c0-4716-b279-38f504354a17",
+      "passed": true,
+      "failures": [],
+      "omitted_components": 0,
+      "evidence_coverage": 1.0,
+      "quantity_relative_error_mean": 0.0,
+      "rate_relative_error_mean": 0.0,
+      "latency_ms": 433,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "name": "Unknown state schedule remains unresolved",
+      "revision_id": "02f41ba0-d1b4-41a4-8292-e5e6fa845e4d",
+      "passed": true,
+      "failures": [],
+      "omitted_components": 0,
+      "evidence_coverage": 0,
+      "quantity_relative_error_mean": null,
+      "rate_relative_error_mean": null,
+      "latency_ms": 40,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  ],
+  "passed": true,
+  "note": "Only supplied reference labels are scored. Synthetic cases do not establish real-world engineering accuracy."
+}

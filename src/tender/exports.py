@@ -21,6 +21,10 @@ from tender.storage import ObjectStore
 
 
 def status_line(result: EstimateResult) -> str:
+    if result.brief.work_category == "preliminary_cpwd":
+        return (
+            "OFFICIAL-RATE ACADEMIC DEMO — SCOPE-LIMITED PRELIMINARY ESTIMATE • ENGINEERING REVIEW REQUIRED"
+        )
     return (
         "SYNTHETIC DEMO DATA — " if result.demo else ""
     ) + "CONCEPT-BASED DRAFT • ENGINEERING REVIEW REQUIRED"
@@ -28,7 +32,12 @@ def status_line(result: EstimateResult) -> str:
 
 def total_label(result: EstimateResult) -> str:
     return (
-        f"Estimated total: INR {result.base_total:,.2f}"
+        (
+            "Defined-scope preliminary total"
+            if result.brief.work_category == "preliminary_cpwd"
+            else "Estimated total"
+        )
+        + f": INR {result.base_total:,.2f}"
         if result.base_total is not None
         else f"Incomplete estimate — known line-item subtotal: INR {result.known_subtotal:,.2f}"
     )

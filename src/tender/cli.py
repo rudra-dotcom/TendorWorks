@@ -9,6 +9,9 @@ def main():
     serve = commands.add_parser("serve", help="Start the web application")
     serve.add_argument("--host", default="127.0.0.1")
     serve.add_argument("--port", type=int, default=8000)
+    commands.add_parser(
+        "purge-logs", help="Delete local trace files older than the configured retention period"
+    )
     commands.add_parser("ingest", help="Index new and changed source files in database/")
     db = commands.add_parser("db", help="Database migrations")
     db.add_argument("action", choices=["upgrade", "current", "revision"])
@@ -36,6 +39,11 @@ def main():
         import uvicorn
 
         uvicorn.run("tender.app:create_app", factory=True, host=args.host, port=args.port)
+    elif args.command == "purge-logs":
+        from tender.config import Settings
+        from tender.observability import purge_logs
+
+        print(json.dumps({"removed": purge_logs(Settings())}))
     elif args.command == "schema":
         from tender.schemas import DomainPack
 

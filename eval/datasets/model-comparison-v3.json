@@ -1,0 +1,315 @@
+[
+  {
+    "id": "intake-0",
+    "inputs": {
+      "layer": "agent",
+      "role": "intake",
+      "context": {
+        "description": "Build a CPWD office in Delhi with floor area 300 m2."
+      }
+    },
+    "expected": {
+      "facts": {
+        "authority": "cpwd",
+        "building_type": "office",
+        "floor_area": "300",
+        "location": "Delhi"
+      }
+    },
+    "label_origin": "developer-authored; source rows checked against PDF; no independent engineer adjudication",
+    "label_revision": "v3: Delhi is an explicitly supplied location, not an explicitly labelled state."
+  },
+  {
+    "id": "intake-1",
+    "inputs": {
+      "layer": "agent",
+      "role": "intake",
+      "context": {
+        "description": "Build a school with floor area 2,400 sq m."
+      }
+    },
+    "expected": {
+      "facts": {
+        "building_type": "school",
+        "floor_area": "2400"
+      }
+    },
+    "label_origin": "developer-authored; source rows checked against PDF; no independent engineer adjudication"
+  },
+  {
+    "id": "intake-2",
+    "inputs": {
+      "layer": "agent",
+      "role": "intake",
+      "context": {
+        "description": "Prepare an estimate; the authority and location have not been supplied."
+      }
+    },
+    "expected": {
+      "facts": {}
+    },
+    "label_origin": "developer-authored; source rows checked against PDF; no independent engineer adjudication"
+  },
+  {
+    "id": "scope-defect",
+    "inputs": {
+      "layer": "agent",
+      "role": "scope",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "Mandatory project requirement: provide a manual fire alarm. The current scope omits the fire alarm.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "label_origin": "developer-authored; source rows checked against PDF; no independent engineer adjudication"
+  },
+  {
+    "id": "design-defect",
+    "inputs": {
+      "layer": "agent",
+      "role": "design",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "Supplied floor height is 3.60 m. The proposed design uses 3.00 m, contradicting the supplied height.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "label_origin": "developer-authored; source rows checked against PDF; no independent engineer adjudication"
+  },
+  {
+    "id": "rules-defect",
+    "inputs": {
+      "layer": "agent",
+      "role": "rules",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "This rate package applies only to Delhi. The project is in Kerala; applicability is unresolved.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "label_origin": "developer-authored; source rows checked against PDF; no independent engineer adjudication"
+  },
+  {
+    "id": "quantity_verifier-defect",
+    "inputs": {
+      "layer": "agent",
+      "role": "quantity_verifier",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "Wall W1 length 10 m, height 3 m and thickness 0.2 m gives volume 6 m3. The worksheet reports 60 m3.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "label_origin": "developer-authored; source rows checked against PDF; no independent engineer adjudication"
+  },
+  {
+    "id": "rate_estimator-defect",
+    "inputs": {
+      "layer": "agent",
+      "role": "rate_estimator",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "The selected rate is for M25 concrete in m3. The required item is M30 concrete in m3. The grade does not match.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "label_origin": "developer-authored; source rows checked against PDF; no independent engineer adjudication"
+  },
+  {
+    "id": "economics-defect",
+    "inputs": {
+      "layer": "agent",
+      "role": "economics",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "The selected unit rate already includes overhead. The estimate adds overhead a second time.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "label_origin": "developer-authored; source rows checked against PDF; no independent engineer adjudication"
+  },
+  {
+    "id": "pricing_verifier-defect",
+    "inputs": {
+      "layer": "agent",
+      "role": "pricing_verifier",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "The selected rate is for M25 concrete in m3. The required item is M30 concrete in m3. The grade does not match.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "label_origin": "developer-authored; source rows checked against PDF; no independent engineer adjudication"
+  },
+  {
+    "id": "evidence_audit-defect",
+    "inputs": {
+      "layer": "agent",
+      "role": "evidence_audit",
+      "context": {
+        "brief": {
+          "description": "Check the CPWD office estimate."
+        },
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-1",
+            "text": "The citation claims a concrete price of INR 999 per m3, but the cited excerpt only states a wall dimension and contains no price.",
+            "locator": "Controlled evaluation fixture"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "defect_evidence_ids": [
+        "fixture-1"
+      ]
+    },
+    "label_origin": "developer-authored; source rows checked against PDF; no independent engineer adjudication"
+  },
+  {
+    "id": "critic-clean",
+    "inputs": {
+      "layer": "agent",
+      "role": "pricing_verifier",
+      "context": {
+        "retrieved_context": [
+          {
+            "evidence_id": "fixture-clean",
+            "text": "Required grade M25, unit m3. Selected applicable approved rate: M25, m3, INR 100. Quantity 2 m3; amount INR 200. No adjustments. All evidence is present.",
+            "locator": "Controlled fixture"
+          }
+        ]
+      }
+    },
+    "expected": {
+      "defect_evidence_ids": []
+    },
+    "label_origin": "developer-authored; source rows checked against PDF; no independent engineer adjudication"
+  },
+  {
+    "id": "intake-unseen-railway",
+    "inputs": {
+      "layer": "agent",
+      "role": "intake",
+      "context": {
+        "description": "Build a railway school in Patna for 120 students."
+      }
+    },
+    "expected": {
+      "facts": {
+        "authority": "railway",
+        "building_type": "school",
+        "location": "Patna",
+        "capacity": "120"
+      }
+    },
+    "label_origin": "developer-authored diagnostic expansion, not held-out engineering data"
+  },
+  {
+    "id": "intake-unseen-office",
+    "inputs": {
+      "layer": "agent",
+      "role": "intake",
+      "context": {
+        "description": "Build a CPWD office with floor area 450 m2, 3 floors, capacity 60 occupants and duration 12 months. Location is Mumbai and state is Maharashtra."
+      }
+    },
+    "expected": {
+      "facts": {
+        "authority": "cpwd",
+        "building_type": "office",
+        "floor_area": "450",
+        "floors": "3",
+        "capacity": "60",
+        "duration_months": "12",
+        "location": "Mumbai",
+        "state": "Maharashtra"
+      }
+    },
+    "label_origin": "developer-authored diagnostic expansion, not held-out engineering data"
+  }
+]

@@ -14,11 +14,28 @@ def test_draft_generation_rejects_fabrication_and_rebuilds_approved_rows(setting
     generator = DraftPackGenerator(settings)
     monkeypatch.setattr(
         "tender.drafts.pdf_pages",
-        lambda _: [(1, "MASONRY\n1.01 Brick masonry m3 6000", None), (2, "", "No extractable text; OCR required")],
+        lambda _: [
+            (1, "MASONRY\n1.01 Brick masonry m3 6000", None),
+            (2, "", "No extractable text; OCR required"),
+        ],
     )
     generator.extract_rows = lambda _: [
-        {"item_code": "1.01", "description": "MASONRY Brick masonry", "unit": "m3", "value": "6000", "page": 1, "source_text": "1.01 Brick masonry m3 6000"},
-        {"item_code": "9.99", "description": "Invented row", "unit": "m3", "value": "9000", "page": 1, "source_text": "not on page"},
+        {
+            "item_code": "1.01",
+            "description": "MASONRY Brick masonry",
+            "unit": "m3",
+            "value": "6000",
+            "page": 1,
+            "source_text": "1.01 Brick masonry m3 6000",
+        },
+        {
+            "item_code": "9.99",
+            "description": "Invented row",
+            "unit": "m3",
+            "value": "9000",
+            "page": 1,
+            "source_text": "not on page",
+        },
     ]
     path = tmp_path / "rates.pdf"
     result = generator.generate(

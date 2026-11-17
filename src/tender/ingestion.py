@@ -185,7 +185,11 @@ class FolderIngestor:
                             )
                         except Exception as exc:
                             report.setdefault("drafts", []).append(
-                                {"path": str(path.relative_to(root)), "status": "failed", "error": str(exc)[:1200]}
+                                {
+                                    "path": str(path.relative_to(root)),
+                                    "status": "failed",
+                                    "error": str(exc)[:1200],
+                                }
                             )
             report["embedding_backfilled"] = self.gateway.backfill_embeddings(tenant)
             self.last_report = report
@@ -195,7 +199,9 @@ class FolderIngestor:
         """Manually rebuild review artifacts; never imports a generated package."""
         tenant = tenant or self.gateway.settings.database_tenant
         if tenant != self.gateway.settings.database_tenant:
-            return [{"status": "skipped", "message": "Server inbox belongs to a different tenant; use uploads."}]
+            return [
+                {"status": "skipped", "message": "Server inbox belongs to a different tenant; use uploads."}
+            ]
         root = self.gateway.settings.database_dir.resolve()
         results = []
         for path in sorted(root.rglob("*.pdf")):
@@ -208,5 +214,7 @@ class FolderIngestor:
             try:
                 results.append(self.drafts.generate(path, metadata, path.read_bytes()))
             except Exception as exc:
-                results.append({"path": str(path.relative_to(root)), "status": "failed", "error": str(exc)[:1200]})
+                results.append(
+                    {"path": str(path.relative_to(root)), "status": "failed", "error": str(exc)[:1200]}
+                )
         return results

@@ -50,6 +50,7 @@ class ProjectBrief(Contract):
     supplied_quantities: dict[str, Number] = Field(default_factory=dict)
     review_design: bool = False
     allow_demo: bool = True
+    correction_limit: int | None = Field(default=None, ge=0, le=5)
 
 
 class SourceDocument(Contract):

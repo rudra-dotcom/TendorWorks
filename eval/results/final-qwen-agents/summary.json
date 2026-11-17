@@ -1,0 +1,127 @@
+{
+  "model": "qwen2.5:3b",
+  "provider": "ollama",
+  "repetitions": 1,
+  "cases": 12,
+  "runs": 12,
+  "metrics": {
+    "quote_grounding": 1.0,
+    "field_recall": 0.0,
+    "defect_recall_proxy": 0.6666666666666666,
+    "citation_grounding": 0.6296296296296297,
+    "reference_correctness": 0.4166666666666667,
+    "false_positive_free": 1.0,
+    "field_precision": 0.0,
+    "execution_success": 1.0
+  },
+  "pass_count": 5,
+  "reference_pass_rate": 0.4166666666666667,
+  "wilson_95_interval_per_run": [
+    0.1933,
+    0.6805
+  ],
+  "interval_caveat": "Repeated runs of the same case are correlated; interval is descriptive, not independent-project generalization.",
+  "latency_p50_ms": 15552.5,
+  "latency_p95_ms": 21441,
+  "source_tree_sha256": "ab700fb2bf32800454ef54edeca0beaf53a72fd7455429940adf4e293c727b62",
+  "python": "3.12.4",
+  "platform": "macOS-13.7.8-arm64-arm-64bit",
+  "prompt_version": "2026-11-17-bounded-review-v2",
+  "dataset_sha256": "b6a14ab18494189988de38ed827569c4b89ef53bafe5aa4be4d93239ddaa26ed",
+  "package_sha256": "229075977f1fa1de1c23dbe537ed444cbaac22205aa5d2c476188b073b22aef1",
+  "git_commit": "f58825a87d4897431bc165e26590f777ef587d58",
+  "limitations": [
+    "Small developer-labelled benchmark, not an independent engineer-reviewed test set.",
+    "Critic defect metrics are evidence-ID proxies and require human semantic adjudication.",
+    "No historical ablation results are inferred from these measurements."
+  ],
+  "uploaded": false,
+  "ollama_models": [
+    {
+      "name": "qwen2.5:3b",
+      "model": "qwen2.5:3b",
+      "modified_at": "2026-10-27T04:14:54.222542826+05:30",
+      "size": 1929912432,
+      "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen2",
+        "families": [
+          "qwen2"
+        ],
+        "parameter_size": "3.1B",
+        "quantization_level": "Q4_K_M"
+      }
+    },
+    {
+      "name": "qwen2.5vl:latest",
+      "model": "qwen2.5vl:latest",
+      "modified_at": "2025-06-10T22:06:42.671788304+05:30",
+      "size": 5969245856,
+      "digest": "5ced39dfa4bac325dc183dd1e4febaa1c46b3ea28bce48896c8e69c1e79611cc",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen25vl",
+        "families": [
+          "qwen25vl"
+        ],
+        "parameter_size": "8.3B",
+        "quantization_level": "Q4_K_M"
+      }
+    },
+    {
+      "name": "gemma3:latest",
+      "model": "gemma3:latest",
+      "modified_at": "2025-05-23T09:23:33.169813365+05:30",
+      "size": 3338801804,
+      "digest": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "gemma3",
+        "families": [
+          "gemma3"
+        ],
+        "parameter_size": "4.3B",
+        "quantization_level": "Q4_K_M"
+      }
+    },
+    {
+      "name": "llava:latest",
+      "model": "llava:latest",
+      "modified_at": "2025-05-21T00:00:54.034116403+05:30",
+      "size": 4733363377,
+      "digest": "8dd30f6b0cb19f555f2c7a7ebda861449ea2cc76bf1f44e262931f45fc81d081",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "llama",
+        "families": [
+          "llama",
+          "clip"
+        ],
+        "parameter_size": "7B",
+        "quantization_level": "Q4_0"
+      }
+    },
+    {
+      "name": "llama3:latest",
+      "model": "llama3:latest",
+      "modified_at": "2025-05-20T22:27:05.61565274+05:30",
+      "size": 4661224676,
+      "digest": "365c0bd3c000a25d28ddbf732fe1c6add414de7275464c4e4d1c3b5fcb5d8ad1",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "llama",
+        "families": [
+          "llama"
+        ],
+        "parameter_size": "8.0B",
+        "quantization_level": "Q4_0"
+      }
+    }
+  ]
+}

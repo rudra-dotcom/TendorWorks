@@ -1,0 +1,99 @@
+[
+  {
+    "case_id": "retrieval-par",
+    "layer": "retrieval",
+    "inputs": {
+      "layer": "retrieval",
+      "query": "1.1.1 RCC FRAMED STRUCTURE 30,920 offices",
+      "k": 5
+    },
+    "reference": {
+      "source_id": "cpwd-par-2025",
+      "contains": "30,920"
+    },
+    "output": {
+      "mode": "keyword",
+      "warning": null,
+      "results": [
+        {
+          "document_id": "d5b275416d6be0a33b9c9796fdf0010417cb5ed9",
+          "source_id": "cpwd-par-2025",
+          "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+          "title": "CPWD PAR 2025, official Railway Board hosted copy",
+          "version": "2025-base-2025-04-01",
+          "trust": "demo",
+          "authority": "cpwd",
+          "content": "PLINTH AREA RATES\nas on 01.04.2025\nRate in \u20b9 per sqm\nS. No. Description Non-Residential Buildings Residential Buildings\nOffices/\nColleges\nHospitals Schools Hostels Quarters\n1.0 BUILDING COST (Specifications as per Annexure-I)\n1.1 RCC FRAMED STRUCTURE (Upto six storeys)\n1.1.1 Floor height 3.60 metre 30,920 31,990 23,530 -\n1.1.2 Floor height 3.00  metre - - - 24,410\n1.2 COMPOSITE (PARTIALLY LOAD BEARING AND PARTIALLY RCC FRAMED) STRUCTURE \n(Upto six storeys)\n1.2.1 Floor height 3.60 metre 26,280 27,190 20,000  \n1.2.2 Floor height 3.00 metre - -  20,750\n1.3 EXTRA FOR\n1.3.1 Set of six additional storey\n(i.e. from 7th to 12th storey)\n123\nSimilarly, extra for next set of six storeys may be increased by Rs. 123/- per sqm (viz Rs. 246/- \nper sqm for 13 th to 18 th storey, Rs. 369/- per sqm for 19 th to 24 th storey, Rs 492/- per sqm for \n25th to 30 th storey and so on). The applicable plinth area shall be the sum of plinth area of all \nthe storeys within the set of six storeys. \nIf the next set of storeys is having fewer than six storeys, the same procedure shall be followed. \nFor example, if building is having 15 storeys, the additional rate applicable shall be (i) Rs 123/- \nper sqm for sum of plinth area between 7 th to 12 th storey and (ii) Rs. 246/- per sqm for sum of \nplinth area of 13th to 15th floor.  \n1.3.2 Every 0.3 metre or part thereof, \nadditional / less height of floor \nabove normal floor height of 3.60 \nmetre / 3.00 metre (on areas having \nadditional / less height)\n434\n1.3.3 Every 0.3 metre or part thereof, \nhigher plinth height over normal plinth \nheight of 0.60 metre (on ground floor \narea only).\n470\n1.3.4 Every 0.30 metre or part thereof, \ndeeper foundations over normal \ndepth of 1.20 metre (on ground floor \narea only).\n205\n1.3.5 Making stronger foundations to",
+          "locator": "PDF pages 12-15; printed pages 2-5; chunk 11",
+          "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+          "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+          "score": 0.01639344262295082
+        },
+        {
+          "document_id": "d5b275416d6be0a33b9c9796fdf0010417cb5ed9",
+          "source_id": "cpwd-par-2025",
+          "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+          "title": "CPWD PAR 2025, official Railway Board hosted copy",
+          "version": "2025-base-2025-04-01",
+          "trust": "demo",
+          "authority": "cpwd",
+          "content": "take \nload of one additional floor at a later \ndate (on ground floor area only).\nFor RCC framed structures Composite structure\n1800 700\n1.3.6 RCC raft foundation (on ground floor \narea only)\n12,765\n1.3.7 Pile foundation upto a depth of 15 \nmetre (on ground floor area only)\n22,240",
+          "locator": "PDF pages 12-15; printed pages 2-5; chunk 12",
+          "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+          "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+          "score": 0.016129032258064516
+        },
+        {
+          "document_id": "d5b275416d6be0a33b9c9796fdf0010417cb5ed9",
+          "source_id": "cpwd-par-2025",
+          "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+          "title": "CPWD PAR 2025, official Railway Board hosted copy",
+          "version": "2025-base-2025-04-01",
+          "trust": "demo",
+          "authority": "cpwd",
+          "content": "ANNEXURE-II\nGENERAL SPECIFICATIONS FOR NON \u2013 RESIDENTIAL BUILDINGS\nItem No. Description Specifications\n1.0 FOUNDATION\n1.1 For RCC framed structure As per structural design based on soil investigation. \n(Primarily with RCC footings, columns, raft etc.).\n1.2 For composite (partially load \nbearing and partially RCC \nframed structure)\nAs per structural design based on soil investigation. (Brick/\nstone work spread footings on cement concrete base upto \n1500 mm depth below ground level with or without RCC \nisolated combined footings with plinth beams/bands).\n2.0 SUPER STRUCTURE\n2.1 As per specifications of New and Emerging Technology issued vide circular No. 17/SE(TAS)/\nBMTPC/2022/105-H dated 24.03.2022 as amended time to time\n2.2 Internal partitions (wherever \napplicable) :- \nOffice/college/hospital\nAerated cement concrete (ACC) blocks./ Light weight \nautoclaved aerated concrete (AAC) blocks/ Gypsum \nblocks/ Non Asbestos double skin c\u00e9ment boards/ Fly ash \nbricks/ dry wall partitioning/ glass partitioning\n Schools Light weight autoclaved aerated concrete (AAC) blocks/ \nburnt clay FPS brick masonry work / aerated cement \nconcrete (ACC) blocks / fly ash bricks.\n2.3 Sunken Floor in Lavatory Blocks \nfor Floor Traps / W.C. with four \ncourse waterproofing treatment\nNo Sunken floor slab except floor depression for \nmaintaining slopes. However, camouflaging of water \nsupply and sanitary line of upper floor to be done by false \nceiling as per the architectural drawings.\n3.0 DOORS & WINDOWS\n3.1 Frames\n3.1.1 Door frames:- \nOffice/college/hospital\nDoor frames of 2nd class Indian teakwood or equivalent \nin officer\u2019s room. anodized / powder coated/ polyester \npowder coated aluminum extruded tubular sections/\nextruded hollow mild steel pipes (minimum  2 mm \nthickness)/uPVC extruded frame",
+          "locator": "PDF pages 12-15; printed pages 2-5; chunk 46",
+          "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+          "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+          "score": 0.015873015873015872
+        },
+        {
+          "document_id": "d5b275416d6be0a33b9c9796fdf0010417cb5ed9",
+          "source_id": "cpwd-par-2025",
+          "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+          "title": "CPWD PAR 2025, official Railway Board hosted copy",
+          "version": "2025-base-2025-04-01",
+          "trust": "demo",
+          "authority": "cpwd",
+          "content": "[PDF page 16]\nPlinth Area Rates 2025\nCPWD 171 Year of Engineering Excellence\n6\nS.No. Capacity/ \nPersons\nSpeed in m/sec Travel height Price\n(in lac `)\nExtra for each \nadditional floor \n(in `)\n4.2.3 20 2.5 G+12 80.79 1,22,050\n4.3 Goods lifts (2 speed)\n4.3.1 1 Ton 0.5 G+4 28.01 94,310\n4.3.2 2 Ton 0.5 G+4 35.55 94,310\n4.3.3 3 Ton 0.25 G+4 44.17 1,10,950\nS. No. Description Rates in \u20b9\n5.0 RCC WATER TANK\n5.1 Overhead tank without independent staging 23 per litre\n5.2 Overhead tank with staging height upto 20 metre 35 per litre\n5.3 Overhead tank with staging height above 20 metre upto 30 metre 40 per litre\n5.4 Overhead tank with staging height above 30 metre upto 40 metre 47 per litre\n5.5 Underground sump 24 per litre\n6.0 DEVELOPMENT OF SITE\n6.1 Levelling 160 per sqm\n6.2 Internal roads & paths\n6.2.1 Internal road with WBM and  bituminous top 1,940 per sqm\n6.2.2 Internal road with WMM and  bituminous top 2,150 per sqm\n6.2.3 Cement concrete pavement with  vacuum  dewatered  concrete 2,945per sqm\n6.2.4 Footpath with PCC base, 60 mm thick paver blocks and kerb stone edging 2,930per sqm\n6.3 External sewerage 4,180 per metre\n6.4 Filtered water supply\n6.4.1 Distribution lines upto100 mm dia 2,170 per metre\n6.4.2 Peripheral grid 150 mm to 300 mm dia pipes 4,175 per metre\n6.4.3 Unfiltered water supply distribution lines 1,560 per metre\n6.5 Storm water drains 10,810 per \nmetre\n6.6 Rain water harvesting (RWH) (excluding collection tank) 2,330 per metre\n6.7 Trenches for services 7,460 per metre\n6.8 Boundary wall with 1500 mm high wall and 600 mm high MS grill including 2100 mm high steel \ngates at every 100 metres\n6.8.1 With brickwork structure with RCC column of size 300X300mm @ 3.00 \nmetre centre to centre and RCC plinth beam  of size 300X300mm at \nground level and coping\n13,210 per",
+          "locator": "PDF pages 12-15; printed pages 2-5; chunk 15",
+          "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+          "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+          "score": 0.015625
+        },
+        {
+          "document_id": "d5b275416d6be0a33b9c9796fdf0010417cb5ed9",
+          "source_id": "cpwd-par-2025",
+          "url": "https://rb.indianrailways.gov.in/uploads/directorate/civil_engg/2025/PLINTH_AREA_RATES_2025%20(1).pdf",
+          "title": "CPWD PAR 2025, official Railway Board hosted copy",
+          "version": "2025-base-2025-04-01",
+          "trust": "demo",
+          "authority": "cpwd",
+          "content": "[PDF page 28]\nPlinth Area Rates 2025\nCPWD 171 Year of Engineering Excellence\n18\nAppendix -5\nGeneral Specifications and Design for GPRA Dwelling Units\nThe materials, specifications and design values given here are only illustrative. Use of local and renewable \nmaterials shall be preferred. The actual design values may vary according to type of building, bye-laws, and \nspecial requirements, if any.\nS.No. Description Specifications and design\n1 Foundation  \n(i) Bearing capacity \n(QA) 60 kN/m\u00b2at 2500 mm below the ground level.\n(ii) Ground water table 7 metre below ground during rainy season.\n(iii) Type Bored cast in situ RCC piles of M30 concrete with minimum cement \ncontent of 350 kg/m\u00b3\n(iv) Masonry Fly ash cement concrete bricks in cement mortar 1:6\n2a Superstructure RCC framed structure.\n(ii) Concrete mix M 30\n(iii) Rebars Corrosion resistant Fe 550 D\n(iv) External walls\n230 mm thick fly ash cement concrete brick masonry with cement mortar \n1:6. OR 200 mm thick autoclaved aerated concrete blocks laid with \nadhesive.\n(v) Internal walls\n115 mm thick fly ash cement concrete brick masonry with cement mortar \n1:4. OR 100 mm thick autoclaved aerated concrete blocks laid with \nadhesive.\n2b Superstructure Load bearing masonry in burnt clay FPS bricks.\n(i) Load beaning walls 230 mm thick brick masonry in cement mortar 1:6.\n(ii) Partition walls 115 mm thick brick masonry in cement mortar 1:4\n3 Doors  \n(i) Entrance door 2nd class teak wood frame and 2-leaf shutters. 35mm thick decorative flush \ndoor shutter. The frames will have double rebate for wire mesh shutters.\n(ii) Room frames 2nd class teak wood or UPVC\n(iii) Room shutters 35 mm thick decorative or commercial flush door\n(iv) External doors\n35 mm thick flush door shutters or UPVC Exposed face of shutters in \nbalcony or mumty",
+          "locator": "PDF pages 12-15; printed pages 2-5; chunk 34",
+          "snapshot_ref": "sha256/8c/8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+          "content_hash": "8cb86f8bbd94854829d46527aa4b741d952a7ad95cff564818b03e8fdf05dbe3",
+          "score": 0.015384615384615385
+        }
+      ],
+      "latency_ms": 350
+    },
+    "run_error": null,
+    "scores": {
+      "execution_success": 1.0,
+      "recall_at_k": 1.0,
+      "reciprocal_rank": 1.0,
+      "reference_correctness": 1.0
+    }
+  }
+]

@@ -14,8 +14,10 @@ from tender.agents import Specialists, finding
 from tender.db import Repository
 from tender.evaluation_reports import write_evaluation_workbook
 from tender.exports import ReportCompiler
+from tender.guardrails import assess_brief
 from tender.ingestion import FolderIngestor
 from tender.knowledge import KnowledgeGateway
+from tender.observability import revision_context, write_event
 from tender.providers import ModelAdapter
 from tender.schemas import DomainPack, EstimateResult, EvidenceRecord, Identity
 
@@ -68,7 +70,7 @@ class EstimationWorkflow:
             "evidence",
             "report",
         ):
-            graph.add_node(name, getattr(self, name))
+            graph.add_node(name, self.logged_node(name))
         graph.add_edge(START, "ingest")
         graph.add_edge("ingest", "intake")
         graph.add_conditional_edges("intake", lambda s: "retrieve_context" if s.get("pack") else "report")
@@ -91,6 +93,52 @@ class EstimationWorkflow:
         graph.add_conditional_edges("verify_scope", self.after_scope)
         graph.add_conditional_edges("verify_prices", self.after_prices)
         self.graph = graph.compile(checkpointer=self.checkpointer)
+
+    def logged_node(self, name):
+        def run(state):
+            revision = state["result"]["revision_id"]
+            token = revision_context.set(revision)
+            started = time.perf_counter()
+            try:
+                output = getattr(self, name)(state)
+                write_event(
+                    self.repo.settings,
+                    state["tenant"],
+                    revision,
+                    {
+                        "event": "node_result",
+                        "role": name,
+                        "input": state["result"],
+                        "output": output,
+                        "duration_ms": round((time.perf_counter() - started) * 1000),
+                    },
+                )
+                return output
+            except BaseException as exc:
+                write_event(
+                    self.repo.settings,
+                    state["tenant"],
+                    revision,
+                    {
+                        "event": "node_interrupted"
+                        if type(exc).__name__ == "GraphInterrupt"
+                        else "node_error",
+                        "role": name,
+                        "error_type": type(exc).__name__,
+                    },
+                )
+                raise
+            finally:
+                revision_context.reset(token)
+
+        return run
+
+    def repair_limit(self, state):
+        revision = state["result"].get("revision_id")
+        if revision and self.repo.corrections_stopped(revision, state["tenant"]):
+            return 0
+        value = state["result"]["brief"].get("correction_limit")
+        return self.repo.settings.correction_limit if value is None else value
 
     def close(self):
         self.stack.close()
@@ -131,6 +179,13 @@ class EstimationWorkflow:
     def intake(self, state):
         start, result = time.perf_counter(), self.result(state)
         result.checkpoint = 1
+        decision = assess_brief(result.brief)
+        result.metrics["scope_guard"] = decision
+        if not decision["allowed"]:
+            finding(result, decision["code"], 1, decision["message"])
+            result.status = "needs_input"
+            result.pending = {"kind": "scope", "message": decision["message"]}
+            return self.save(state, result, "scope_guard", start)
         usage = self.agents.intake(result, state["tenant"])
         selected = self.agents.route(result, state["tenant"])
         updates = {}
@@ -158,6 +213,28 @@ class EstimationWorkflow:
         start, result = time.perf_counter(), self.result(state)
         if not self.repo.settings.rag_enabled or any(e.kind == "retrieved" for e in result.evidence):
             return self.save(state, result, "retrieve_context", start)
+        if self.repo.settings.web_enabled:
+            try:
+                web = self.agents.research.discover(result.brief.authority, "building", state["tenant"])
+            except Exception as exc:
+                web = {"status": "unavailable", "error_type": type(exc).__name__}
+            result.metrics["web_research"] = web
+            if web.get("candidates"):
+                finding(
+                    result,
+                    "web_candidates",
+                    1,
+                    "Web sources were retrieved but their applicability is unverified. They are advisory and cannot set prices.",
+                    "warning",
+                )
+            elif web.get("status") != "disabled":
+                finding(
+                    result,
+                    "web_unavailable",
+                    1,
+                    "Web research produced no usable candidates; local evidence is used and source gaps remain visible.",
+                    "warning",
+                )
         pack = self.pack(state)
         components = ", ".join(component.key for component in pack.components[:12])
         queries = [
@@ -186,6 +263,7 @@ class EstimationWorkflow:
                         id=evidence_id,
                         kind="retrieved",
                         title=item["title"],
+                        url=item.get("url", ""),
                         source_id=item["source_id"],
                         version=item["version"],
                         locator=item["locator"],
@@ -196,6 +274,15 @@ class EstimationWorkflow:
                     )
                 )
         result.metrics["retrieved_chunks"] = len(seen)
+        unverified = [e.id for e in result.evidence if e.kind == "retrieved" and e.trust != "approved"]
+        if unverified:
+            finding(
+                result,
+                "unverified_retrieval",
+                1,
+                f"{len(unverified)} retrieved excerpts are unreviewed or demonstration evidence. They are advisory only, not validated pricing inputs.",
+                "warning",
+            )
         return self.save(state, result, "retrieve_context", start)
 
     def scope(self, state):
@@ -223,10 +310,9 @@ class EstimationWorkflow:
 
     def after_scope(self, state):
         repairable = {"duplicate_component", "missing_required_component"}
-        if (
-            any(f["code"] in repairable for f in state["result"]["findings"])
-            and state.get("scope_repairs", 0) < 2
-        ):
+        if any(f["code"] in repairable for f in state["result"]["findings"]) and state.get(
+            "scope_repairs", 0
+        ) < self.repair_limit(state):
             return "scope_repair"
         return "design_review"
 
@@ -290,10 +376,9 @@ class EstimationWorkflow:
         return self.save(state, result, "pricing_verifier", start, usage)
 
     def after_prices(self, state):
-        if (
-            any(f["code"] == "arithmetic_mismatch" for f in state["result"]["findings"])
-            and state.get("price_repairs", 0) < 2
-        ):
+        if any(f["code"] == "arithmetic_mismatch" for f in state["result"]["findings"]) and state.get(
+            "price_repairs", 0
+        ) < self.repair_limit(state):
             return "price_repair"
         return "evidence"
 
@@ -319,7 +404,7 @@ class EstimationWorkflow:
         return self.save(state, result, "report_compiler", start)
 
     def execute(self, revision_id: str, identity: Identity, token: str, resume: dict | None = None):
-        config = {"configurable": {"thread_id": revision_id}, "recursion_limit": 70}
+        config = {"configurable": {"thread_id": revision_id}, "recursion_limit": 150}
         try:
             row = self.repo.get_revision(revision_id, identity.tenant)
             snapshot = self.graph.get_state(config)
