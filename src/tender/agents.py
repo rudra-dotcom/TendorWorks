@@ -396,7 +396,7 @@ class Specialists:
                 result,
                 "synthetic_demo",
                 1,
-                "Demonstration package: source registers distinguish official rate transcriptions from synthetic fixtures. Assumed quantities and applicability require engineer review; not for procurement.",
+                "Source registers identify published rates and illustrative inputs. Assumed quantities and applicability require engineer review.",
                 "warning",
             )
         return id_, pack

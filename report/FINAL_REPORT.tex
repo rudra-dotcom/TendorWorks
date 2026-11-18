@@ -5,7 +5,7 @@
 \usepackage{enumitem,float,caption,fancyhdr,fvextra}
 \usepackage[hidelinks]{hyperref}
 \definecolor{navy}{HTML}{244E68}
-\hypersetup{pdftitle={Tenderworks: Controlled Government Works Estimation},pdfauthor={Tenderworks Project Team}}
+\hypersetup{pdftitle={Tenderworks: Controlled Government Works Estimation},pdfauthor={Rudra Gupta, Krish Teckchandani, Meet Tilala}}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt}
 \setlength{\emergencystretch}{3em}
@@ -22,14 +22,15 @@
 {\LARGE Controlled, Evidence-Backed Estimation\\for Government Works\par}\vspace{12mm}
 {\Large Architecture, Implementation and Empirical Evaluation\par}\vspace{15mm}
 {\large Bachelor of Technology Final-Project Technical Report\par}\vspace{7mm}
+{\large\textbf{Submitted by}\par}\vspace{3mm}
+{\large
+\begin{tabular}{@{}ll@{}}
+Rudra Gupta & B23CS1098 \\
+Krish Teckchandani & B23CS1092 \\
+Meet Tilala & B23CS1036
+\end{tabular}\par}\vspace{7mm}
 {17 November 2026\par}
 \vfill
-\begin{minipage}{.88\textwidth}
-\textbf{Demonstrated application.} A scope-limited CPWD PAR 2025 preliminary estimate for a 300\,m$^2$ office in Delhi, using local Ollama inference, document retrieval, deterministic calculations and auditable evidence links.
-
-\textbf{Interpretive boundary.} The implementation demonstrates an integrated estimating workflow. Its drawings are schematic, its benchmark is developer-labelled, and its output requires engineering review before any procurement use.
-\end{minipage}
-\vspace{18mm}
 \end{titlepage}
 \pagenumbering{roman}
 \section*{Abstract}\addcontentsline{toc}{section}{Abstract}
@@ -39,6 +40,7 @@ The implemented knowledge layer combines structured rate records, keyword/BM25 d
 
 Evaluation is separated into deterministic tests, isolated agent tasks, checkpoint tests and complete workflows. We verify saved scores against raw outputs before presenting them. In the matched fourteen-case V3 agent experiment, Qwen 2.5 3B passed five cases and Gemma 3 4.3B passed nine. Both executed every task, illustrating the distinction between availability and correctness. Fifty-six automated tests passed in the recorded validation run. We identify engineering-drawing capability as the principal bottleneck: exact arithmetic cannot compensate for incomplete structural, geotechnical or building-services design. The contribution is therefore an auditable estimation architecture and an evaluation methodology that exposes failure, rather than a claim of autonomous tender preparation.
 
+\clearpage
 \tableofcontents\clearpage\listoffigures\listoftables\clearpage
 \pagenumbering{arabic}
 \section{Problem Definition, Objectives and Scope}

@@ -200,7 +200,7 @@ def build():
             )
     (ROOT / "reference_documents/manifest.json").write_text(json.dumps(manifest, indent=2))
     brief = {
-        "title": "CPWD office preliminary demo",
+        "title": "CPWD office preliminary estimate",
         "description": "Prepare a CPWD preliminary estimate for a 300 m2 single-storey office in New Delhi. RCC frame, 3.60 m height, downcomer and manual alarm scenario, internal water and electrical services only. Exclude external works, land, lifts, HVAC, consultancy, TPQA and escalation.",
         "authority": "cpwd",
         "state": "Delhi",

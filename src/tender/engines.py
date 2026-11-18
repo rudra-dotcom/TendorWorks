@@ -290,7 +290,7 @@ def drawing_svg(design: DesignRevision, title: str, revision: int, demo: bool) -
         '<rect width="100%" height="100%" fill="#f5faf7"/>',
         f'<text x="30" y="32" font-size="18" font-weight="bold">{escape(title)}</text>',
         f'<text x="30" y="53" font-size="11">CONCEPT ONLY · REVISION {revision}'
-        + (" · SYNTHETIC DEMO" if demo else "")
+        + (" · ASSUMED GEOMETRY" if demo else "")
         + "</text>",
     ]
     for floor in range(min(design.floors, 3)):

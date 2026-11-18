@@ -30,7 +30,7 @@ def test_full_workflow_has_reproducible_totals_evidence_and_exports(client, brie
     assert {"BOQ", "Sources", "Calculations", "Assumptions", "Findings", "Adjustments"} <= set(
         workbook.sheetnames
     )
-    assert "SYNTHETIC" in workbook["BOQ"]["A2"].value
+    assert "ILLUSTRATIVE RATE DATA" in workbook["BOQ"]["A2"].value
     assert (
         "CONCEPT" in PdfReader(io.BytesIO(client.get(base + "estimate.pdf").content)).pages[0].extract_text()
     )

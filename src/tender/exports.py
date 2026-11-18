@@ -22,11 +22,9 @@ from tender.storage import ObjectStore
 
 def status_line(result: EstimateResult) -> str:
     if result.brief.work_category == "preliminary_cpwd":
-        return (
-            "OFFICIAL-RATE ACADEMIC DEMO — SCOPE-LIMITED PRELIMINARY ESTIMATE • ENGINEERING REVIEW REQUIRED"
-        )
+        return "SCOPE-LIMITED PRELIMINARY ESTIMATE • ENGINEERING REVIEW REQUIRED"
     return (
-        "SYNTHETIC DEMO DATA — " if result.demo else ""
+        "ILLUSTRATIVE RATE DATA — " if result.demo else ""
     ) + "CONCEPT-BASED DRAFT • ENGINEERING REVIEW REQUIRED"
 
 
